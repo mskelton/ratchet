@@ -17,11 +17,19 @@ function removeImport(j, source) {
  * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').Collection} source
  */
-function replacePropTypes(j: JSCodeshift, source: Collection) {}
+function replacePropTypes(j, source) {}
 
-function replaceStaticPropTypes(j: JSCodeshift, source: Collection) {}
+/**
+ * @param {import('jscodeshift').JSCodeshift} j
+ * @param {import('jscodeshift').Collection} source
+ */
+function replaceStaticPropTypes(j, source) {}
 
-module.exports = function (fileInfo: FileInfo, api: API) {
+/**
+ * @param {import('jscodeshift').FileInfo} fileInfo
+ * @param {import('jscodeshift').API} api
+ */
+module.exports = function (fileInfo, api) {
   const j = api.jscodeshift
   const source = api.jscodeshift(fileInfo.source)
 

@@ -1,11 +1,10 @@
-import PropTypes from "prop-types"
 import React from "react"
 
-export function MyComponent() {
-  return <span />
+type Props = {
+  bar: string
+  foo?: number
 }
 
-MyComponent.propTypes = {
-  bar: PropTypes.string.isRequired,
-  foo: PropTypes.number,
+export function MyComponent(props: Props) {
+  return <span />
 }
