@@ -1,0 +1,13 @@
+{
+  "name": "prop-types-to-ts",
+  "description": "Convert React propTypes to TypeScript types.",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mskelton/prop-types-to-ts.git"
+  },
+  "author": "Mark Skelton",
+  "license": "MIT"
+}
