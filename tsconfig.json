@@ -1,8 +1,0 @@
-{
-  "extends": "@mskelton/tsconfig",
-  "compilerOptions": {
-    "rootDir": "src",
-    "noEmit": true,
-    "emitDeclarationOnly": false
-  }
-}

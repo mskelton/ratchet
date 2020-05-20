@@ -1,12 +1,22 @@
-import { API, Collection, FileInfo, JSCodeshift } from "jscodeshift"
+// @ts-check
 
-function removeImport(j: JSCodeshift, source: Collection) {
+/**
+ * Removes the prop-types import from the file
+ *
+ * @param {import('jscodeshift').JSCodeshift} j
+ * @param {import('jscodeshift').Collection} source
+ */
+function removeImport(j, source) {
   source
     .find(j.ImportDeclaration)
     .filter((path) => path.value.source.value === "prop-types")
     .remove()
 }
 
+/**
+ * @param {import('jscodeshift').JSCodeshift} j
+ * @param {import('jscodeshift').Collection} source
+ */
 function replacePropTypes(j: JSCodeshift, source: Collection) {}
 
 function replaceStaticPropTypes(j: JSCodeshift, source: Collection) {}
