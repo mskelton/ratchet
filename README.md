@@ -5,5 +5,5 @@
 ## Usage
 
 ```sh
-npx jscodeshift -t
+npx jscodeshift -t https://git.io/Jfz0B **/*.{js,jsx}
 ```
