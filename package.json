@@ -26,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "eslint": "^7.0.0",
     "eslint-plugin-sort": "^1.4.0",
+    "jest": "^26.0.1",
     "jscodeshift": "^0.9.0",
     "prettier": "^2.0.5",
     "typescript": "^3.9.3"
