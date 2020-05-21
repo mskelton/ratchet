@@ -27,13 +27,13 @@ function getComplexTSType(j, node) {
 
     case "oneOfType":
       return j.tsUnionType(
-        node.arguments[0].elements.map(convertToTSType.bind(this, j))
+        node.arguments[0].elements.map((e) => convertToTSType(j, e))
       )
 
     case "shape":
-      console.log(node.arguments[0].properties)
-      return j.tsUnionType(
-        node.arguments[0].elements.map(convertToTSType.bind(this, j))
+    case "exact":
+      return j.tsTypeLiteral(
+        node.arguments[0].properties.map((p) => createPropertySignature(j, p))
       )
   }
 }
@@ -71,5 +71,5 @@ function createPropertySignature(j, property) {
  * @param {import('jscodeshift').Property[]} properties
  */
 exports.parsePropTypes = (j, properties) => {
-  return properties.map(createPropertySignature.bind(this, j))
+  return properties.map((p) => createPropertySignature(j, p))
 }

@@ -24,10 +24,10 @@ MyComponent.propTypes = {
     optionalProperty: PropTypes.string,
     requiredProperty: PropTypes.number.isRequired,
   }),
-  // optionalObjectWithStrictShape: PropTypes.exact({
-  //   optionalProperty: PropTypes.string,
-  //   requiredProperty: PropTypes.number.isRequired,
-  // }),
+  optionalObjectWithStrictShape: PropTypes.exact({
+    optionalProperty: PropTypes.string,
+    requiredProperty: PropTypes.number.isRequired,
+  }),
   requiredFunc: PropTypes.func.isRequired,
   requiredAny: PropTypes.any.isRequired,
   requiredEnum: PropTypes.oneOf(["News", "Photos"]).isRequired,

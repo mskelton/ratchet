@@ -19,7 +19,7 @@ type Props = {
     optionalProperty?: string,
     requiredProperty: number
   },
-  optionalObjectWithStrictShape: {
+  optionalObjectWithStrictShape?: {
     optionalProperty?: string,
     requiredProperty: number
   },
