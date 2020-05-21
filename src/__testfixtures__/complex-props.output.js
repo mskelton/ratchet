@@ -23,9 +23,28 @@ type Props = {
     optionalProperty?: string,
     requiredProperty: number
   },
+  requiredArray: unknown[],
+  requiredBool: boolean,
   requiredFunc: (...args: unknown[]) => unknown,
-  requiredAny: any,
-  requiredEnum: "News" | "Photos"
+  requiredNumber: number,
+  requiredObject: object,
+  requiredString: string,
+  requiredSymbol: symbol,
+  requiredNode: React.ReactNode,
+  requiredElement: React.ReactElement,
+  requiredElementType: React.ElementType,
+  requiredEnum: "News" | "Photos",
+  requiredUnion: string | number,
+  requiredArrayOf: number[],
+  requiredObjectOf: Record<string, number>,
+  requiredObjectWithShape: {
+    optionalProperty?: string,
+    requiredProperty: number
+  },
+  requiredObjectWithStrictShape: {
+    optionalProperty?: string,
+    requiredProperty: number
+  }
 };
 
 export function MyComponent(props: Props) {
