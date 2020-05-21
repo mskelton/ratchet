@@ -1,9 +1,9 @@
 import React from "react"
 
 type Props = {
-  bar: string
+  bar: string,
   foo?: number
-}
+};
 
 export function MyComponent(props: Props) {
   return <span />
