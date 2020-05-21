@@ -47,19 +47,23 @@ function collectPropTypes(j, source) {
   const staticTypes = findStaticPropTypes(j, source)
 
   // Store the types to survive after we remove the propTypes
-  const results = types
-    .paths()
-    .concat(staticTypes.paths())
-    .map((path) => ({
-      component: path.value.left.object.name,
-      propTypes: parsePropTypes(j, path.value.right.properties),
-    }))
+  const results = types.paths().map((path) => ({
+    component: path.value.left.object.name,
+    propTypes: parsePropTypes(j, path.value.right.properties),
+  }))
+
+  const staticResults = staticTypes.paths().map((path) => {
+    return {
+      component: path.parent.parent.value.id.name,
+      propTypes: parsePropTypes(j, path.value.value.properties),
+    }
+  })
 
   // Remove the propTypes assignment expression and static propTypes
   types.remove()
   staticTypes.remove()
 
-  return results
+  return results.concat(staticResults)
 }
 
 /**
