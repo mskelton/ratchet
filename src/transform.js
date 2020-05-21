@@ -1,4 +1,121 @@
-const { parsePropTypes } = require("./parse-prop-types")
+/**
+ * @param {import('jscodeshift').JSCodeshift} j
+ */
+function getFunctionType(j) {
+  const restElement = j.restElement.from({
+    argument: j.identifier("args"),
+    typeAnnotation: j.tsTypeAnnotation(j.tsArrayType(j.tsUnknownKeyword())),
+  })
+
+  return j.tsFunctionType.from({
+    parameters: [restElement],
+    typeAnnotation: j.tsTypeAnnotation(j.tsUnknownKeyword()),
+  })
+}
+
+/**
+ * @param {import('jscodeshift').JSCodeshift} j
+ * @param {string} type
+ */
+function reactType(j, type) {
+  return j.tsQualifiedName(j.identifier("React"), j.identifier(type))
+}
+
+/**
+ * @param {import('jscodeshift').JSCodeshift} j
+ * @param {string} type
+ */
+function mapType(j, type) {
+  const map = {
+    any: j.tsAnyKeyword(),
+    array: j.tsArrayType(j.tsUnknownKeyword()),
+    bool: j.tsBooleanKeyword(),
+    element: j.tsTypeReference(reactType(j, "ReactElement")),
+    elementType: j.tsTypeReference(reactType(j, "ElementType")),
+    func: getFunctionType(j),
+    node: j.tsTypeReference(reactType(j, "ReactNode")),
+    number: j.tsNumberKeyword(),
+    object: j.tsObjectKeyword(),
+    string: j.tsStringKeyword(),
+    symbol: j.tsSymbolKeyword(),
+  }
+
+  return map[type] || j.tsUnknownKeyword()
+}
+
+/**
+ * @param {import('jscodeshift').JSCodeshift} j
+ * @param {import('jscodeshift').CallExpression} node
+ */
+function getComplexTSType(j, node) {
+  switch (node.callee.property.name) {
+    case "arrayOf":
+      return j.tsArrayType(mapType(j, node.arguments[0].property.name))
+
+    case "objectOf":
+      return j.tsTypeReference(
+        j.identifier("Record"),
+        j.tsTypeParameterInstantiation([
+          j.tsStringKeyword(),
+          mapType(j, node.arguments[0].property.name),
+        ])
+      )
+
+    case "oneOf":
+      return j.tsUnionType(
+        node.arguments[0].elements.map(({ value }) =>
+          j.tsLiteralType(j.stringLiteral(value))
+        )
+      )
+
+    case "oneOfType":
+      return j.tsUnionType(
+        node.arguments[0].elements.map((e) => convertToTSType(j, e))
+      )
+
+    case "shape":
+    case "exact":
+      return j.tsTypeLiteral(
+        node.arguments[0].properties.map((p) => createPropertySignature(j, p))
+      )
+  }
+}
+
+/**
+ * @param {import('jscodeshift').JSCodeshift} j
+ * @param {import('jscodeshift').CallExpression | import('jscodeshift').MemberExpression} node
+ */
+function convertToTSType(j, node) {
+  return node.type === "MemberExpression"
+    ? mapType(j, node.property.name)
+    : getComplexTSType(j, node)
+}
+
+/**
+ * @param {import('jscodeshift')} j
+ * @param {import('jscodeshift').CallExpression | import('jscodeshift').MemberExpression} property
+ */
+function createPropertySignature(j, property) {
+  const required =
+    property.value.type === "MemberExpression" &&
+    property.value.property.name === "isRequired"
+
+  return j.tsPropertySignature(
+    j.identifier(property.key.name),
+    j.tsTypeAnnotation(
+      convertToTSType(j, required ? property.value.object : property.value)
+    ),
+    !required
+  )
+}
+
+/**
+ * @param {import('jscodeshift').JSCodeshift} j
+ * @param {import('jscodeshift').Property[]} properties
+ */
+function parsePropTypes(j, properties) {
+  return properties.map((p) => createPropertySignature(j, p))
+}
 
 /**
  * Removes the prop-types import from the file
@@ -80,7 +197,7 @@ function addFunctionTSTypes(j, source, types) {
   components.forEach((path) => {
     const componentName = path.value.id.name
     const { propTypes } = types.find((t) => t.component === componentName)
-    const typeName = components.length === 1 ? "Props" : `${componentName}Props`
+    const typeName = types.length === 1 ? "Props" : `${componentName}Props`
 
     // Add the TS types before the function
     path.parentPath.insertBefore(
@@ -113,7 +230,7 @@ function addClassTSType(j, source, types) {
   components.forEach((path) => {
     const componentName = path.value.id.name
     const { propTypes } = types.find((t) => t.component === componentName)
-    const typeName = components.length === 1 ? "Props" : `${componentName}Props`
+    const typeName = types.length === 1 ? "Props" : `${componentName}Props`
 
     // Add the TS types before the function
     path.parentPath.insertBefore(
