@@ -4,7 +4,10 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "build": "rollup -c rollup.config.js",
+    "start": "serve web",
+    "watch": "npm run build -- --watch"
   },
   "repository": {
     "type": "git",
@@ -18,16 +21,25 @@
       "@mskelton/eslint-config/typescript"
     ]
   },
+  "dependencies": {
+    "jscodeshift": "^0.9.0"
+  },
   "devDependencies": {
-    "@mskelton/eslint-config": "^5.8.0",
+    "@babel/preset-env": "^7.9.6",
+    "@mskelton/eslint-config": "^5.9.0",
+    "@rollup/plugin-commonjs": "^12.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.0",
     "@types/jscodeshift": "^0.7.1",
-    "@types/node": "^14.0.4",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-sort": "^1.4.0",
     "jest": "^26.0.1",
-    "jscodeshift": "^0.9.0",
     "prettier": "^2.0.5",
+    "rollup": "^2.10.5",
+    "rollup-plugin-postcss": "^3.1.1",
+    "rollup-plugin-svelte": "^5.2.2",
+    "serve": "^11.3.0",
+    "svelte": "^3.22.3",
     "typescript": "^3.9.3"
   }
 }
