@@ -1,3 +1,3 @@
-import App from "./components/App.svelte"
+import App from "./src/App.svelte"
 
 new App({ target: document.body })

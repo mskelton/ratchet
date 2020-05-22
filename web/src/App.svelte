@@ -1,17 +1,19 @@
 <script>
   import Editor from "./Editor.svelte"
   import ConfigBar from "./ConfigBar.svelte"
+  import { inputSnippet, outputSnippet } from "./editor/snippets"
 </script>
 
 <style>
   .container {
+    display: flex;
+    flex-direction: column;
     height: 100vh;
-    width: 100vw;
   }
 
   .editors {
     display: flex;
-    /* flex-direction: column; */
+    flex: 1;
   }
 </style>
 
@@ -19,7 +21,7 @@
   <ConfigBar />
 
   <div class="editors">
-    <Editor />
-    <Editor />
+    <Editor defaultValue={inputSnippet} />
+    <Editor defaultValue={outputSnippet} />
   </div>
 </div>

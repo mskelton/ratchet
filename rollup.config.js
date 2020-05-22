@@ -1,6 +1,8 @@
 import commonjs from "@rollup/plugin-commonjs"
 import resolve from "@rollup/plugin-node-resolve"
+import livereload from "rollup-plugin-livereload"
 import postcss from "rollup-plugin-postcss"
+import serve from "rollup-plugin-serve"
 import svelte from "rollup-plugin-svelte"
 
 module.exports = {
@@ -15,6 +17,8 @@ module.exports = {
     commonjs(),
     resolve(),
     postcss({ extract: true, minimize: true }),
+    serve("web"),
+    livereload(),
   ],
   watch: { clearScreen: false },
 }

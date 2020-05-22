@@ -6,8 +6,7 @@
     "lint": "eslint .",
     "test": "jest",
     "build": "rollup -c rollup.config.js",
-    "start": "serve web",
-    "watch": "npm run build -- --watch"
+    "start": "npm run build -- --watch"
   },
   "repository": {
     "type": "git",
@@ -22,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "codemirror": "^5.54.0",
     "jscodeshift": "^0.9.0"
   },
   "devDependencies": {
@@ -37,9 +37,10 @@
     "prettier": "^2.0.5",
     "prettier-plugin-svelte": "^1.1.0",
     "rollup": "^2.10.5",
+    "rollup-plugin-livereload": "^1.3.0",
     "rollup-plugin-postcss": "^3.1.1",
+    "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-svelte": "^5.2.2",
-    "serve": "^11.3.0",
     "svelte": "^3.22.3",
     "typescript": "^3.9.3"
   }
