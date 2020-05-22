@@ -1,5 +1,12 @@
+// These variables are defined globally so we don't have to pass them
+// through many layers of function calls.
+
 /** @type {import('jscodeshift').JSCodeshift} */
 let j
+
+const opts = {
+  preservePropTypes: false,
+}
 
 function getFunctionType() {
   const restElement = j.restElement.from({
@@ -158,8 +165,10 @@ function collectPropTypes(source) {
   })
 
   // Remove the propTypes assignment expression and static propTypes
-  types.remove()
-  staticTypes.remove()
+  if (!opts.preservePropTypes) {
+    types.remove()
+    staticTypes.remove()
+  }
 
   return results.concat(staticResults)
 }
@@ -229,13 +238,18 @@ function addClassTSType(source, types) {
 /**
  * @param {import('jscodeshift').FileInfo} fileInfo
  * @param {import('jscodeshift').API} api
+ * @param {import('jscodeshift').Options} opts
  */
-module.exports = function (fileInfo, api) {
+module.exports = function (fileInfo, api, options) {
   j = api.jscodeshift
+  opts.preservePropTypes = options["preserve-prop-types"]
+
   const source = api.jscodeshift(fileInfo.source)
 
   // Remove the prop-types import from the top of the file
-  removeImport(source)
+  if (!opts.preservePropTypes) {
+    removeImport(source)
+  }
 
   // Collect prop types from assignment expressions and static prop types
   const types = collectPropTypes(source).concat()
