@@ -6,8 +6,8 @@ import svelte from "rollup-plugin-svelte"
 module.exports = {
   input: "web/index.js",
   output: {
-    file: "web/public/bundle.js",
-    format: "iife",
+    dir: "web/public",
+    format: "esm",
     name: "app",
   },
   plugins: [
