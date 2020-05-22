@@ -1,7 +1,7 @@
-/**
- * @param {import('jscodeshift').JSCodeshift} j
- */
-function getFunctionType(j) {
+/** @type {import('jscodeshift').JSCodeshift} */
+let j
+
+function getFunctionType() {
   const restElement = j.restElement.from({
     argument: j.identifier("args"),
     typeAnnotation: j.tsTypeAnnotation(j.tsArrayType(j.tsUnknownKeyword())),
@@ -14,26 +14,24 @@ function getFunctionType(j) {
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {string} type
  */
-function reactType(j, type) {
+function reactType(type) {
   return j.tsQualifiedName(j.identifier("React"), j.identifier(type))
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {string} type
  */
-function mapType(j, type) {
+function mapType(type) {
   const map = {
     any: j.tsAnyKeyword(),
     array: j.tsArrayType(j.tsUnknownKeyword()),
     bool: j.tsBooleanKeyword(),
-    element: j.tsTypeReference(reactType(j, "ReactElement")),
-    elementType: j.tsTypeReference(reactType(j, "ElementType")),
+    element: j.tsTypeReference(reactType("ReactElement")),
+    elementType: j.tsTypeReference(reactType("ElementType")),
     func: getFunctionType(j),
-    node: j.tsTypeReference(reactType(j, "ReactNode")),
+    node: j.tsTypeReference(reactType("ReactNode")),
     number: j.tsNumberKeyword(),
     object: j.tsObjectKeyword(),
     string: j.tsStringKeyword(),
@@ -44,20 +42,19 @@ function mapType(j, type) {
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').CallExpression} node
  */
-function getComplexTSType(j, node) {
+function getComplexTSType(node) {
   switch (node.callee.property.name) {
     case "arrayOf":
-      return j.tsArrayType(mapType(j, node.arguments[0].property.name))
+      return j.tsArrayType(mapType(node.arguments[0].property.name))
 
     case "objectOf":
       return j.tsTypeReference(
         j.identifier("Record"),
         j.tsTypeParameterInstantiation([
           j.tsStringKeyword(),
-          mapType(j, node.arguments[0].property.name),
+          mapType(node.arguments[0].property.name),
         ])
       )
 
@@ -69,33 +66,29 @@ function getComplexTSType(j, node) {
       )
 
     case "oneOfType":
-      return j.tsUnionType(
-        node.arguments[0].elements.map((e) => convertToTSType(j, e))
-      )
+      return j.tsUnionType(node.arguments[0].elements.map(convertToTSType))
 
     case "shape":
     case "exact":
       return j.tsTypeLiteral(
-        node.arguments[0].properties.map((p) => createPropertySignature(j, p))
+        node.arguments[0].properties.map(createPropertySignature)
       )
   }
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').CallExpression | import('jscodeshift').MemberExpression} node
  */
-function convertToTSType(j, node) {
+function convertToTSType(node) {
   return node.type === "MemberExpression"
-    ? mapType(j, node.property.name)
-    : getComplexTSType(j, node)
+    ? mapType(node.property.name)
+    : getComplexTSType(node)
 }
 
 /**
- * @param {import('jscodeshift')} j
  * @param {import('jscodeshift').CallExpression | import('jscodeshift').MemberExpression} property
  */
-function createPropertySignature(j, property) {
+function createPropertySignature(property) {
   const required =
     property.value.type === "MemberExpression" &&
     property.value.property.name === "isRequired"
@@ -103,27 +96,18 @@ function createPropertySignature(j, property) {
   return j.tsPropertySignature(
     j.identifier(property.key.name),
     j.tsTypeAnnotation(
-      convertToTSType(j, required ? property.value.object : property.value)
+      convertToTSType(required ? property.value.object : property.value)
     ),
     !required
   )
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
- * @param {import('jscodeshift').Property[]} properties
- */
-function parsePropTypes(j, properties) {
-  return properties.map((p) => createPropertySignature(j, p))
-}
-
-/**
  * Removes the prop-types import from the file
  *
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').Collection} source
  */
-function removeImport(j, source) {
+function removeImport(source) {
   source
     .find(j.ImportDeclaration)
     .filter((path) => path.value.source.value === "prop-types")
@@ -131,10 +115,9 @@ function removeImport(j, source) {
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').Collection} source
  */
-function findPropTypes(j, source) {
+function findPropTypes(source) {
   return source
     .find(j.AssignmentExpression)
     .filter(
@@ -146,33 +129,31 @@ function findPropTypes(j, source) {
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').Collection} source
  */
-function findStaticPropTypes(j, source) {
+function findStaticPropTypes(source) {
   return source
     .find(j.ClassProperty)
     .filter((path) => path.value.static && path.value.key.name === "propTypes")
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').Collection} source
  */
-function collectPropTypes(j, source) {
-  const types = findPropTypes(j, source)
-  const staticTypes = findStaticPropTypes(j, source)
+function collectPropTypes(source) {
+  const types = findPropTypes(source)
+  const staticTypes = findStaticPropTypes(source)
 
   // Store the types to survive after we remove the propTypes
   const results = types.paths().map((path) => ({
     component: path.value.left.object.name,
-    propTypes: parsePropTypes(j, path.value.right.properties),
+    propTypes: path.value.right.properties.map(createPropertySignature),
   }))
 
   const staticResults = staticTypes.paths().map((path) => {
     return {
       component: path.parent.parent.value.id.name,
-      propTypes: parsePropTypes(j, path.value.value.properties),
+      propTypes: path.value.value.properties.map(createPropertySignature),
     }
   })
 
@@ -184,11 +165,10 @@ function collectPropTypes(j, source) {
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').Collection} source
  * @param {{ component: string, propTypes: import('jscodeshift').TSPropertySignature[] }[]} types
  */
-function addFunctionTSTypes(j, source, types) {
+function addFunctionTSTypes(source, types) {
   const components = source
     .find(j.FunctionDeclaration)
     // Ignore functions without propTypes
@@ -217,11 +197,10 @@ function addFunctionTSTypes(j, source, types) {
 }
 
 /**
- * @param {import('jscodeshift').JSCodeshift} j
  * @param {import('jscodeshift').Collection} source
  * @param {{ component: string, propTypes: import('jscodeshift').TSPropertySignature[] }[]} types
  */
-function addClassTSType(j, source, types) {
+function addClassTSType(source, types) {
   const components = source
     .find(j.ClassDeclaration)
     // Ignore classes without propTypes
@@ -252,18 +231,18 @@ function addClassTSType(j, source, types) {
  * @param {import('jscodeshift').API} api
  */
 module.exports = function (fileInfo, api) {
-  const j = api.jscodeshift
+  j = api.jscodeshift
   const source = api.jscodeshift(fileInfo.source)
 
   // Remove the prop-types import from the top of the file
-  removeImport(j, source)
+  removeImport(source)
 
   // Collect prop types from assignment expressions and static prop types
-  const types = collectPropTypes(j, source).concat()
+  const types = collectPropTypes(source).concat()
 
   // Add TS types to functions and classes
-  addFunctionTSTypes(j, source, types)
-  addClassTSType(j, source, types)
+  addFunctionTSTypes(source, types)
+  addClassTSType(source, types)
 
   return source.toSource()
 }
