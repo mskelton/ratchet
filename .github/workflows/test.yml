@@ -17,7 +17,7 @@ jobs:
       - run: yarn --frozen-lockfile
       - name: Wait for deployment
         id: wait-for-netflify
-        uses: mskelton/wait-for-netlify-action@v1
+        uses: jakepartusch/wait-for-netlify-action@v1.2
         with:
           site_name: "proptypes"
       - run: yarn test
