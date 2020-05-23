@@ -1,0 +1,17 @@
+{
+  "name": "e2e",
+  "private": true,
+  "description": "E2E tests for PropTypes to TS.",
+  "author": "Mark Skelton",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "expect-playwright": "^0.2.2",
+    "jest": "^26.0.1",
+    "jest-circus": "^26.0.1",
+    "jest-playwright-preset": "0.2.0",
+    "playwright-chromium": "^1.0.2"
+  }
+}

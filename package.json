@@ -2,11 +2,11 @@
   "name": "prop-types-to-ts",
   "description": "Convert React propTypes to TypeScript types.",
   "scripts": {
+    "build": "cd web && webpack",
+    "start": "cd web && webpack-dev-server",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "test": "jest",
-    "build": "cd web && webpack",
-    "start": "cd web && webpack-dev-server"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
