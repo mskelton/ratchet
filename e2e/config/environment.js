@@ -6,7 +6,7 @@ module.exports = class Environment extends PlaywrightEnvironment {
     if (
       event.name === "test_done" &&
       event.test.errors.length > 0 &&
-      !page.isClosed()
+      !this.global.page.isClosed()
     ) {
       const parentName = event.test.parent.name.replace(/\W/g, "-")
       const specName = event.test.name.replace(/\W/g, "-")
