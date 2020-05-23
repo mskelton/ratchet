@@ -6,7 +6,7 @@
   "author": "Mark Skelton",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack",
     "start": "webpack-dev-server"
   },
   "devDependencies": {
