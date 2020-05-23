@@ -1,5 +1,4 @@
 node_modules/
-web/public/*
-!web/public/index.html
+web/public
 e2e/screenshots/*
 !e2e/screenshots/.gitkeep
