@@ -1,4 +1,5 @@
 const fs = require("fs")
+const { baseUrl } = require("../env")
 
 const read = (fixture) =>
   fs.readFileSync(`../__testfixtures__/${fixture}.js`, "utf-8").trim()
@@ -16,7 +17,7 @@ const getValue = (editorId) =>
 
 describe("Input/Output", () => {
   beforeAll(async () => {
-    await page.goto("http://localhost:8080")
+    await page.goto(baseUrl)
   })
 
   it("should have default content", async () => {
