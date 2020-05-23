@@ -7,3 +7,18 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm ci
       - run: npm test
+  e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd web
+      - run: npm ci
+      - name: Wait for deployment
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Vercel
+          ref: github.event.pull_request.head.sha || github.sha
+      - run: npm test
+        if: steps.wait.outputs.conclusion == 'success'
