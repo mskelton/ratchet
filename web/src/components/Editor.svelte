@@ -9,7 +9,7 @@
   export let value
   let editor
 
-  const dispatch = debounce(createEventDispatcher(), 1000)
+  const dispatch = debounce(createEventDispatcher(), 200)
   const refs = {}
 
   onMount(() => {
