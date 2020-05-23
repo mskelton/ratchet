@@ -11,6 +11,10 @@
 - Supports files with multiple components
 - Option to remove or preserve PropTypes after converting to TS
 
+## Try it Online!
+
+You can try out this tool online at [proptypes.netlify.app](https://proptypes.netlify.app)!
+
 ## Usage
 
 Run the following command with a file glob that matches the files you want to convert.
