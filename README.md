@@ -11,10 +11,6 @@
 - Supports files with multiple components
 - Option to remove or preserve PropTypes after converting to TS
 
-## Try it Online!
-
-You can try out this tool online at [proptypes.netlify.app](https://proptypes.netlify.app)!
-
 ## Usage
 
 Run the following command with a file glob that matches the files you want to convert.
@@ -25,6 +21,12 @@ npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/m
 # Example
 npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/master/transform.js src/**/*.{js,jsx}
 ```
+
+## Try it Online!
+
+In addition to the CLI, you can use the tool online at [proptypes.netlify.app](https://proptypes.netlify.app)! Simply paste your input on the left and instantly see the output on the right!
+
+[![Screenshot](web/screenshot.png)](https://proptypes.netlify.app)
 
 ## Example Input/Output
 
