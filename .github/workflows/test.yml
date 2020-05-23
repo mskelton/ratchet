@@ -16,10 +16,10 @@ jobs:
       - uses: actions/checkout@v2
       - run: yarn --frozen-lockfile
       - name: Wait for deployment
-        id: waitForDeploy
-        uses: josephduffy/wait-for-netlify-action@v1
+        id: wait-for-netflify
+        uses: mskelton/wait-for-netlify-action@v1
         with:
           site_name: "proptypes"
       - run: yarn test
         env:
-          ENVIRONMENT_URL: ${{ steps.waitForDeploy.outputs.url }}
+          ENVIRONMENT_URL: ${{ steps.wait-for-netflify.outputs.url }}
