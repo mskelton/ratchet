@@ -28,5 +28,5 @@ exports.read = (fixture) =>
  */
 exports.id = (testId) => `[data-testid="${testId}"]`
 
-/** @type {'Meta' | 'Ctrl'} */
-exports.ctrlKey = os.type() === "Darwin" ? "Meta" : "Ctrl"
+/** @type {'Meta' | 'Control'} */
+exports.ctrlKey = os.type() === "Darwin" ? "Meta" : "Control"
