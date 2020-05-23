@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.3",
     "expect-playwright": "^0.2.2",
     "jest": "^26.0.1",
     "jest-circus": "^26.0.1",
