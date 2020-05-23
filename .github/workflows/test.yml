@@ -5,6 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
       - run: yarn --frozen-lockfile
       - run: yarn test
   e2e-test:
@@ -14,12 +17,17 @@ jobs:
         working-directory: e2e
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Setup Playwright
+        uses: microsoft/playwright-github-action@v1
       - run: yarn --frozen-lockfile
       - name: Waiting for Vercel deployment
         uses: mskelton/wait-for-vercel-action@master
         id: wait-for-vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      - run: npm test
+      - run: yarn test
         env:
           ENVIRONMENT_URL: ${{ steps.wait-for-vercel.outputs.url }}
