@@ -50,7 +50,7 @@
   <Header on:change={handleOptionChange} />
 
   <div class="editors">
-    <Editor value={inputSnippet} on:change={handleChange} />
-    <Editor value={output} readOnly />
+    <Editor testId="input" value={inputSnippet} on:change={handleChange} />
+    <Editor testId="output" value={output} readOnly />
   </div>
 </div>

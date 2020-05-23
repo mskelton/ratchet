@@ -4,8 +4,9 @@
   import { options } from "../editor/options"
   import { debounce } from "../utils"
 
-  export let value
   export let readOnly = false
+  export let testId
+  export let value
   let editor
 
   const dispatch = debounce(createEventDispatcher(), 1000)
@@ -18,6 +19,9 @@
       ...options,
       readOnly
     })
+
+    // Attach the editor to the window so we can test it
+    if (!window.editor) window.editor = editor
 
     editor.on("change", instance => {
       dispatch("change", { value: instance.getValue() })
@@ -46,7 +50,7 @@
 </style>
 
 <div class="container">
-  <div class="editor">
+  <div class="editor" data-testid={testId}>
     <!-- svelte-ignore a11y-positive-tabindex -->
     <textarea tabindex="2" bind:this={refs.editor} readonly {value} />
   </div>
