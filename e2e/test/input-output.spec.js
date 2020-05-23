@@ -1,19 +1,8 @@
-const fs = require("fs")
+// @ts-check
 const { baseUrl } = require("../env")
+const { ctrlKey, getValue, id, read } = require("../utils")
 
-const read = (fixture) =>
-  fs.readFileSync(`../__testfixtures__/${fixture}.js`, "utf-8").trim()
-
-const defaultInput = read("function-component.input")
-const defaultOutput = read("function-component.output")
-
-const inputFixture = read("class-component.input")
 const outputFixture = read("class-component.output")
-
-const id = (testId) => `[data-testid="${testId}"]`
-
-const getValue = (editorId) =>
-  page.evaluate((editorId) => window[editorId].getValue(), editorId)
 
 describe("Input/Output", () => {
   beforeAll(async () => {
@@ -21,15 +10,15 @@ describe("Input/Output", () => {
   })
 
   it("should have default content", async () => {
-    expect(await getValue("input")).toBe(defaultInput)
-    expect(await getValue("output")).toBe(defaultOutput)
+    expect(await getValue("input")).toBe(read("function-component.input"))
+    expect(await getValue("output")).toBe(read("function-component.output"))
   })
 
   it("should clear the output when clearing the input", async () => {
     await page.click(id("input"))
-    await page.keyboard.down("Meta")
+    await page.keyboard.down(ctrlKey)
     await page.keyboard.press("a")
-    await page.keyboard.up("Meta")
+    await page.keyboard.up(ctrlKey)
     await page.keyboard.press("Backspace")
 
     await page.waitForFunction(
@@ -39,7 +28,7 @@ describe("Input/Output", () => {
   })
 
   it("should update the output when changing the input", async () => {
-    const trimmedInput = inputFixture
+    const trimmedInput = read("class-component.input")
       .split("\n")
       .map((line) => line.trim())
       .join("\n")
