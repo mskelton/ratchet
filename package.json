@@ -1,24 +1,24 @@
 {
   "name": "prop-types-to-ts",
+  "private": true,
   "description": "Convert React propTypes to TypeScript types.",
-  "scripts": {
-    "format": "prettier --write .",
-    "lint": "eslint .",
-    "test": "jest",
-    "build": "cd web && webpack",
-    "start": "cd web && webpack-dev-server"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mskelton/prop-types-to-ts.git"
   },
   "author": "Mark Skelton",
   "license": "MIT",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "workspaces": [
+    "e2e",
+    "web"
+  ],
   "eslintConfig": {
-    "extends": [
-      "@mskelton",
-      "@mskelton/eslint-config/typescript"
-    ]
+    "extends": "@mskelton"
   },
   "dependencies": {
     "codemirror": "^5.54.0",
@@ -28,19 +28,10 @@
     "@babel/preset-env": "^7.9.6",
     "@mskelton/eslint-config": "^5.9.0",
     "@types/jscodeshift": "^0.7.1",
-    "@typescript-eslint/eslint-plugin": "^3.0.0",
-    "css-loader": "^3.5.3",
     "eslint": "^7.0.0",
     "eslint-plugin-sort": "^1.4.0",
     "jest": "^26.0.1",
-    "mini-css-extract-plugin": "^0.9.0",
     "prettier": "^2.0.5",
-    "prettier-plugin-svelte": "^1.1.0",
-    "style-loader": "^1.2.1",
-    "svelte": "^3.22.3",
-    "svelte-loader": "^2.13.6",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "prettier-plugin-svelte": "^1.1.0"
   }
 }

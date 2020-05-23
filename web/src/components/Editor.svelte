@@ -9,7 +9,7 @@
   export let value
   let editor
 
-  const dispatch = debounce(createEventDispatcher(), 1000)
+  const dispatch = debounce(createEventDispatcher(), 200)
   const refs = {}
 
   onMount(() => {
@@ -17,13 +17,13 @@
 
     editor = CodeMirror.fromTextArea(refs.editor, {
       ...options,
-      readOnly
+      readOnly,
     })
 
     // Attach the editor to the window so we can test it
-    if (!window.editor) window.editor = editor
+    if (!window.editor) window[testId] = editor
 
-    editor.on("change", instance => {
+    editor.on("change", (instance) => {
       dispatch("change", { value: instance.getValue() })
     })
   })
@@ -52,6 +52,6 @@
 <div class="container">
   <div class="editor" data-testid={testId}>
     <!-- svelte-ignore a11y-positive-tabindex -->
-    <textarea tabindex="2" bind:this={refs.editor} readonly {value} />
+    <textarea bind:this={refs.editor} readonly tabindex="2" {value} />
   </div>
 </div>

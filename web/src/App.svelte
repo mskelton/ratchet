@@ -15,7 +15,7 @@
 
   function handleOptionChange(event) {
     options = {
-      "preserve-prop-types": event.detail.preservePropTypes
+      "preserve-prop-types": event.detail.preservePropTypes,
     }
 
     // Since the options have changed, we need to re-compile the source
