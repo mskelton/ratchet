@@ -36,7 +36,7 @@ module.exports = {
   },
   devtool: prod ? false : "source-map",
   entry: {
-    main: ["./web/index.js"],
+    main: ["./src/index.js"],
   },
   mode,
   module: {
@@ -67,7 +67,7 @@ module.exports = {
   plugins: [new MiniCssExtractPlugin({ filename: "[name].[hash].css" })],
   resolve: {
     alias: {
-      svelte: path.resolve("node_modules", "svelte"),
+      svelte: path.resolve("..", "node_modules", "svelte"),
     },
     extensions: [".mjs", ".js", ".svelte"],
   },

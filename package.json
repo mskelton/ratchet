@@ -5,8 +5,8 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "test": "jest",
-    "build": "webpack",
-    "start": "webpack-dev-server"
+    "build": "cd web && webpack",
+    "start": "cd web && webpack-dev-server"
   },
   "repository": {
     "type": "git",
