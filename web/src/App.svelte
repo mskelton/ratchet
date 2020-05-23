@@ -1,7 +1,11 @@
 <script>
-  import Editor from "./Editor.svelte"
-  import ConfigBar from "./ConfigBar.svelte"
+  import Editor from "./components/Editor.svelte"
+  import ConfigBar from "./components/ConfigBar.svelte"
   import { inputSnippet, outputSnippet } from "./editor/snippets"
+
+  function handleChange(event) {
+    console.log(event.detail.value)
+  }
 </script>
 
 <style>
@@ -21,7 +25,7 @@
   <ConfigBar />
 
   <div class="editors">
-    <Editor defaultValue={inputSnippet} />
-    <Editor defaultValue={outputSnippet} />
+    <Editor defaultValue={inputSnippet} on:change={handleChange} />
+    <Editor defaultValue={outputSnippet} readOnly={true} />
   </div>
 </div>

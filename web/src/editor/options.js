@@ -3,5 +3,6 @@ export const options = {
   lineNumbers: true,
   lineWrapping: true,
   mode: { name: "javascript" },
+  smartIndent: false,
   theme: "material",
 }
