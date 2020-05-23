@@ -30,15 +30,19 @@
 </script>
 
 <style>
-  .container {
+  .container,
+  .editors {
     display: flex;
+    height: 100%;
+  }
+
+  .container {
     flex-direction: column;
-    height: 100vh;
   }
 
   .editors {
-    display: flex;
     flex: 1;
+    min-height: 0;
   }
 </style>
 
