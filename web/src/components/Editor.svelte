@@ -17,13 +17,13 @@
 
     editor = CodeMirror.fromTextArea(refs.editor, {
       ...options,
-      readOnly
+      readOnly,
     })
 
     // Attach the editor to the window so we can test it
     if (!window.editor) window[testId] = editor
 
-    editor.on("change", instance => {
+    editor.on("change", (instance) => {
       dispatch("change", { value: instance.getValue() })
     })
   })
