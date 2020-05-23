@@ -1,0 +1,6 @@
+{
+  "extends": ["plugin:jest-playwright/recommended"],
+  "env": {
+    "browser": true
+  }
+}

@@ -1,5 +1,4 @@
 const fs = require("fs")
-const { sleep } = require("../utils")
 
 const read = (fixture) =>
   fs.readFileSync(`../__testfixtures__/${fixture}.js`, "utf-8").trim()
