@@ -15,13 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn --frozen-lockfile
-      # - name: Wait for deployment
-      #   uses: fountainhead/action-wait-for-check@v1.0.0
-      #   id: wait
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     checkName: Vercel
-      #     ref: github.event.pull_request.head.sha || github.sha
+      - name: Wait for deployment
+        uses: jakepartusch/wait-for-netlify-action@v1
+        with:
+          site_name: "proptypes"
       - run: yarn test
         # env: ENVIRONMENT_URL
-        # if: steps.wait.outputs.conclusion == 'success'
