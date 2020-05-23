@@ -30,6 +30,8 @@ jobs:
         env:
           ENVIRONMENT_URL: ${{ steps.wait-for-vercel.outputs.url }}
       - name: Upload screenshots
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v1
         with:
-          path: screenshots
+          name: screenshots
+          path: e2e/screenshots/*.png
