@@ -15,10 +15,6 @@ const id = (testId) => `[data-testid="${testId}"]`
 const getValue = (editorId) =>
   page.evaluate((editorId) => window[editorId].getValue(), editorId)
 
-console.log("baseUrl", baseUrl)
-console.log("defaultInput", defaultInput)
-console.log("defaultOutput", defaultOutput)
-
 describe("Input/Output", () => {
   beforeAll(async () => {
     await page.goto(baseUrl)
