@@ -29,3 +29,7 @@ jobs:
         working-directory: e2e
         env:
           ENVIRONMENT_URL: ${{ steps.wait-for-vercel.outputs.url }}
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v1
+        with:
+          path: screenshots
