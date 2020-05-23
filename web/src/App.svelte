@@ -3,16 +3,18 @@
   import ConfigBar from "./components/ConfigBar.svelte"
   import { inputSnippet, outputSnippet } from "./editor/snippets"
   import transform from "../../transform"
-  // import jscodeshift from "jscodeshift/src/core"
+  import jscodeshift from "jscodeshift"
 
   const options = {}
 
   function handleChange(event) {
-    // const output = transform(
-    //   { source: event.detail.value },
-    //   { jscodeshift },
-    //   options
-    // )
+    const output = transform(
+      { source: event.detail.value },
+      { jscodeshift },
+      options
+    )
+
+    console.log(output)
   }
 </script>
 

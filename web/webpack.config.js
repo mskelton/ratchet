@@ -1,28 +1,3 @@
-// import commonjs from "@rollup/plugin-commonjs"
-// import resolve from "@rollup/plugin-node-resolve"
-// import livereload from "rollup-plugin-livereload"
-// import postcss from "rollup-plugin-postcss"
-// import serve from "rollup-plugin-serve"
-// import svelte from "rollup-plugin-svelte"
-
-// module.exports = {
-//   input: "web/index.js",
-//   output: {
-//     dir: "web/public",
-//     format: "esm",
-//     name: "app",
-//   },
-//   plugins: [
-//     svelte({ emitCss: true }),
-//     commonjs(),
-//     resolve(),
-//     postcss({ extract: true, minimize: true }),
-//     serve("web"),
-//     livereload(),
-//   ],
-//   watch: { clearScreen: false },
-// }
-
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const path = require("path")
 
@@ -32,7 +7,6 @@ const prod = mode === "production"
 module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "public"),
-    open: true,
   },
   devtool: prod ? false : "source-map",
   entry: {
@@ -40,6 +14,14 @@ module.exports = {
   },
   mode,
   module: {
+    noParse: [
+      // This is necessary because flow is trying to load the 'fs' module, but
+      // dynamically. Without this webpack will throw an error at runtime.
+      // I assume the `require(...)` call "succeeds" because 'fs' is shimmed to
+      // be empty below.
+      // https://github.com/fkling/astexplorer/blob/master/website/webpack.config.js#L228
+      /flow-parser\/flow_parser\.js/,
+    ],
     rules: [
       {
         test: /\.svelte$/,
