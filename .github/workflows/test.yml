@@ -23,6 +23,8 @@ jobs:
       - name: Waiting for Vercel deployment
         uses: mskelton/wait-for-vercel-action@master
         id: wait-for-vercel
+        with:
+          prod-url: prop-types.now.sh
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       - run: yarn test
