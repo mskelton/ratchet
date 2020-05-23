@@ -1,9 +1,9 @@
 <script>
+  import jscodeshift from "jscodeshift"
+  import transform from "../../transform"
   import Editor from "./components/Editor.svelte"
   import Header from "./components/Header.svelte"
   import { inputSnippet, outputSnippet } from "./editor/snippets"
-  import transform from "../../transform"
-  import jscodeshift from "jscodeshift"
 
   const source = { current: inputSnippet }
   let options = {}
