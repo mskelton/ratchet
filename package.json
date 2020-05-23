@@ -15,10 +15,7 @@
   "author": "Mark Skelton",
   "license": "MIT",
   "eslintConfig": {
-    "extends": [
-      "@mskelton",
-      "@mskelton/eslint-config/typescript"
-    ]
+    "extends": "@mskelton"
   },
   "dependencies": {
     "codemirror": "^5.54.0",
@@ -28,7 +25,6 @@
     "@babel/preset-env": "^7.9.6",
     "@mskelton/eslint-config": "^5.9.0",
     "@types/jscodeshift": "^0.7.1",
-    "@typescript-eslint/eslint-plugin": "^3.0.0",
     "css-loader": "^3.5.3",
     "eslint": "^7.0.0",
     "eslint-plugin-sort": "^1.4.0",
