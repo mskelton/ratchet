@@ -29,15 +29,9 @@ jobs:
         working-directory: e2e
         env:
           ENVIRONMENT_URL: ${{ steps.wait-for-vercel.outputs.url }}
-      - run: ls e2e
-        if: ${{ failure() }}
-      - run: ls screenshots
-        if: ${{ failure() }}
-      - run: ls e2e/screenshots
-        if: ${{ failure() }}
       - name: Upload screenshots
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: screenshots
           path: e2e/screenshots/*.png
