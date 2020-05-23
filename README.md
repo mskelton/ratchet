@@ -1,6 +1,6 @@
 # PropTypes to TS
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5405cd67-6bbd-40ee-956a-2ae4ded8a987/deploy-status)](https://app.netlify.com/sites/proptypes/deploys) ![Test](https://github.com/mskelton/prop-types-to-ts/workflows/Test/badge.svg?branch=master)
+![Test](https://github.com/mskelton/prop-types-to-ts/workflows/Test/badge.svg?branch=master)
 
 > Codemod to convert React PropTypes to TypeScript types.
 
