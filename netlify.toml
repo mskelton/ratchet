@@ -1,3 +1,0 @@
-[build]
-  publish = "web/public/"
-  command = "cd web && yarn build"
