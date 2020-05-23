@@ -8,6 +8,12 @@
   let options = {}
   let output = outputSnippet
 
+  function handleOptionChange(event) {
+    options = {
+      "preserve-prop-types": event.detail.preservePropTypes
+    }
+  }
+
   function handleChange(event) {
     output = transform({ source: event.detail.value }, { jscodeshift }, options)
   }
@@ -27,7 +33,7 @@
 </style>
 
 <div class="container">
-  <ConfigBar />
+  <ConfigBar on:change={handleOptionChange} />
 
   <div class="editors">
     <Editor value={inputSnippet} on:change={handleChange} />
