@@ -9,9 +9,11 @@ jobs:
       - run: npm test
   e2e-test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: e2e
     steps:
       - uses: actions/checkout@v2
-      - run: cd web
       - run: npm ci
       # - name: Wait for deployment
       #   uses: fountainhead/action-wait-for-check@v1.0.0
