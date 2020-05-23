@@ -1,6 +1,7 @@
 {
   "name": "e2e",
   "private": true,
+  "version": "0.0.0",
   "description": "E2E tests for PropTypes to TS.",
   "author": "Mark Skelton",
   "license": "MIT",

@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci
-      - run: npm test
+      - run: yarn --frozen-lockfile
+      - run: yarn test
   e2e-test:
     runs-on: ubuntu-latest
     defaults:
@@ -14,7 +14,7 @@ jobs:
         working-directory: e2e
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci
+      - run: yarn --frozen-lockfile
       # - name: Wait for deployment
       #   uses: fountainhead/action-wait-for-check@v1.0.0
       #   id: wait
@@ -22,6 +22,6 @@ jobs:
       #     token: ${{ secrets.GITHUB_TOKEN }}
       #     checkName: Vercel
       #     ref: github.event.pull_request.head.sha || github.sha
-      - run: npm test
+      - run: yarn test
         # env: ENVIRONMENT_URL
         # if: steps.wait.outputs.conclusion == 'success'

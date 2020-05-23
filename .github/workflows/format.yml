@@ -14,9 +14,9 @@ jobs:
           node-version: "12.x"
       - name: Format
         run: |
-          npm ci
-          npm run format
-          npm run lint -- --fix
+          yarn --frozen-lockfile
+          yarn format
+          yarn lint --fix
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
