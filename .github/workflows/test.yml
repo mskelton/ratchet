@@ -15,11 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn --frozen-lockfile
-      - name: Wait for deployment
-        id: wait-for-netflify
-        uses: jakepartusch/wait-for-netlify-action@v1.2
-        with:
-          site_name: "proptypes"
-      - run: yarn test
+      - name: Waiting for Vercel deployment
+        uses: mskelton/wait-for-vercel-action@master
+        id: wait-for-vercel
+      - run: npm test
         env:
-          ENVIRONMENT_URL: ${{ steps.wait-for-netflify.outputs.url }}
+          ENVIRONMENT_URL: ${{ steps.wait-for-vercel.outputs.url }}
