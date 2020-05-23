@@ -5,16 +5,11 @@
   import transform from "../../transform"
   import jscodeshift from "jscodeshift"
 
-  const options = {}
+  let options = {}
+  let output = outputSnippet
 
   function handleChange(event) {
-    const output = transform(
-      { source: event.detail.value },
-      { jscodeshift },
-      options
-    )
-
-    console.log(output)
+    output = transform({ source: event.detail.value }, { jscodeshift }, options)
   }
 </script>
 
@@ -35,7 +30,7 @@
   <ConfigBar />
 
   <div class="editors">
-    <Editor defaultValue={inputSnippet} on:change={handleChange} />
-    <Editor defaultValue={outputSnippet} readOnly={true} />
+    <Editor value={inputSnippet} on:change={handleChange} />
+    <Editor value={output} readOnly />
   </div>
 </div>
