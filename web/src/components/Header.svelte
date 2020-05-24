@@ -40,7 +40,10 @@
   <h1>PropTypes to TS</h1>
 
   <label>
-    <input type="checkbox" bind:checked={preservePropTypes} data-testid="preserve-prop-types" />
+    <input
+      type="checkbox"
+      bind:checked={preservePropTypes}
+      data-testid="preserve-prop-types" />
     Preserve PropTypes
   </label>
 </div>
