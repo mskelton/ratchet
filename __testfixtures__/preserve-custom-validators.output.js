@@ -2,10 +2,16 @@ import PropTypes from "prop-types"
 import React from "react"
 
 type Props = {
+  a?: string,
+  b?: unknown,
+  c?: unknown,
+  d?: unknown,
+  e?: unknown,
+  f?: unknown,
+  g?: unknown
+};
 
-}
-
-export function MyComponent(props) {
+export function MyComponent(props: Props) {
   return <span />
 }
 
@@ -16,8 +22,4 @@ MyComponent.propTypes = {
   e: PropTypes.arrayOf(() => {}),
   f: PropTypes.objectOf(function() {}),
   g: PropTypes.objectOf(() => {}),
-  h: PropTypes.arrayOf(function() {}).isRequired,
-  i: PropTypes.arrayOf(() => {}).isRequired,
-  j: PropTypes.objectOf(function() {}).isRequired,
-  k: PropTypes.objectOf(() => {}).isRequired
 }
