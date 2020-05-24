@@ -62,9 +62,15 @@ export function MyComponent(props: Props) {
 
 ### `--preserve-prop-types`
 
-This option will preserve PropTypes after converting to TS. This is useful for component libraries where you support both TypeScript declarations and PropTypes.
+Preserves prop types after converting to TS. There are two available modes: `all` and `custom-validators`.
 
-#### Input
+#### `--preserve-prop-types=all`
+
+_CLI alias: `--preserve-prop-types`_
+
+This option will preserve all PropTypes. This is useful for component libraries where you support both TypeScript declarations and PropTypes.
+
+Input:
 
 ```js
 import PropTypes from "prop-types"
@@ -75,19 +81,17 @@ export function MyComponent(props) {
 }
 
 MyComponent.propTypes = {
-  bar: PropTypes.string.isRequired,
   foo: PropTypes.number,
 }
 ```
 
-#### Output
+Output:
 
 ```ts
 import PropTypes from "prop-types"
 import React from "react"
 
 type Props = {
-  bar: string
   foo?: number
 }
 
@@ -96,7 +100,50 @@ export function MyComponent(props: Props) {
 }
 
 MyComponent.propTypes = {
-  bar: PropTypes.string.isRequired,
   foo: PropTypes.number,
+}
+```
+
+#### `--preserve-prop-types=custom-validators`
+
+This option will preserve custom validator functions. Because custom validators are converted to `unknown`, this option is useful to preserve these functions so you can manually review and convert to their TypeScript equivalent.
+
+Input:
+
+```js
+import PropTypes from "prop-types"
+import React from "react"
+
+export function MyComponent(props) {
+  return <span />
+}
+
+MyComponent.propTypes = {
+  foo: PropTypes.number,
+  bar(props, propName, componentName) {
+    return new Error("Invalid prop")
+  },
+}
+```
+
+Output:
+
+```ts
+import PropTypes from "prop-types"
+import React from "react"
+
+type Props = {
+  foo?: number
+  bar: unknown
+}
+
+export function MyComponent(props: Props) {
+  return <span />
+}
+
+MyComponent.propTypes = {
+  bar(props, propName, componentName) {
+    return new Error("Invalid prop")
+  },
 }
 ```
