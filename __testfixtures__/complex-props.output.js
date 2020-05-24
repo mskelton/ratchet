@@ -15,6 +15,7 @@ type Props = {
   optionalUnion?: string | number,
   optionalArrayOf?: number[],
   optionalObjectOf?: Record<string, number>,
+  optionalInstanceOf?: Message,
   optionalObjectWithShape?: {
     optionalProperty?: string,
     requiredProperty: number
@@ -37,6 +38,7 @@ type Props = {
   requiredUnion: string | number,
   requiredArrayOf: number[],
   requiredObjectOf: Record<string, number>,
+  requiredInstanceOf: Message,
   requiredObjectWithShape: {
     optionalProperty?: string,
     requiredProperty: number
