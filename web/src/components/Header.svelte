@@ -2,7 +2,8 @@
   import { afterUpdate, createEventDispatcher } from "svelte"
 
   const dispatch = createEventDispatcher()
-  let preservePropTypes = false
+  let optionKey = "option:preserve-prop-types"
+  let preservePropTypes = localStorage.getItem(optionKey) || "none"
 
   afterUpdate(() => {
     dispatch("change", { preservePropTypes })
@@ -30,9 +31,8 @@
     align-items: center;
   }
 
-  input {
-    margin-right: 8px;
-    margin-top: 2px;
+  .label {
+    margin-right: 4px;
   }
 </style>
 
@@ -40,10 +40,14 @@
   <h1>PropTypes to TS</h1>
 
   <label>
-    <input
-      type="checkbox"
-      bind:checked={preservePropTypes}
-      data-testid="preserve-prop-types" />
-    Preserve PropTypes
+    <span class="label">Preserve PropTypes:</span>
+    <select
+      bind:value={preservePropTypes}
+      data-testid="preserve-prop-types"
+      on:change={() => localStorage.setItem(optionKey, preservePropTypes)}>
+      <option value="none">None</option>
+      <option value="unconverted">Unconverted</option>
+      <option value="all">All</option>
+    </select>
   </label>
 </div>
