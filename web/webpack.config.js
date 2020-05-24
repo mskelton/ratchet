@@ -1,5 +1,6 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const path = require("path")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const mode = process.env.NODE_ENV || "development"
 const prod = mode === "production"
@@ -43,10 +44,13 @@ module.exports = {
     ],
   },
   output: {
-    filename: "[name].js",
+    filename: "[name].[hash].js",
     path: path.join(__dirname, "public"),
   },
-  plugins: [new MiniCssExtractPlugin({ filename: "[name].[hash].css" })],
+  plugins: [
+    new HtmlWebpackPlugin({ template: "index.handlebars" }),
+    new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
+  ],
   resolve: {
     alias: {
       svelte: path.resolve("..", "node_modules", "svelte"),
