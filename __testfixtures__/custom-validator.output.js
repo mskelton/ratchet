@@ -1,7 +1,9 @@
 import React from "react"
 
 type Props = {
-  a?: string
+  a?: string,
+  b?: unknown,
+  c?: unknown
 };
 
 export function MyComponent(props: Props) {

@@ -20,12 +20,14 @@ function getFunctionType() {
   })
 }
 
-/**
- * @param {string} type
- */
+/** @param {string} type */
 function reactType(type) {
   return j.tsQualifiedName(j.identifier("React"), j.identifier(type))
 }
+
+/** @param {import('ast-types/gen/kinds').ExpressionKind} node */
+const isFunction = (node) =>
+  node.type === "FunctionExpression" || node.type === "ArrowFunctionExpression"
 
 /**
  * @param {string} type
@@ -92,6 +94,8 @@ function getComplexTSType(node) {
 function convertToTSType(node) {
   return node.type === "MemberExpression"
     ? mapType(node.property.name)
+    : isFunction(node)
+    ? j.tsUnknownKeyword()
     : getComplexTSType(node)
 }
 
