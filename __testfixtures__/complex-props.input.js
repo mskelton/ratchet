@@ -20,6 +20,7 @@ MyComponent.propTypes = {
   optionalUnion: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
   optionalObjectOf: PropTypes.objectOf(PropTypes.number),
+  optionalInstanceOf: PropTypes.instanceOf(Message),
   optionalObjectWithShape: PropTypes.shape({
     optionalProperty: PropTypes.string,
     requiredProperty: PropTypes.number.isRequired,
@@ -42,6 +43,7 @@ MyComponent.propTypes = {
   requiredUnion: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   requiredArrayOf: PropTypes.arrayOf(PropTypes.number).isRequired,
   requiredObjectOf: PropTypes.objectOf(PropTypes.number).isRequired,
+  requiredInstanceOf: PropTypes.instanceOf(Message).isRequired,
   requiredObjectWithShape: PropTypes.shape({
     optionalProperty: PropTypes.string,
     requiredProperty: PropTypes.number.isRequired,

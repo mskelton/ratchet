@@ -75,6 +75,9 @@ function getComplexTSType(node) {
     case "oneOfType":
       return j.tsUnionType(node.arguments[0].elements.map(convertToTSType))
 
+    case "instanceOf":
+      return j.tsTypeReference(j.identifier(node.arguments[0].name))
+
     case "shape":
     case "exact":
       return j.tsTypeLiteral(
