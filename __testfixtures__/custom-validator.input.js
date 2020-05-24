@@ -7,10 +7,10 @@ export function MyComponent(props) {
 
 MyComponent.propTypes = {
   a: PropTypes.string,
-  a: function () {},
-  b: () => {},
-  e: PropTypes.arrayOf(function() {}),
-  f: PropTypes.arrayOf(() => {}),
-  g: PropTypes.objectOf(function() {}),
-  h: PropTypes.objectOf(() => {})
+  b: function () {},
+  c: () => {},
+  d: PropTypes.arrayOf(function() {}),
+  e: PropTypes.arrayOf(() => {}),
+  f: PropTypes.objectOf(function() {}),
+  g: PropTypes.objectOf(() => {})
 }
