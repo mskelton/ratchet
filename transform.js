@@ -20,12 +20,14 @@ function getFunctionType() {
   })
 }
 
-/**
- * @param {string} type
- */
+/** @param {string} type */
 function reactType(type) {
   return j.tsQualifiedName(j.identifier("React"), j.identifier(type))
 }
+
+/** @param {import('ast-types/gen/kinds').ExpressionKind} node */
+const isFunction = (node) =>
+  node.type === "FunctionExpression" || node.type === "ArrowFunctionExpression"
 
 /**
  * @param {string} type
@@ -54,16 +56,20 @@ function mapType(type) {
 function getComplexTSType(node) {
   switch (node.callee.property.name) {
     case "arrayOf":
-      return j.tsArrayType(mapType(node.arguments[0].property.name))
+      return isFunction(node.arguments[0])
+        ? j.tsUnknownKeyword()
+        : j.tsArrayType(mapType(node.arguments[0].property.name))
 
     case "objectOf":
-      return j.tsTypeReference(
-        j.identifier("Record"),
-        j.tsTypeParameterInstantiation([
-          j.tsStringKeyword(),
-          mapType(node.arguments[0].property.name),
-        ])
-      )
+      return isFunction(node.arguments[0])
+        ? j.tsUnknownKeyword()
+        : j.tsTypeReference(
+            j.identifier("Record"),
+            j.tsTypeParameterInstantiation([
+              j.tsStringKeyword(),
+              mapType(node.arguments[0].property.name),
+            ])
+          )
 
     case "oneOf":
       return j.tsUnionType(
@@ -92,6 +98,8 @@ function getComplexTSType(node) {
 function convertToTSType(node) {
   return node.type === "MemberExpression"
     ? mapType(node.property.name)
+    : isFunction(node)
+    ? j.tsUnknownKeyword()
     : getComplexTSType(node)
 }
 

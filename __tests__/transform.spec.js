@@ -7,6 +7,7 @@ defineTest(__dirname, "transform", null, "multiple-components")
 defineTest(__dirname, "transform", null, "class-component-static")
 defineTest(__dirname, "transform", null, "multiple-class-components-static")
 defineTest(__dirname, "transform", null, "function-and-class")
+defineTest(__dirname, "transform", null, "custom-validator")
 
 // Options
 defineTest(
