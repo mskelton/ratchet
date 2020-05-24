@@ -3,9 +3,11 @@
 
 /** @type {import('jscodeshift').JSCodeshift} */
 let j
+let foundCustomFunction = false
 
 const opts = {
-  preservePropTypes: false,
+  /** @type {'all' | 'custom-validators' | 'none'} */
+  preservePropTypes: "none",
 }
 
 function getFunctionType() {
@@ -26,8 +28,17 @@ function reactType(type) {
 }
 
 /** @param {import('ast-types/gen/kinds').ExpressionKind} node */
-const isFunction = (node) =>
-  node.type === "FunctionExpression" || node.type === "ArrowFunctionExpression"
+function isCustomValidator(node) {
+  const result =
+    node.type === "FunctionExpression" ||
+    node.type === "ArrowFunctionExpression"
+
+  if (result) {
+    foundCustomFunction = true
+  }
+
+  return result
+}
 
 /**
  * @param {string} type
@@ -56,12 +67,12 @@ function mapType(type) {
 function getComplexTSType(node) {
   switch (node.callee.property.name) {
     case "arrayOf":
-      return isFunction(node.arguments[0])
+      return isCustomValidator(node.arguments[0])
         ? j.tsUnknownKeyword()
         : j.tsArrayType(mapType(node.arguments[0].property.name))
 
     case "objectOf":
-      return isFunction(node.arguments[0])
+      return isCustomValidator(node.arguments[0])
         ? j.tsUnknownKeyword()
         : j.tsTypeReference(
             j.identifier("Record"),
@@ -98,7 +109,7 @@ function getComplexTSType(node) {
 function convertToTSType(node) {
   return node.type === "MemberExpression"
     ? mapType(node.property.name)
-    : isFunction(node)
+    : isCustomValidator(node)
     ? j.tsUnknownKeyword()
     : getComplexTSType(node)
 }
@@ -176,7 +187,7 @@ function collectPropTypes(source) {
   })
 
   // Remove the propTypes assignment expression and static propTypes
-  if (!opts.preservePropTypes) {
+  if (opts.preservePropTypes === "none") {
     types.remove()
     staticTypes.remove()
   }
@@ -253,15 +264,20 @@ function addClassTSType(source, types) {
  */
 module.exports = function (fileInfo, api, options) {
   j = api.jscodeshift
+
+  // Parse the CLI options
   opts.preservePropTypes =
     options["preserve-prop-types"] === true
       ? "all"
-      : options["preserve-prop-types"]
+      : options["preserve-prop-types"] || "none"
 
   const source = api.jscodeshift(fileInfo.source)
 
   // Remove the prop-types import from the top of the file
-  if (!opts.preservePropTypes) {
+  if (
+    opts.preservePropTypes === "none" ||
+    (opts.preservePropTypes === "custom-validators" && !foundCustomFunction)
+  ) {
     removeImport(source)
   }
 
