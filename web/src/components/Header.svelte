@@ -1,12 +1,12 @@
 <script>
   import { afterUpdate, createEventDispatcher } from "svelte"
+  import { storage } from "../storage"
 
   const dispatch = createEventDispatcher()
-  let optionKey = "option:preserve-prop-types"
-  let preservePropTypes = localStorage.getItem(optionKey) || "none"
+  let preservePropTypes = storage["preserve-prop-types"]
 
   afterUpdate(() => {
-    dispatch("change", { preservePropTypes })
+    dispatch("change")
   })
 </script>
 
@@ -44,7 +44,9 @@
     <select
       bind:value={preservePropTypes}
       data-testid="preserve-prop-types"
-      on:change={() => localStorage.setItem(optionKey, preservePropTypes)}>
+      on:change={() => {
+        storage['preserve-prop-types'] = preservePropTypes
+      }}>
       <option value="none">None</option>
       <option value="unconverted">Unconverted</option>
       <option value="all">All</option>
