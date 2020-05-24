@@ -253,7 +253,10 @@ function addClassTSType(source, types) {
  */
 module.exports = function (fileInfo, api, options) {
   j = api.jscodeshift
-  opts.preservePropTypes = options["preserve-prop-types"]
+  opts.preservePropTypes =
+    options["preserve-prop-types"] === true
+      ? "all"
+      : options["preserve-prop-types"]
 
   const source = api.jscodeshift(fileInfo.source)
 

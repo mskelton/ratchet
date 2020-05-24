@@ -16,3 +16,9 @@ defineTest(
   { "preserve-prop-types": true },
   "preserve-prop-types"
 )
+defineTest(
+  __dirname,
+  "transform",
+  { "preserve-prop-types": "all" },
+  "preserve-prop-types"
+)
