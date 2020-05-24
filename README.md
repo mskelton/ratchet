@@ -62,7 +62,7 @@ export function MyComponent(props: Props) {
 
 ### `--preserve-prop-types`
 
-Preserves prop types after converting to TS. There are two available modes: `all` and `custom-validators`.
+Preserves prop types after converting to TS. There are two available modes: `all` and `unconverted`.
 
 #### `--preserve-prop-types=all`
 
@@ -104,9 +104,9 @@ MyComponent.propTypes = {
 }
 ```
 
-#### `--preserve-prop-types=custom-validators`
+#### `--preserve-prop-types=unconverted`
 
-This option will preserve custom validator functions. Because custom validators are converted to `unknown`, this option is useful to preserve these functions so you can manually review and convert to their TypeScript equivalent.
+This option will preserve prop types which could not be fully converted. For example, spread expressions are not converted, and custom validators are converted to `unknown`. This option is useful to preserve these expressions so you can manually review and convert to their TypeScript equivalent.
 
 Input:
 
@@ -119,6 +119,7 @@ export function MyComponent(props) {
 }
 
 MyComponent.propTypes = {
+  ...OtherComponent.propTypes,
   foo: PropTypes.number,
   bar(props, propName, componentName) {
     return new Error("Invalid prop")
@@ -142,6 +143,7 @@ export function MyComponent(props: Props) {
 }
 
 MyComponent.propTypes = {
+  ...OtherComponent.propTypes,
   bar(props, propName, componentName) {
     return new Error("Invalid prop")
   },

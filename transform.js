@@ -6,7 +6,7 @@ let j
 let foundCustomFunction = false
 
 const opts = {
-  /** @type {'all' | 'custom-validators' | 'none'} */
+  /** @type {'all' | 'unconverted' | 'none'} */
   preservePropTypes: "none",
 }
 
@@ -276,7 +276,7 @@ module.exports = function (fileInfo, api, options) {
   // Remove the prop-types import from the top of the file
   if (
     opts.preservePropTypes === "none" ||
-    (opts.preservePropTypes === "custom-validators" && !foundCustomFunction)
+    (opts.preservePropTypes === "unconverted" && !foundCustomFunction)
   ) {
     removeImport(source)
   }

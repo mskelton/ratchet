@@ -25,19 +25,19 @@ defineTest(
   "preserve-prop-types"
 )
 
-// --preserve-prop-types=custom
+// --preserve-prop-types=unconverted
 defineTest(
   __dirname,
   "transform",
-  { "preserve-prop-types": "custom-validators" },
-  "preserve-custom-validators"
+  { "preserve-prop-types": "unconverted" },
+  "preserve-unconverted"
 )
 
-// --preserve-prop-types=custom
-// When no custom validators exist, should match --preserve-prop-types=all
+// --preserve-prop-types=unconverted
+// When no unconverted PropTypes exist, should match --preserve-prop-types=all
 defineTest(
   __dirname,
   "transform",
-  { "preserve-prop-types": "custom-validators" },
+  { "preserve-prop-types": "unconverted" },
   "preserve-prop-types"
 )

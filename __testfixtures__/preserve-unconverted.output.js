@@ -16,6 +16,7 @@ export function MyComponent(props: Props) {
 }
 
 MyComponent.propTypes = {
+  ...OtherComponent.propTypes,
   b: function () {},
   c: () => {},
   d: PropTypes.arrayOf(function() {}),
