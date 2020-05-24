@@ -21,12 +21,11 @@ jobs:
         uses: microsoft/playwright-github-action@v1
       - run: yarn --frozen-lockfile
       - name: Waiting for Vercel deployment
-        uses: mskelton/wait-for-vercel-action@master
+        uses: mskelton/wait-for-vercel-action@v1
         id: wait-for-vercel
         with:
           prod-url: prop-types.now.sh
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          token: ${{ secrets.VERCEL_TOKEN }}
       - run: yarn test
         working-directory: e2e
         env:
