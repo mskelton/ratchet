@@ -7,7 +7,11 @@ type Props = {
   d?: unknown,
   e?: unknown,
   f?: unknown,
-  g?: unknown
+  g?: unknown,
+  h: unknown,
+  i: unknown,
+  j: unknown,
+  k: unknown
 };
 
 export function MyComponent(props: Props) {
