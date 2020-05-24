@@ -1,6 +1,7 @@
 # PropTypes to TS
 
 [![Test](https://github.com/mskelton/prop-types-to-ts/workflows/Test/badge.svg?branch=master)](https://github.com/mskelton/prop-types-to-ts/actions?query=workflow%3ATest)
+[![GitHub deployments](https://img.shields.io/github/deployments/mskelton/prop-types-to-ts/production?label=Deploy)](https://prop-types.now.sh)
 
 > Codemod to convert React PropTypes to TypeScript types.
 
