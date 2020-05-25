@@ -27,7 +27,7 @@ npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/m
 
 In addition to the CLI, you can use the tool online at [prop-types.now.sh](https://prop-types.now.sh)! Simply paste your input on the left and instantly see the output on the right!
 
-[![Screenshot](web/screenshot.png)](https://prop-types.now.sh)
+[![Screenshot](web/screenshot.png?v=1)](https://prop-types.now.sh)
 
 ## Example Input/Output
 
