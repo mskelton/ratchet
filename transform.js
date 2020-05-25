@@ -3,7 +3,6 @@
 
 /** @type {import('jscodeshift').JSCodeshift} */
 let j
-let foundCustomFunction = false
 
 const opts = {
   /** @type {'all' | 'unconverted' | 'none'} */
@@ -166,6 +165,10 @@ function findStaticPropTypes(source) {
     .filter((path) => path.value.static && path.value.key.name === "propTypes")
 }
 
+function notSpread(property) {
+  return property.type === "Property"
+}
+
 /**
  * @param {import('jscodeshift').Collection} source
  */
@@ -176,13 +179,17 @@ function collectPropTypes(source) {
   // Store the types to survive after we remove the propTypes
   const results = types.paths().map((path) => ({
     component: path.value.left.object.name,
-    propTypes: path.value.right.properties.map(createPropertySignature),
+    propTypes: path.value.right.properties
+      .filter(notSpread)
+      .map(createPropertySignature),
   }))
 
   const staticResults = staticTypes.paths().map((path) => {
     return {
       component: path.parent.parent.value.id.name,
-      propTypes: path.value.value.properties.map(createPropertySignature),
+      propTypes: path.value.value.properties
+        .filter(notSpread)
+        .map(createPropertySignature),
     }
   })
 
@@ -192,7 +199,36 @@ function collectPropTypes(source) {
     staticTypes.remove()
   }
 
-  return results.concat(staticResults)
+  let foundUnconverted = false
+  if (opts.preservePropTypes === "unconverted") {
+    const properties = types.find(j.Property)
+    const typesToRemove = properties.filter((path) => {
+      const node = path.value.value
+
+      return (
+        node.type !== "FunctionExpression" &&
+        node.type !== "ArrowFunctionExpression" &&
+        (node.type !== "CallExpression" ||
+          !["FunctionExpression", "ArrowFunctionExpression"].includes(
+            node.arguments[0].type
+          ))
+      )
+    })
+
+    foundUnconverted = typesToRemove.length < properties.length
+
+    // If all the types should be removed, we also need to remove propTypes object
+    if (typesToRemove.length === properties.length) {
+      types.remove()
+    } else {
+      typesToRemove.remove()
+    }
+  }
+
+  return {
+    foundUnconverted,
+    results: results.concat(staticResults),
+  }
 }
 
 /**
@@ -273,20 +309,20 @@ module.exports = function (fileInfo, api, options) {
 
   const source = api.jscodeshift(fileInfo.source)
 
-  // Remove the prop-types import from the top of the file
-  if (
-    opts.preservePropTypes === "none" ||
-    (opts.preservePropTypes === "unconverted" && !foundCustomFunction)
-  ) {
-    removeImport(source)
-  }
-
   // Collect prop types from assignment expressions and static prop types
-  const types = collectPropTypes(source).concat()
+  const { foundUnconverted, results: types } = collectPropTypes(source)
 
   // Add TS types to functions and classes
   addFunctionTSTypes(source, types)
   addClassTSType(source, types)
+
+  // Remove the prop-types import from the top of the file
+  if (
+    opts.preservePropTypes === "none" ||
+    (opts.preservePropTypes === "unconverted" && !foundUnconverted)
+  ) {
+    removeImport(source)
+  }
 
   return source.toSource()
 }

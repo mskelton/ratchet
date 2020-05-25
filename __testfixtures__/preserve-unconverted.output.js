@@ -22,5 +22,5 @@ MyComponent.propTypes = {
   d: PropTypes.arrayOf(function() {}),
   e: PropTypes.arrayOf(() => {}),
   f: PropTypes.objectOf(function() {}),
-  g: PropTypes.objectOf(() => {}),
+  g: PropTypes.objectOf(() => {})
 }

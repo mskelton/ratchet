@@ -26,18 +26,18 @@ defineTest(
 )
 
 // --preserve-prop-types=unconverted
-// defineTest(
-//   __dirname,
-//   "transform",
-//   { "preserve-prop-types": "unconverted" },
-//   "preserve-unconverted"
-// )
-
-// --preserve-prop-types=unconverted
-// When no unconverted PropTypes exist, should match --preserve-prop-types=all
 defineTest(
   __dirname,
   "transform",
   { "preserve-prop-types": "unconverted" },
-  "preserve-prop-types"
+  "preserve-unconverted"
+)
+
+// --preserve-prop-types=unconverted
+// When no unconverted PropTypes exist, should match --preserve-prop-types=none
+defineTest(
+  __dirname,
+  "transform",
+  { "preserve-prop-types": "unconverted" },
+  "function-component"
 )
