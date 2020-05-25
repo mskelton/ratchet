@@ -32,6 +32,12 @@ defineTest(
   { "preserve-prop-types": "unconverted" },
   "preserve-unconverted"
 )
+defineTest(
+  __dirname,
+  "transform",
+  { "preserve-prop-types": "unconverted" },
+  "spread-element"
+)
 
 // --preserve-prop-types=unconverted
 // When no unconverted PropTypes exist, should match --preserve-prop-types=none

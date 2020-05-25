@@ -210,10 +210,12 @@ function collectPropTypes(source) {
       )
     })
 
+    // Spread elements don't require a PropTypes import, so we check the
+    // properties length to determine if the import is needed.
     foundUnconverted = typesToRemove.length < properties.length
 
     // If all the types should be removed, we also need to remove propTypes object
-    if (typesToRemove.length === properties.length) {
+    if (typesToRemove.length === types.get().value.right.properties.length) {
       types.remove()
     } else {
       typesToRemove.remove()
