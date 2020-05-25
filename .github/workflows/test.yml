@@ -9,6 +9,7 @@ jobs:
         with:
           node-version: "12"
       - run: yarn --frozen-lockfile
+      - run: yarn lint
       - run: yarn test
   e2e-test:
     runs-on: ubuntu-latest

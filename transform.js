@@ -5,7 +5,8 @@
 let j
 
 const opts = {
-  preservePropTypes: false,
+  /** @type {'all' | 'unconverted' | 'none'} */
+  preservePropTypes: "none",
 }
 
 function getFunctionType() {
@@ -26,8 +27,12 @@ function reactType(type) {
 }
 
 /** @param {import('ast-types/gen/kinds').ExpressionKind} node */
-const isFunction = (node) =>
-  node.type === "FunctionExpression" || node.type === "ArrowFunctionExpression"
+function isCustomValidator(node) {
+  return (
+    node.type === "FunctionExpression" ||
+    node.type === "ArrowFunctionExpression"
+  )
+}
 
 /**
  * @param {string} type
@@ -56,12 +61,12 @@ function mapType(type) {
 function getComplexTSType(node) {
   switch (node.callee.property.name) {
     case "arrayOf":
-      return isFunction(node.arguments[0])
+      return isCustomValidator(node.arguments[0])
         ? j.tsUnknownKeyword()
         : j.tsArrayType(mapType(node.arguments[0].property.name))
 
     case "objectOf":
-      return isFunction(node.arguments[0])
+      return isCustomValidator(node.arguments[0])
         ? j.tsUnknownKeyword()
         : j.tsTypeReference(
             j.identifier("Record"),
@@ -98,7 +103,7 @@ function getComplexTSType(node) {
 function convertToTSType(node) {
   return node.type === "MemberExpression"
     ? mapType(node.property.name)
-    : isFunction(node)
+    : isCustomValidator(node)
     ? j.tsUnknownKeyword()
     : getComplexTSType(node)
 }
@@ -155,6 +160,10 @@ function findStaticPropTypes(source) {
     .filter((path) => path.value.static && path.value.key.name === "propTypes")
 }
 
+function notSpread(property) {
+  return property.type === "Property"
+}
+
 /**
  * @param {import('jscodeshift').Collection} source
  */
@@ -165,23 +174,56 @@ function collectPropTypes(source) {
   // Store the types to survive after we remove the propTypes
   const results = types.paths().map((path) => ({
     component: path.value.left.object.name,
-    propTypes: path.value.right.properties.map(createPropertySignature),
+    propTypes: path.value.right.properties
+      .filter(notSpread)
+      .map(createPropertySignature),
   }))
 
   const staticResults = staticTypes.paths().map((path) => {
     return {
       component: path.parent.parent.value.id.name,
-      propTypes: path.value.value.properties.map(createPropertySignature),
+      propTypes: path.value.value.properties
+        .filter(notSpread)
+        .map(createPropertySignature),
     }
   })
 
   // Remove the propTypes assignment expression and static propTypes
-  if (!opts.preservePropTypes) {
+  if (opts.preservePropTypes === "none") {
     types.remove()
     staticTypes.remove()
   }
 
-  return results.concat(staticResults)
+  let foundUnconverted = false
+  if (opts.preservePropTypes === "unconverted") {
+    const properties = types.find(j.Property)
+    const typesToRemove = properties.filter((path) => {
+      const node = path.value.value
+
+      return (
+        node.type !== "FunctionExpression" &&
+        node.type !== "ArrowFunctionExpression" &&
+        (node.type !== "CallExpression" ||
+          !["FunctionExpression", "ArrowFunctionExpression"].includes(
+            node.arguments[0].type
+          ))
+      )
+    })
+
+    foundUnconverted = typesToRemove.length < properties.length
+
+    // If all the types should be removed, we also need to remove propTypes object
+    if (typesToRemove.length === properties.length) {
+      types.remove()
+    } else {
+      typesToRemove.remove()
+    }
+  }
+
+  return {
+    foundUnconverted,
+    results: results.concat(staticResults),
+  }
 }
 
 /**
@@ -253,21 +295,29 @@ function addClassTSType(source, types) {
  */
 module.exports = function (fileInfo, api, options) {
   j = api.jscodeshift
-  opts.preservePropTypes = options["preserve-prop-types"]
+
+  // Parse the CLI options
+  opts.preservePropTypes =
+    options["preserve-prop-types"] === true
+      ? "all"
+      : options["preserve-prop-types"] || "none"
 
   const source = api.jscodeshift(fileInfo.source)
 
-  // Remove the prop-types import from the top of the file
-  if (!opts.preservePropTypes) {
-    removeImport(source)
-  }
-
   // Collect prop types from assignment expressions and static prop types
-  const types = collectPropTypes(source).concat()
+  const { foundUnconverted, results: types } = collectPropTypes(source)
 
   // Add TS types to functions and classes
   addFunctionTSTypes(source, types)
   addClassTSType(source, types)
+
+  // Remove the prop-types import from the top of the file
+  if (
+    opts.preservePropTypes === "none" ||
+    (opts.preservePropTypes === "unconverted" && !foundUnconverted)
+  ) {
+    removeImport(source)
+  }
 
   return source.toSource()
 }

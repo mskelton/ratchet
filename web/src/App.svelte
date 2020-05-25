@@ -1,31 +1,32 @@
 <script>
   import jscodeshift from "jscodeshift"
+  import { onMount } from "svelte"
   import transform from "../../transform"
   import Editor from "./components/Editor.svelte"
   import Header from "./components/Header.svelte"
-  import { inputSnippet, outputSnippet } from "./editor/snippets"
+  import { inputSnippet } from "./editor/snippets"
+  import { storage } from "./storage"
 
   const source = { current: inputSnippet }
-  let options = {}
-  let output = outputSnippet
+  let output = doTransform(source.current)
 
   function doTransform(source) {
-    output = transform({ source }, { jscodeshift }, options)
+    return transform(
+      { source },
+      { jscodeshift },
+      { "preserve-prop-types": storage["preserve-prop-types"] }
+    )
   }
 
-  function handleOptionChange(event) {
-    options = {
-      "preserve-prop-types": event.detail.preservePropTypes,
-    }
-
+  function handleOptionChange() {
     // Since the options have changed, we need to re-compile the source
-    doTransform(source.current)
+    output = doTransform(source.current)
   }
 
   function handleChange(event) {
     // Store the source for use if the options are changed
     source.current = event.detail.value
-    doTransform(source.current)
+    output = doTransform(source.current)
   }
 </script>
 

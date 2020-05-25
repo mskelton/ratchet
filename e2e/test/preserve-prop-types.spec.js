@@ -8,23 +8,23 @@ describe("Preserve PropTypes", () => {
     await page.goto(baseUrl)
   })
 
-  it("should be unchecked by default", async () => {
-    const checked = await page.$eval(
+  it("should be none by default", async () => {
+    const value = await page.$eval(
       id("preserve-prop-types"),
-      (el) => el.checked
+      (el) => el.options[el.selectedIndex].value
     )
 
-    expect(checked).toBe(false)
+    expect(value).toBe("none")
   })
 
-  it("should update the output when toggling the checkbox", async () => {
-    await page.check(id("preserve-prop-types"))
+  it("should update the output when changing the selected value", async () => {
+    await page.selectOption(id("preserve-prop-types"), "all")
     await page.waitForFunction(
       ([editorId, expected]) => window[editorId].getValue() === expected,
       ["output", outputFixture]
     )
 
-    await page.uncheck(id("preserve-prop-types"))
+    await page.selectOption(id("preserve-prop-types"), "none")
     await page.waitForFunction(
       ([editorId, expected]) => window[editorId].getValue() === expected,
       ["output", read("function-component.output")]
@@ -32,7 +32,7 @@ describe("Preserve PropTypes", () => {
   })
 
   it("should respect the option when editing the input", async () => {
-    await page.check(id("preserve-prop-types"))
+    await page.selectOption(id("preserve-prop-types"), "all")
 
     // Clear the input
     await page.click(id("input"))
@@ -55,6 +55,18 @@ describe("Preserve PropTypes", () => {
     await page.waitForFunction(
       ([editorId, expected]) => window[editorId].getValue() === expected,
       ["output", output]
+    )
+  })
+
+  it("should persist the selected value", async () => {
+    await page.reload()
+    await page.selectOption(id("preserve-prop-types"), "all")
+  })
+
+  it("should use the persisted value for the initial value", async () => {
+    await page.waitForFunction(
+      ([editorId, expected]) => window[editorId].getValue() === expected,
+      ["output", outputFixture]
     )
   })
 })
