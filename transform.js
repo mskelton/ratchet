@@ -28,15 +28,10 @@ function reactType(type) {
 
 /** @param {import('ast-types/gen/kinds').ExpressionKind} node */
 function isCustomValidator(node) {
-  const result =
+  return (
     node.type === "FunctionExpression" ||
     node.type === "ArrowFunctionExpression"
-
-  if (result) {
-    foundCustomFunction = true
-  }
-
-  return result
+  )
 }
 
 /**
