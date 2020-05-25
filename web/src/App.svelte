@@ -8,25 +8,30 @@
   import { storage } from "./storage"
 
   const source = { current: inputSnippet }
-  let output = doTransform(source.current)
+  let output
+  doTransform(source.current)
 
   function doTransform(source) {
-    return transform(
-      { source },
-      { jscodeshift },
-      { "preserve-prop-types": storage["preserve-prop-types"] }
-    )
+    try {
+      output = transform(
+        { source },
+        { jscodeshift },
+        { "preserve-prop-types": storage["preserve-prop-types"] }
+      )
+    } catch (e) {
+      console.warn("Transform error.", e)
+    }
   }
 
   function handleOptionChange() {
     // Since the options have changed, we need to re-compile the source
-    output = doTransform(source.current)
+    doTransform(source.current)
   }
 
   function handleChange(event) {
     // Store the source for use if the options are changed
     source.current = event.detail.value
-    output = doTransform(source.current)
+    doTransform(source.current)
   }
 </script>
 
