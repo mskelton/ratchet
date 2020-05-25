@@ -16,7 +16,7 @@ jobs:
         run: |
           yarn --frozen-lockfile
           yarn format
-          yarn lint --fix
+          yarn lint --fix; exit 0
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
