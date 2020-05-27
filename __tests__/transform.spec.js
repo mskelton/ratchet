@@ -39,11 +39,17 @@ defineTest(
   "spread-element"
 )
 
-// --preserve-prop-types=unconverted
 // When no unconverted PropTypes exist, should match --preserve-prop-types=none
 defineTest(
   __dirname,
   "transform",
   { "preserve-prop-types": "unconverted" },
-  "function-component"
+  "complex-props"
+)
+// Should take PropTypes.shape into account when calculating unconverted propTypes
+defineTest(
+  __dirname,
+  "transform",
+  { "preserve-prop-types": "unconverted" },
+  "preserve-unconverted-shape"
 )
