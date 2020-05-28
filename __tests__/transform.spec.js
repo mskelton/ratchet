@@ -8,6 +8,7 @@ defineTest(__dirname, "transform", null, "class-component-static")
 defineTest(__dirname, "transform", null, "multiple-class-components-static")
 defineTest(__dirname, "transform", null, "function-and-class")
 defineTest(__dirname, "transform", null, "custom-validator")
+defineTest(__dirname, "transform", null, "no-prop-types")
 
 // --preserve-prop-types
 defineTest(
@@ -25,6 +26,15 @@ defineTest(
   "preserve-prop-types"
 )
 
+// --preserve-prop-types=none
+defineTest(__dirname, "transform", null, "preserve-none")
+defineTest(
+  __dirname,
+  "transform",
+  { "preserve-prop-types": "none" },
+  "preserve-none"
+)
+
 // --preserve-prop-types=unconverted
 defineTest(
   __dirname,
@@ -38,12 +48,24 @@ defineTest(
   { "preserve-prop-types": "unconverted" },
   "spread-element"
 )
+defineTest(
+  __dirname,
+  "transform",
+  { "preserve-prop-types": "unconverted" },
+  "preserve-unconverted-static"
+)
 
-// --preserve-prop-types=unconverted
 // When no unconverted PropTypes exist, should match --preserve-prop-types=none
 defineTest(
   __dirname,
   "transform",
   { "preserve-prop-types": "unconverted" },
-  "function-component"
+  "complex-props"
+)
+// Should take PropTypes.shape into account when calculating unconverted propTypes
+defineTest(
+  __dirname,
+  "transform",
+  { "preserve-prop-types": "unconverted" },
+  "preserve-unconverted-shape"
 )

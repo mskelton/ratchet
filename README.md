@@ -17,10 +17,10 @@
 Run the following command with a file glob that matches the files you want to convert.
 
 ```sh
-npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/master/transform.js GLOB
+npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/master/transform.ts GLOB
 
 # Example
-npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/master/transform.js src/**/*.{js,jsx}
+npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/master/transform.ts src/**/*.{js,jsx}
 ```
 
 ## Try it Online!
