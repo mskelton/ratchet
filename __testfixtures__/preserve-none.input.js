@@ -1,17 +1,22 @@
 import PropTypes from "prop-types"
 import React from "react"
 
-export function MyComponent(props) {
+export function ComponentA(props) {
   return <span />
 }
 
-MyComponent.propTypes = {
-  ...OtherComponent.propTypes,
-  a: PropTypes.string,
-  b: function () {},
-  c: () => {},
-  d: PropTypes.arrayOf(function() {}),
-  e: PropTypes.arrayOf(() => {}),
-  f: PropTypes.objectOf(function() {}),
-  g: PropTypes.objectOf(() => {}),
+ComponentA.propTypes = {
+  ...OtherComponent,
+  a: PropTypes.string.isRequired,
+  b() {}
+}
+
+export function ComponentB(props) {
+  return <span />
+}
+
+ComponentB.propTypes = {
+  ...ThisComponent,
+  c: PropTypes.number,
+  d() {}
 }

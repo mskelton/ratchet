@@ -1,15 +1,19 @@
 import React from "react"
 
-type Props = {
-  a?: string,
-  b?: unknown,
-  c?: unknown,
-  d?: unknown,
-  e?: unknown,
-  f?: unknown,
-  g?: unknown
+type ComponentAProps = {
+  a: string,
+  b?: unknown
 };
 
-export function MyComponent(props: Props) {
+export function ComponentA(props: ComponentAProps) {
+  return <span />
+}
+
+type ComponentBProps = {
+  c?: number,
+  d?: unknown
+};
+
+export function ComponentB(props: ComponentBProps) {
   return <span />
 }
