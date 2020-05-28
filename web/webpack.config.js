@@ -36,9 +36,7 @@ module.exports = {
       },
       {
         loader: "babel-loader",
-        options: {
-          rootMode: "upward",
-        },
+        options: { rootMode: "upward" },
         test: /\.tsx?$/,
       },
       {
