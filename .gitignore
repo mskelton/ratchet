@@ -1,4 +1,5 @@
 node_modules/
+coverage/
 web/public
 e2e/screenshots/*
 !e2e/screenshots/.gitkeep
