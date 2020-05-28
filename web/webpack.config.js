@@ -35,6 +35,13 @@ module.exports = {
         },
       },
       {
+        loader: "babel-loader",
+        options: {
+          rootMode: "upward",
+        },
+        test: /\.tsx?$/,
+      },
+      {
         test: /\.css$/,
         use: [
           prod ? MiniCssExtractPlugin.loader : "style-loader",
@@ -55,6 +62,6 @@ module.exports = {
     alias: {
       svelte: path.resolve("..", "node_modules", "svelte"),
     },
-    extensions: [".mjs", ".js", ".svelte"],
+    extensions: [".ts", ".mjs", ".js", ".svelte"],
   },
 }
