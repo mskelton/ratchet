@@ -18,19 +18,23 @@
     "web"
   ],
   "eslintConfig": {
-    "extends": "@mskelton"
+    "extends": [
+      "@mskelton",
+      "@mskelton/eslint-config/typescript"
+    ]
   },
   "dependencies": {
-    "codemirror": "^5.54.0",
     "jscodeshift": "^0.9.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.1",
     "@mskelton/eslint-config": "^5.9.0",
     "@types/jscodeshift": "^0.7.1",
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
     "eslint": "^7.0.0",
     "eslint-plugin-sort": "^1.4.0",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
-    "prettier-plugin-svelte": "^1.1.0"
+    "typescript": "^3.9.3"
   }
 }
