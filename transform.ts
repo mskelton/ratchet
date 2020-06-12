@@ -164,7 +164,7 @@ function getTSTypes(
 function getFunctionParent(path: NodePath) {
   return path.parent.get("type").value === "Program"
     ? path
-    : getFunctionParent(path.parentPath)
+    : getFunctionParent(path.parent)
 }
 
 function createTypeAlias(path: NodePath, componentTypes: CollectedTypes) {
@@ -191,7 +191,7 @@ function addFunctionTSTypes(
   source: Collection,
   componentTypes: CollectedTypes
 ) {
-  source.find(j.FunctionDeclaration).forEach((path) => {
+  source.forEach((path) => {
     const typeName = createTypeAlias(path, componentTypes)
     if (!typeName) return
 
@@ -289,7 +289,8 @@ module.exports = function (file: FileInfo, api: API, opts: Options) {
     (path) => path.parent.parent.parent.value.id.name
   )
 
-  addFunctionTSTypes(source, tsTypes)
+  addFunctionTSTypes(source.find(j.FunctionDeclaration), tsTypes)
+  addFunctionTSTypes(source.find(j.FunctionExpression), tsTypes)
   addClassTSTypes(source, tsTypes)
   addClassTSTypes(source, staticTSTypes)
 
