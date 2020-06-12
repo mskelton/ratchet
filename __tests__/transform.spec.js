@@ -9,6 +9,9 @@ defineTest(__dirname, "transform", null, "multiple-class-components-static")
 defineTest(__dirname, "transform", null, "function-and-class")
 defineTest(__dirname, "transform", null, "custom-validator")
 defineTest(__dirname, "transform", null, "no-prop-types")
+defineTest(__dirname, "transform", null, "no-export")
+defineTest(__dirname, "transform", null, "memo")
+defineTest(__dirname, "transform", null, "memo-export")
 
 // --preserve-prop-types
 defineTest(
