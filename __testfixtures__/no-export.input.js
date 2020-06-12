@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-function MyComponent(props: Props) {
+function MyComponent(props) {
   return null
 }
 

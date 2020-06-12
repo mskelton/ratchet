@@ -161,6 +161,12 @@ function getTSTypes(
   return collected
 }
 
+function getFunctionParent(path: NodePath) {
+  return path.parent.get("type").value === "Program"
+    ? path
+    : getFunctionParent(path.parentPath)
+}
+
 function createTypeAlias(path: NodePath, componentTypes: CollectedTypes) {
   const componentName = path.get("id", "name").value
   const types = componentTypes.find((t) => t.component === componentName)
@@ -171,7 +177,7 @@ function createTypeAlias(path: NodePath, componentTypes: CollectedTypes) {
   if (!types) return
 
   // Add the TS types before the function/class
-  path.parentPath.insertBefore(
+  getFunctionParent(path).insertBefore(
     j.tsTypeAliasDeclaration(
       j.identifier(typeName),
       j.tsTypeLiteral(types.types.map(createPropertySignature))
