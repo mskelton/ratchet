@@ -3,7 +3,7 @@ import React from "react"
 type Props = {
   optionalArray?: unknown[],
   optionalBool?: boolean,
-  optionalFunc?: (...args: unknown[]) => unknown,
+  optionalFunc?(...args: unknown[]): unknown,
   optionalNumber?: number,
   optionalObject?: object,
   optionalString?: string,
@@ -18,7 +18,8 @@ type Props = {
   optionalInstanceOf?: Message,
   optionalObjectWithShape?: {
     optionalProperty?: string,
-    requiredProperty: number
+    requiredProperty: number,
+    functionProperty?(...args: unknown[]): unknown
   },
   optionalObjectWithStrictShape?: {
     optionalProperty?: string,
@@ -26,7 +27,7 @@ type Props = {
   },
   requiredArray: unknown[],
   requiredBool: boolean,
-  requiredFunc: (...args: unknown[]) => unknown,
+  requiredFunc(...args: unknown[]): unknown,
   requiredNumber: number,
   requiredObject: object,
   requiredString: string,

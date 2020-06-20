@@ -6,6 +6,7 @@ import type {
   JSCodeshift,
   Options,
   TSAnyKeyword,
+  TSFunctionType,
 } from "jscodeshift"
 
 let j: JSCodeshift
@@ -17,7 +18,22 @@ function reactType(type: string) {
   return j.tsQualifiedName(j.identifier("React"), j.identifier(type))
 }
 
+type TSType = {
+  key: string
+  type: TSAnyKeyword | TSFunctionType
+  required: boolean
+}
+
 function createPropertySignature({ key, required, type }: TSType) {
+  if (type.type === "TSFunctionType") {
+    return j.tsMethodSignature.from({
+      key: j.identifier(key),
+      optional: !required,
+      parameters: type.parameters,
+      typeAnnotation: type.typeAnnotation,
+    })
+  }
+
   return j.tsPropertySignature(
     j.identifier(key),
     j.tsTypeAnnotation(type),
@@ -115,12 +131,6 @@ function getTSType(path: NodePath) {
 const isRequiredProperty = (property: NodePath) =>
   property.get("value", "type").value === "MemberExpression" &&
   property.get("value", "property", "name").value === "isRequired"
-
-type TSType = {
-  key: string
-  type: TSAnyKeyword
-  required: boolean
-}
 
 function mapType(path: NodePath): TSType {
   const required = isRequiredProperty(path)

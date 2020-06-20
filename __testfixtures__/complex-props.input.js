@@ -24,6 +24,7 @@ MyComponent.propTypes = {
   optionalObjectWithShape: PropTypes.shape({
     optionalProperty: PropTypes.string,
     requiredProperty: PropTypes.number.isRequired,
+    functionProperty: PRopTypes.func,
   }),
   optionalObjectWithStrictShape: PropTypes.exact({
     optionalProperty: PropTypes.string,
