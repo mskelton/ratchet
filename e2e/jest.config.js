@@ -1,7 +1,11 @@
+const path = require("path")
+
 module.exports = {
   preset: "jest-playwright-preset",
-  setupFilesAfterEnv: ["expect-playwright"],
-  testEnvironment: "./config/environment.js",
-  testRunner: "jest-circus/runner",
+  reporters: ["@testim/root-cause-jest/lib/reporter/default"],
+  testEnvironment: "@testim/root-cause-jest/lib/RootCauseJestEnv",
+  testEnvironmentOptions: {
+    actualEnvironment: path.resolve("./config/environment.js"),
+  },
   testTimeout: 35 * 1000,
 }
