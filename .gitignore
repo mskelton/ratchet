@@ -3,3 +3,4 @@ coverage/
 web/public
 e2e/screenshots/*
 !e2e/screenshots/.gitkeep
+.root-cause
