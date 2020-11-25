@@ -2,3 +2,6 @@ __testfixtures__/
 web/public/
 web/index.handlebars
 .root-cause
+.pnp.js
+.yarn/
+coverage/
