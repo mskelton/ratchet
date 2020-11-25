@@ -4,3 +4,11 @@ web/public
 e2e/screenshots/*
 !e2e/screenshots/.gitkeep
 .root-cause
+
+# Yarn 2 with zero-install
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
