@@ -13,12 +13,13 @@
     "webpack": ">=4"
   },
   "devDependencies": {
+    "@jest/reporters": "^26.6.2",
     "@testim/root-cause-jest": "^0.1.33",
-    "@types/jest": "^26.0.14",
-    "babel-loader": "^8.1.0",
+    "@types/jest": "^26.0.20",
+    "babel-loader": "^8.2.2",
     "eslint-plugin-jest-playwright": "^0.2.1",
-    "jest": "^26.5.3",
-    "jest-playwright-preset": "0.2.0",
-    "playwright-chromium": "^1.5.1"
+    "jest": "^26.6.3",
+    "jest-playwright-preset": "1.4.7",
+    "playwright-chromium": "^1.9.0"
   }
 }
