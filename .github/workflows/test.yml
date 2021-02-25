@@ -21,7 +21,7 @@ jobs:
       - name: Setup Playwright
         uses: microsoft/playwright-github-action@v1
       - run: yarn install --immutable
-      - run: yarn start &
+      - run: yarn serve &
         working-directory: web
       - run: yarn test
         working-directory: e2e

@@ -15,6 +15,7 @@
 
   <label>
     <span class="label">Preserve PropTypes:</span>
+    <!-- svelte-ignore a11y-no-onchange -->
     <select
       bind:value={preservePropTypes}
       data-testid="preserve-prop-types"

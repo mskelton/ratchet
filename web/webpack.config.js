@@ -1,6 +1,7 @@
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const { EnvironmentPlugin } = require("webpack")
 
 const mode = process.env.NODE_ENV || "development"
 const prod = mode === "production"
@@ -55,11 +56,15 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ template: "index.handlebars" }),
     new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
+    new EnvironmentPlugin({ NODE_DEBUG: false }),
   ],
   resolve: {
     alias: {
       svelte: path.resolve("..", "node_modules", "svelte"),
     },
     extensions: [".ts", ".mjs", ".js", ".svelte"],
+    fallback: {
+      os: false,
+    },
   },
 }
