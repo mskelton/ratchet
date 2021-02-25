@@ -8,8 +8,12 @@
   "scripts": {
     "test": "jest"
   },
+  "peerDependencies": {
+    "@babel/core": ">=7",
+    "webpack": ">=4"
+  },
   "devDependencies": {
-    "@testim/root-cause-jest": "^0.1.24",
+    "@testim/root-cause-jest": "^0.1.33",
     "@types/jest": "^26.0.14",
     "babel-loader": "^8.1.0",
     "eslint-plugin-jest-playwright": "^0.2.1",
