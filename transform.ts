@@ -1,4 +1,4 @@
-import { NodePath } from "ast-types"
+import type { NodePath } from "ast-types/lib/node-path"
 import type {
   API,
   Collection,
@@ -177,8 +177,15 @@ function getFunctionParent(path: NodePath) {
     : getFunctionParent(path.parent)
 }
 
+function getComponentName(path: NodePath) {
+  const root =
+    path.get("type").value === "ArrowFunctionExpression" ? path.parent : path
+
+  return root.get("id", "name").value
+}
+
 function createTypeAlias(path: NodePath, componentTypes: CollectedTypes) {
-  const componentName = path.get("id", "name").value
+  const componentName = getComponentName(path)
   const types = componentTypes.find((t) => t.component === componentName)
   const typeName =
     componentTypes.length === 1 ? "Props" : `${componentName}Props`
@@ -238,7 +245,7 @@ function collectPropTypes(source: Collection) {
 function collectStaticPropTypes(source: Collection) {
   return source
     .find(j.ClassProperty)
-    .filter((path) => path.value.static)
+    .filter((path) => !!path.value.static)
     .filter((path) => path.get("key", "name").value === "propTypes")
     .map((path) => path.get("value", "properties"))
 }
@@ -301,6 +308,7 @@ module.exports = function (file: FileInfo, api: API, opts: Options) {
 
   addFunctionTSTypes(source.find(j.FunctionDeclaration), tsTypes)
   addFunctionTSTypes(source.find(j.FunctionExpression), tsTypes)
+  addFunctionTSTypes(source.find(j.ArrowFunctionExpression), tsTypes)
   addClassTSTypes(source, tsTypes)
   addClassTSTypes(source, staticTSTypes)
 

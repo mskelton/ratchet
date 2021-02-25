@@ -11,6 +11,7 @@ jobs:
       - run: yarn install --immutable
       - run: yarn lint
       - run: yarn test
+      - run: yarn ts
   e2e-test:
     runs-on: ubuntu-latest
     steps:

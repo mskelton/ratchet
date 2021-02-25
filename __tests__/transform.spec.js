@@ -1,6 +1,7 @@
 const { defineTest } = require("jscodeshift/dist/testUtils")
 
 defineTest(__dirname, "transform", null, "function-component")
+defineTest(__dirname, "transform", null, "arrow-function")
 defineTest(__dirname, "transform", null, "class-component")
 defineTest(__dirname, "transform", null, "complex-props")
 defineTest(__dirname, "transform", null, "multiple-components")
