@@ -35,6 +35,15 @@
   }
 </script>
 
+<div class="container">
+  <Header on:change={handleOptionChange} />
+
+  <div class="editors">
+    <Editor testId="input" value={inputSnippet} on:change={handleChange} />
+    <Editor testId="output" value={output} readOnly />
+  </div>
+</div>
+
 <style>
   .container,
   .editors {
@@ -51,12 +60,3 @@
     min-height: 0;
   }
 </style>
-
-<div class="container">
-  <Header on:change={handleOptionChange} />
-
-  <div class="editors">
-    <Editor testId="input" value={inputSnippet} on:change={handleChange} />
-    <Editor testId="output" value={output} readOnly />
-  </div>
-</div>

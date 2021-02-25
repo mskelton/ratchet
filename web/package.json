@@ -9,19 +9,22 @@
     "build": "NODE_ENV=production webpack",
     "start": "webpack-dev-server"
   },
+  "peerDependencies": {
+    "prettier": ">=2"
+  },
+  "dependencies": {
+    "codemirror": "^5.54.0"
+  },
   "devDependencies": {
     "css-loader": "^3.5.3",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
-    "prettier-plugin-svelte": "^1.1.0",
+    "prettier-plugin-svelte": "^2.1.6",
     "style-loader": "^1.2.1",
     "svelte": "^3.22.3",
     "svelte-loader": "^2.13.6",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
-  },
-  "dependencies": {
-    "codemirror": "^5.54.0"
   }
 }

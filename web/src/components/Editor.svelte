@@ -33,6 +33,13 @@
   })
 </script>
 
+<div class="container">
+  <div class="editor" data-testid={testId}>
+    <!-- svelte-ignore a11y-positive-tabindex -->
+    <textarea bind:this={refs.editor} readonly tabindex="2" {value} />
+  </div>
+</div>
+
 <style>
   .container {
     display: flex;
@@ -48,10 +55,3 @@
     flex: 1;
   }
 </style>
-
-<div class="container">
-  <div class="editor" data-testid={testId}>
-    <!-- svelte-ignore a11y-positive-tabindex -->
-    <textarea bind:this={refs.editor} readonly tabindex="2" {value} />
-  </div>
-</div>
