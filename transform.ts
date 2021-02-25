@@ -1,4 +1,4 @@
-import { NodePath } from "ast-types"
+import { NodePath } from "ast-types/lib/node-path"
 import type {
   API,
   Collection,
@@ -238,7 +238,7 @@ function collectPropTypes(source: Collection) {
 function collectStaticPropTypes(source: Collection) {
   return source
     .find(j.ClassProperty)
-    .filter((path) => path.value.static)
+    .filter((path) => !!path.value.static)
     .filter((path) => path.get("key", "name").value === "propTypes")
     .map((path) => path.get("value", "properties"))
 }

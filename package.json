@@ -11,7 +11,8 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "ts": "tsc"
   },
   "workspaces": [
     "e2e",
