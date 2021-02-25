@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12"
-      - run: yarn install --immutable --immutable-cache
+      - run: yarn install --immutable
       - run: yarn lint
       - run: yarn test
   e2e-test:
@@ -20,7 +20,7 @@ jobs:
           node-version: "12"
       - name: Setup Playwright
         uses: microsoft/playwright-github-action@v1
-      - run: yarn install --immutable --immutable-cache
+      - run: yarn install --immutable
       - run: yarn start &
         working-directory: web
       - run: yarn test
