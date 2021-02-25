@@ -10,6 +10,25 @@
   })
 </script>
 
+<div class="container">
+  <h1>PropTypes to TS</h1>
+
+  <label>
+    <span class="label">Preserve PropTypes:</span>
+    <select
+      bind:value={preservePropTypes}
+      data-testid="preserve-prop-types"
+      on:change={() => {
+        storage["preserve-prop-types"] = preservePropTypes
+      }}
+    >
+      <option value="none">None</option>
+      <option value="unconverted">Unconverted</option>
+      <option value="all">All</option>
+    </select>
+  </label>
+</div>
+
 <style>
   .container {
     align-content: center;
@@ -35,21 +54,3 @@
     margin-right: 4px;
   }
 </style>
-
-<div class="container">
-  <h1>PropTypes to TS</h1>
-
-  <label>
-    <span class="label">Preserve PropTypes:</span>
-    <select
-      bind:value={preservePropTypes}
-      data-testid="preserve-prop-types"
-      on:change={() => {
-        storage['preserve-prop-types'] = preservePropTypes
-      }}>
-      <option value="none">None</option>
-      <option value="unconverted">Unconverted</option>
-      <option value="all">All</option>
-    </select>
-  </label>
-</div>

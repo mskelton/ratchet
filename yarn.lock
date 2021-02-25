@@ -9500,13 +9500,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prettier-plugin-svelte@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "prettier-plugin-svelte@npm:1.1.0"
+"prettier-plugin-svelte@npm:^2.1.6":
+  version: 2.1.6
+  resolution: "prettier-plugin-svelte@npm:2.1.6"
   peerDependencies:
     prettier: ^1.16.4 || ^2.0.0
     svelte: ^3.2.0
-  checksum: 0ea31037e0483a5ee0a8ce395f5c5f7f6a9bda03a73f205bf307d8d9f43ff5eb9067d5c1fa6c983175fee3d9befa06503b62f34599cf057093b88e2ad5e89eca
+  checksum: b5ff9dc8c26a85f0f09ac25478af37a5afc9ef6405ddb475616456d8d6fdf193bf629f91e94ac7041e804f61855c7e1beb6a649b998572bc07098a2104c0a819
   languageName: node
   linkType: hard
 
@@ -12100,7 +12100,7 @@ typescript@^3.9.9:
     css-loader: ^3.5.3
     html-webpack-plugin: ^4.3.0
     mini-css-extract-plugin: ^0.9.0
-    prettier-plugin-svelte: ^1.1.0
+    prettier-plugin-svelte: ^2.1.6
     style-loader: ^1.2.1
     svelte: ^3.22.3
     svelte-loader: ^2.13.6
