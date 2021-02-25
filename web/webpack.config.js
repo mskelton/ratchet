@@ -58,7 +58,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      svelte: require.resolve("svelte"),
+      svelte: path.resolve("..", "node_modules", "svelte"),
     },
     extensions: [".ts", ".mjs", ".js", ".svelte"],
   },
