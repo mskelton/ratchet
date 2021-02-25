@@ -5,9 +5,8 @@ e2e/screenshots/*
 !e2e/screenshots/.gitkeep
 .root-cause
 
-# Yarn 2 with zero-install
+# Yarn 2
 .yarn/*
-!.yarn/cache
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
