@@ -13,6 +13,7 @@
     "webpack": ">=4"
   },
   "devDependencies": {
+    "@jest/reporters": "^26.6.2",
     "@testim/root-cause-jest": "^0.1.33",
     "@types/jest": "^26.0.20",
     "babel-loader": "^8.2.2",
