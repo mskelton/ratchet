@@ -10,6 +10,7 @@
     "serve": "webpack serve"
   },
   "peerDependencies": {
+    "@babel/core": ">=7",
     "prettier": ">=2"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "codemirror": "^5.60.0"
   },
   "devDependencies": {
+    "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.4.0",
