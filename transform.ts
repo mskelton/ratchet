@@ -282,7 +282,7 @@ function cleanup(
   }
 }
 
-module.exports = function (file: FileInfo, api: API, opts: Options) {
+export default function (file: FileInfo, api: API, opts: Options) {
   j = api.jscodeshift
   const source = j(file.source)
 
