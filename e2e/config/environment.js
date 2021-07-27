@@ -1,5 +1,5 @@
-const PlaywrightEnvironment = require("jest-playwright-preset/lib/PlaywrightEnvironment")
-  .default
+const PlaywrightEnvironment =
+  require("jest-playwright-preset/lib/PlaywrightEnvironment").default
 
 module.exports = class Environment extends PlaywrightEnvironment {
   async handleTestEvent(event) {

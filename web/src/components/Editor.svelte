@@ -31,6 +31,7 @@
   afterUpdate(() => {
     editor.setValue(value)
   })
+
 </script>
 
 <div class="container">
@@ -54,4 +55,5 @@
     display: flex;
     flex: 1;
   }
+
 </style>

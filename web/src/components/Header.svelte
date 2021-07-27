@@ -8,6 +8,7 @@
   afterUpdate(() => {
     dispatch("change")
   })
+
 </script>
 
 <div class="container">
@@ -54,4 +55,5 @@
   .label {
     margin-right: 4px;
   }
+
 </style>
