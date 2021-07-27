@@ -1,7 +1,7 @@
 # PropTypes to TS
 
 [![Test](https://github.com/mskelton/prop-types-to-ts/workflows/Test/badge.svg?branch=master)](https://github.com/mskelton/prop-types-to-ts/actions?query=workflow%3ATest)
-[![GitHub deployments](https://img.shields.io/github/deployments/mskelton/prop-types-to-ts/production?label=Deploy)](https://prop-types.now.sh)
+[![GitHub deployments](https://img.shields.io/github/deployments/mskelton/prop-types-to-ts/production?label=Deploy)](https://prop-types.vercel.app)
 
 > Codemod to convert React PropTypes to TypeScript types.
 
@@ -25,9 +25,9 @@ npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/m
 
 ## Try it Online!
 
-In addition to the CLI, you can use the tool online at [prop-types.now.sh](https://prop-types.now.sh)! Simply paste your input on the left and instantly see the output on the right!
+In addition to the CLI, you can use the tool online at [prop-types.vercel.app](https://prop-types.vercel.app)! Simply paste your input on the left and instantly see the output on the right!
 
-[![Screenshot](web/screenshot.png?v=1)](https://prop-types.now.sh)
+[![Screenshot](web/screenshot.png?v=1)](https://prop-types.vercel.app)
 
 ## Example Input/Output
 
