@@ -1,6 +1,6 @@
 import React from "react"
 
-type ComponentAProps = {
+interface ComponentAProps {
   a: string,
   b?: number
 };
@@ -11,7 +11,7 @@ export class ComponentA extends React.Component<ComponentAProps> {
   }
 }
 
-type ComponentBProps = {
+interface ComponentBProps {
   c?: unknown[],
   d: object
 };

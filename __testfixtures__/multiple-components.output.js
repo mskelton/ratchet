@@ -1,6 +1,6 @@
 import React from "react"
 
-type ComponentAProps = {
+interface ComponentAProps {
   a: string,
   b?: number
 };
@@ -9,7 +9,7 @@ export function ComponentA(props: ComponentAProps) {
   return <span />
 }
 
-type ComponentBProps = {
+interface ComponentBProps {
   c?: unknown[],
   d: object
 };

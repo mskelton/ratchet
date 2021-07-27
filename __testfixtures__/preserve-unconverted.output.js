@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
 
-type Props = {
+interface Props  {
   a?: string,
   b?: unknown,
   c?: unknown,

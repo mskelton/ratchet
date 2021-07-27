@@ -48,7 +48,7 @@ MyComponent.propTypes = {
 // Input
 import React from "react"
 
-type Props = {
+interface Props {
   bar: string
   foo?: number
 }
@@ -91,7 +91,7 @@ Output:
 import PropTypes from "prop-types"
 import React from "react"
 
-type Props = {
+interface Props {
   foo?: number
 }
 
@@ -133,7 +133,7 @@ Output:
 import PropTypes from "prop-types"
 import React from "react"
 
-type Props = {
+interface Props {
   foo?: number
   bar: unknown
 }
