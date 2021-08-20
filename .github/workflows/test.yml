@@ -12,15 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: mskelton/setup-yarn@v1
-      - name: Setup Playwright
-        uses: microsoft/playwright-github-action@v1
-      - run: yarn serve &
-        working-directory: web
-      - run: yarn test
-        working-directory: e2e
+      - run: yarn playwright install-deps
+      - run: yarn playwright install chromium
+      - run: yarn workspace e2e test
       - name: Upload test results
-        if: ${{ failure() }}
         uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
         with:
           name: test-results
-          path: e2e/test-results/*
+          path: e2e/test-results
