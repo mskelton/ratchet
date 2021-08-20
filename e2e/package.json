@@ -6,7 +6,7 @@
   "author": "Mark Skelton",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "playwright test"
   },
   "peerDependencies": {
     "eslint": ">=7"
