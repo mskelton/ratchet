@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: mskelton/setup-yarn@v1
-      - run: yarn playwright install-deps
-      - run: yarn playwright install chromium
+      - run: yarn workspace e2e playwright install-deps
+      - run: yarn workspace e2e playwright install chromium
       - run: yarn workspace e2e test
       - name: Upload test results
         uses: actions/upload-artifact@v2
