@@ -6,15 +6,11 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: mskelton/setup-yarn@v1
         with:
           ref: ${{ github.head_ref }}
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
       - name: Format
         run: |
-          yarn install --immutable
           yarn format
           yarn lint --fix
       - name: Commit changes

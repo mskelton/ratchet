@@ -4,24 +4,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12"
-      - run: yarn install --immutable
+      - uses: mskelton/setup-yarn@v1
       - run: yarn lint
       - run: yarn test
       - run: yarn ts
   e2e-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12"
+      - uses: mskelton/setup-yarn@v1
       - name: Setup Playwright
         uses: microsoft/playwright-github-action@v1
-      - run: yarn install --immutable
       - run: yarn serve &
         working-directory: web
       - run: yarn test
