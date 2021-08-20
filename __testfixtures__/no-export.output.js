@@ -1,9 +1,9 @@
 import React from 'react'
 
-interface Props {
-  a?: number
-};
+interface MyComponentProps {
+  a?: number;
+}
 
-function MyComponent(props: Props) {
+function MyComponent(props: MyComponentProps) {
   return null
 }

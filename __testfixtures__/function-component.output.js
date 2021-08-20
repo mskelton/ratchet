@@ -1,10 +1,10 @@
 import React from "react"
 
-interface Props {
-  bar: string,
-  foo?: number
-};
+interface MyComponentProps {
+  bar: string;
+  foo?: number;
+}
 
-export function MyComponent(props: Props) {
+export function MyComponent(props: MyComponentProps) {
   return <span />
 }

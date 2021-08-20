@@ -1,11 +1,11 @@
 import React from "react"
 
-interface Props {
-  bar: string,
-  foo?: number
-};
+interface MyComponentProps {
+  bar: string;
+  foo?: number;
+}
 
-export class MyComponent extends React.Component<Props> {
+export class MyComponent extends React.Component<MyComponentProps> {
   render() {
     return <span />
   }

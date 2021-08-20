@@ -1,17 +1,17 @@
 import PropTypes from "prop-types"
 import React from "react"
 
-interface Props  {
-  a?: string,
-  b?: unknown,
-  c?: unknown,
-  d?: unknown,
-  e?: unknown,
-  f?: unknown,
-  g?: unknown
-};
+interface MyComponentProps {
+  a?: string;
+  b?: unknown;
+  c?: unknown;
+  d?: unknown;
+  e?: unknown;
+  f?: unknown;
+  g?: unknown;
+}
 
-export function MyComponent(props: Props) {
+export function MyComponent(props: MyComponentProps) {
   return <span />
 }
 

@@ -1,14 +1,14 @@
 import React from "react"
 
-interface Props {
-  a?: string,
-  b?: unknown,
+interface MyComponentProps {
+  a?: string;
+  b?: unknown;
   c?: {
     d?: boolean
-  }
-};
+  };
+}
 
-export function MyComponent(props: Props) {
+export function MyComponent(props: MyComponentProps) {
   return <span />
 }
 

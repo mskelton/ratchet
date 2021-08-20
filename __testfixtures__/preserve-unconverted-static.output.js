@@ -1,11 +1,11 @@
 import React from "react"
 
-interface Props {
-  bar: string,
-  foo?: unknown
-};
+interface MyComponentProps {
+  bar: string;
+  foo?: unknown;
+}
 
-export class MyComponent extends React.Component<Props> {
+export class MyComponent extends React.Component<MyComponentProps> {
   static propTypes = {
     foo() {}
   }
