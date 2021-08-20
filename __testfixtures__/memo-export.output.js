@@ -1,9 +1,9 @@
 import React from 'react'
 
-type Props = {
-  a?: number
-};
+interface MyComponentProps {
+  a?: number;
+}
 
-export const MyComponent = React.memo(function MyComponent(props: Props) {
+export const MyComponent = React.memo(function MyComponent(props: MyComponentProps) {
   return null
 })

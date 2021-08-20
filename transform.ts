@@ -184,20 +184,19 @@ function getComponentName(path: NodePath) {
   return root.get("id", "name").value
 }
 
-function createTypeAlias(path: NodePath, componentTypes: CollectedTypes) {
+function createInterface(path: NodePath, componentTypes: CollectedTypes) {
   const componentName = getComponentName(path)
   const types = componentTypes.find((t) => t.component === componentName)
-  const typeName =
-    componentTypes.length === 1 ? "Props" : `${componentName}Props`
+  const typeName = `${componentName}Props`
 
   // If the component doesn't have propTypes, ignore it
   if (!types) return
 
   // Add the TS types before the function/class
   getFunctionParent(path).insertBefore(
-    j.tsTypeAliasDeclaration(
+    j.tsInterfaceDeclaration(
       j.identifier(typeName),
-      j.tsTypeLiteral(types.types.map(createPropertySignature))
+      j.tsInterfaceBody(types.types.map(createPropertySignature))
     )
   )
 
@@ -209,7 +208,7 @@ function addFunctionTSTypes(
   componentTypes: CollectedTypes
 ) {
   source.forEach((path) => {
-    const typeName = createTypeAlias(path, componentTypes)
+    const typeName = createInterface(path, componentTypes)
     if (!typeName) return
 
     // Add the TS types to the props param
@@ -223,7 +222,7 @@ function addFunctionTSTypes(
 
 function addClassTSTypes(source: Collection, componentTypes: CollectedTypes) {
   source.find(j.ClassDeclaration).forEach((path) => {
-    const typeName = createTypeAlias(path, componentTypes)
+    const typeName = createInterface(path, componentTypes)
     if (!typeName) return
 
     // Add the TS types to the React.Component super class

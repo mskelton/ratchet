@@ -1,9 +1,9 @@
 import React from "react"
 
-type ComponentAProps = {
-  a: string,
-  b?: number
-};
+interface ComponentAProps {
+  a: string;
+  b?: number;
+}
 
 export class ComponentA extends React.Component<ComponentAProps> {
   render() {
@@ -11,10 +11,10 @@ export class ComponentA extends React.Component<ComponentAProps> {
   }
 }
 
-type ComponentBProps = {
-  c?: unknown[],
-  d: object
-};
+interface ComponentBProps {
+  c?: unknown[];
+  d: object;
+}
 
 export class ComponentB extends React.Component<ComponentBProps> {
   render() {
