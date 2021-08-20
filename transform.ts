@@ -196,7 +196,7 @@ function createInterface(path: NodePath, componentTypes: CollectedTypes) {
   getFunctionParent(path).insertBefore(
     j.tsInterfaceDeclaration(
       j.identifier(typeName),
-      j.tsInterfaceBody([types.types.map(createPropertySignature) as any])
+      j.tsInterfaceBody(types.types.map(createPropertySignature))
     )
   )
 
