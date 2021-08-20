@@ -6,19 +6,13 @@
   "author": "Mark Skelton",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "playwright test"
   },
   "peerDependencies": {
     "eslint": ">=7"
   },
   "devDependencies": {
-    "@jest/reporters": "^26.6.2",
-    "@testim/root-cause-jest": "^0.1.33",
-    "@types/jest": "^26.0.24",
-    "eslint-plugin-jest-playwright": "^0.3.3",
-    "jest": "^26.6.3",
-    "jest-playwright-preset": "^1.5.2",
-    "playwright-chromium": "^1.11.0",
-    "playwright-core": "^1.11.0"
+    "@playwright/test": "^1.14.0",
+    "eslint-plugin-playwright": "^0.4.0"
   }
 }

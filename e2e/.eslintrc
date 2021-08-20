@@ -1,6 +1,6 @@
 {
-  "extends": ["plugin:jest-playwright/recommended"],
+  "extends": ["plugin:playwright/playwright-test"],
   "env": {
-    "browser": true
+    "shared-node-browser": true
   }
 }

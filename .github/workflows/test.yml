@@ -4,31 +4,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12"
-      - run: yarn install --immutable
+      - uses: mskelton/setup-yarn@v1
       - run: yarn lint
       - run: yarn test
       - run: yarn ts
   e2e-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12"
-      - name: Setup Playwright
-        uses: microsoft/playwright-github-action@v1
-      - run: yarn install --immutable
-      - run: yarn serve &
-        working-directory: web
-      - run: yarn test
-        working-directory: e2e
-      - name: Upload screenshots
-        if: ${{ failure() }}
+      - uses: mskelton/setup-yarn@v1
+      - run: yarn workspace e2e playwright install-deps
+      - run: yarn workspace e2e playwright install chromium
+      - run: yarn workspace e2e test
+      - name: Upload test results
         uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
         with:
-          name: screenshots
-          path: e2e/screenshots/*.png
+          name: test-results
+          path: e2e/test-results

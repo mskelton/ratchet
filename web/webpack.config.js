@@ -6,9 +6,19 @@ const { EnvironmentPlugin } = require("webpack")
 const mode = process.env.NODE_ENV || "development"
 const prod = mode === "production"
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
+  cache: {
+    buildDependencies: {
+      config: [__filename],
+    },
+    type: "filesystem",
+  },
   devServer: {
-    contentBase: path.join(__dirname, "public"),
+    port: 3000,
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
   },
   devtool: prod ? false : "source-map",
   entry: {
@@ -50,12 +60,12 @@ module.exports = {
     ],
   },
   output: {
-    filename: "[name].[hash].js",
+    filename: "[name].[contenthash].js",
     path: path.join(__dirname, "public"),
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "index.handlebars" }),
-    new MiniCssExtractPlugin({ filename: "[name].[hash].css" }),
+    new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
     new EnvironmentPlugin({ NODE_DEBUG: false }),
   ],
   resolve: {

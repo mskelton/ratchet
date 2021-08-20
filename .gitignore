@@ -1,9 +1,7 @@
 node_modules/
 coverage/
 web/public
-e2e/screenshots/*
-!e2e/screenshots/.gitkeep
-.root-cause
+e2e/test-results
 
 # Yarn 2
 .yarn/*
