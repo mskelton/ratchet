@@ -6,7 +6,14 @@ const { EnvironmentPlugin } = require("webpack")
 const mode = process.env.NODE_ENV || "development"
 const prod = mode === "production"
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
+  cache: {
+    buildDependencies: {
+      config: [__filename],
+    },
+    type: "filesystem",
+  },
   devServer: {
     port: 3000,
     static: {
