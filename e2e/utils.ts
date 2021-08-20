@@ -10,10 +10,16 @@ export const getValue = (page: Page, editorId: "input" | "output") =>
 
 /**
  * Read the value of a fixture
- * @param {string} fixture
  */
-export const read = (fixture) =>
+export const read = (fixture: string) =>
   fs.readFileSync(`../__testfixtures__/${fixture}.js`, "utf-8").trim()
 
-/** @type {'Meta' | 'Control'} */
-export const ctrlKey = os.type() === "Darwin" ? "Meta" : "Control"
+const ctrlKey = os.type() === "Darwin" ? "Meta" : "Control"
+
+export async function clearInput(page: Page) {
+  await page.click("data-testid=input")
+  await page.keyboard.down(ctrlKey)
+  await page.keyboard.press("a")
+  await page.keyboard.up(ctrlKey)
+  await page.keyboard.press("Backspace")
+}

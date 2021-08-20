@@ -1,5 +1,5 @@
 import { expect, test } from "../fixtures/base"
-import { ctrlKey, read } from "../utils"
+import { clearInput, read } from "../utils"
 
 const outputFixture = read("preserve-prop-types.output")
 
@@ -30,44 +30,38 @@ test.describe("Preserve PropTypes", () => {
     )
   })
 
-  test("should respect the option when editing the input", async ({ page }) => {
-    await page.selectOption("data-testid=preserve-prop-types", "all")
+  test("should persist between reloads", async ({ page }) => {
+    await test.step("edit the input", async () => {
+      await page.selectOption("data-testid=preserve-prop-types", "all")
+      await clearInput(page)
 
-    // Clear the input
-    await page.click("data-testid=input")
-    await page.keyboard.down(ctrlKey)
-    await page.keyboard.press("a")
-    await page.keyboard.up(ctrlKey)
-    await page.keyboard.press("Backspace")
+      const trimmedInput = read("preserve-prop-types.input")
+        .replace("PropTypes.number", "PropTypes.bool")
+        .split("\n")
+        .map((line) => line.trim())
+        .join("\n")
 
-    const trimmedInput = read("preserve-prop-types.input")
-      .replace("PropTypes.number", "PropTypes.bool")
-      .split("\n")
-      .map((line) => line.trim())
-      .join("\n")
+      const output = outputFixture
+        .replace("PropTypes.number", "PropTypes.bool")
+        .replace("number", "boolean")
 
-    const output = outputFixture
-      .replace("PropTypes.number", "PropTypes.bool")
-      .replace("number", "boolean")
+      await page.type("data-testid=input", trimmedInput)
+      await page.waitForFunction(
+        ([editorId, expected]) => window[editorId].getValue() === expected,
+        ["output", output]
+      )
+    })
 
-    await page.type("data-testid=input", trimmedInput)
-    await page.waitForFunction(
-      ([editorId, expected]) => window[editorId].getValue() === expected,
-      ["output", output]
-    )
-  })
+    await test.step("persists the selected value", async () => {
+      await page.reload()
+      await page.selectOption("data-testid=preserve-prop-types", "all")
+    })
 
-  test("should persist the selected value", async ({ page }) => {
-    await page.reload()
-    await page.selectOption("data-testid=preserve-prop-types", "all")
-  })
-
-  test("should use the persisted value for the initial value", async ({
-    page,
-  }) => {
-    await page.waitForFunction(
-      ([editorId, expected]) => window[editorId].getValue() === expected,
-      ["output", outputFixture]
-    )
+    await test.step("sets the initial value", async () => {
+      await page.waitForFunction(
+        ([editorId, expected]) => window[editorId].getValue() === expected,
+        ["output", outputFixture]
+      )
+    })
   })
 })
