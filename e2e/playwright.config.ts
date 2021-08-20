@@ -4,7 +4,7 @@ import * as path from "path"
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   reporter: process.env.CI ? "dot" : "list",
-  retries: process.env.CI ? 2 : 0,
+  retries: 2,
   use: {
     screenshot: "only-on-failure",
     trace: "on-first-retry",
