@@ -18,9 +18,9 @@ jobs:
         working-directory: web
       - run: yarn test
         working-directory: e2e
-      - name: Upload screenshots
+      - name: Upload test results
         if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
-          name: screenshots
-          path: e2e/screenshots/*.png
+          name: test-results
+          path: e2e/test-results/*
