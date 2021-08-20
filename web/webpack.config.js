@@ -9,6 +9,7 @@ const prod = mode === "production"
 module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "public"),
+    port: 3000,
   },
   devtool: prod ? false : "source-map",
   entry: {
