@@ -45,15 +45,15 @@ MyComponent.propTypes = {
   foo: PropTypes.number,
 }
 
-// Input
+// Output
 import React from "react"
 
-interface Props {
+interface MyComponentProps {
   bar: string
   foo?: number
 }
 
-export function MyComponent(props: Props) {
+export function MyComponent(props: MyComponentProps) {
   return <span />
 }
 ```
@@ -91,11 +91,11 @@ Output:
 import PropTypes from "prop-types"
 import React from "react"
 
-interface Props {
+interface MyComponentProps {
   foo?: number
 }
 
-export function MyComponent(props: Props) {
+export function MyComponent(props: MyComponentProps) {
   return <span />
 }
 
@@ -133,12 +133,12 @@ Output:
 import PropTypes from "prop-types"
 import React from "react"
 
-interface Props {
+interface MyComponentProps {
   foo?: number
   bar: unknown
 }
 
-export function MyComponent(props: Props) {
+export function MyComponent(props: MyComponentProps) {
   return <span />
 }
 
