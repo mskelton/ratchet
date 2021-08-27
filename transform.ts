@@ -71,6 +71,8 @@ function getTSType(path: NodePath) {
       const type = path.get("arguments", 0)
       return isCustomValidator(type)
         ? j.tsUnknownKeyword()
+        : isRequired(type)
+        ? j.tsArrayType(getTSType(type.get("object")))
         : j.tsArrayType(getTSType(type))
     }
 
@@ -128,12 +130,12 @@ function getTSType(path: NodePath) {
   return map[name] || j.tsUnknownKeyword()
 }
 
-const isRequiredProperty = (property: NodePath) =>
-  property.get("value", "type").value === "MemberExpression" &&
-  property.get("value", "property", "name").value === "isRequired"
+const isRequired = (path: NodePath) =>
+  path.get("type").value === "MemberExpression" &&
+  path.get("property", "name").value === "isRequired"
 
 function mapType(path: NodePath): TSType {
-  const required = isRequiredProperty(path)
+  const required = isRequired(path.get("value"))
   const key = path.get("key", "name").value
   const type = getTSType(
     required ? path.get("value", "object") : path.get("value")
