@@ -17,7 +17,7 @@ defineTest(__dirname, "transform", null, "no-prop-types")
 // This test shouldn't really be needed since `arrayOf(shape({}).isRequired).isRequired`
 // is not really a valid prop type, but since it exists in the wild, we should
 // support it.
-defineTest(__dirname, "transform", null, "required-array-of")
+defineTest(__dirname, "transform", null, "odd-required")
 
 // TypeScript is not likely to exist in input files, but we should support if
 // people already started to migrate to TS. This does exist in the wild.

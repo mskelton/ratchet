@@ -48,6 +48,9 @@ function isCustomValidator(path: NodePath) {
   )
 }
 
+const resolveRequired = (path: NodePath) =>
+  isRequired(path) ? path.get("object") : path
+
 function getTSType(path: NodePath) {
   const { value: name } =
     path.get("type").value === "MemberExpression"
@@ -71,9 +74,7 @@ function getTSType(path: NodePath) {
       const type = path.get("arguments", 0)
       return isCustomValidator(type)
         ? j.tsUnknownKeyword()
-        : isRequired(type)
-        ? j.tsArrayType(getTSType(type.get("object")))
-        : j.tsArrayType(getTSType(type))
+        : j.tsArrayType(getTSType(resolveRequired(type)))
     }
 
     case "objectOf": {
@@ -84,7 +85,7 @@ function getTSType(path: NodePath) {
             j.identifier("Record"),
             j.tsTypeParameterInstantiation([
               j.tsStringKeyword(),
-              getTSType(type),
+              getTSType(resolveRequired(type)),
             ])
           )
     }

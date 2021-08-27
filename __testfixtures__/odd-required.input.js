@@ -6,7 +6,8 @@ export const MyComponent = (props) => {
 }
 
 MyComponent.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string.isRequired }).isRequired
-  ).isRequired
+  a: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.number.isRequired
+  }).isRequired),
+  b: PropTypes.objectOf(PropTypes.number.isRequired)
 }
