@@ -48,6 +48,9 @@ function isCustomValidator(path: NodePath) {
   )
 }
 
+const resolveRequired = (path: NodePath) =>
+  isRequired(path) ? path.get("object") : path
+
 function getTSType(path: NodePath) {
   const { value: name } =
     path.get("type").value === "MemberExpression"
@@ -71,7 +74,7 @@ function getTSType(path: NodePath) {
       const type = path.get("arguments", 0)
       return isCustomValidator(type)
         ? j.tsUnknownKeyword()
-        : j.tsArrayType(getTSType(type))
+        : j.tsArrayType(getTSType(resolveRequired(type)))
     }
 
     case "objectOf": {
@@ -82,7 +85,7 @@ function getTSType(path: NodePath) {
             j.identifier("Record"),
             j.tsTypeParameterInstantiation([
               j.tsStringKeyword(),
-              getTSType(type),
+              getTSType(resolveRequired(type)),
             ])
           )
     }
@@ -128,12 +131,12 @@ function getTSType(path: NodePath) {
   return map[name] || j.tsUnknownKeyword()
 }
 
-const isRequiredProperty = (property: NodePath) =>
-  property.get("value", "type").value === "MemberExpression" &&
-  property.get("value", "property", "name").value === "isRequired"
+const isRequired = (path: NodePath) =>
+  path.get("type").value === "MemberExpression" &&
+  path.get("property", "name").value === "isRequired"
 
 function mapType(path: NodePath): TSType {
-  const required = isRequiredProperty(path)
+  const required = isRequired(path.get("value"))
   const key = path.get("key", "name").value
   const type = getTSType(
     required ? path.get("value", "object") : path.get("value")
@@ -163,7 +166,11 @@ function getTSTypes(
     collected.push({
       component: getComponentName(path),
       types: path
-        .filter(({ value }) => value.type === "Property", null)
+        .filter(
+          ({ value }) =>
+            value.type === "ObjectProperty" || value.type === "ObjectMethod",
+          null
+        )
         .map(mapType, null),
     })
   })
@@ -280,6 +287,10 @@ function cleanup(
       .remove()
   }
 }
+
+// Use the TSX to allow parsing of TypeScript code that still contains prop
+// types. Though not typical, this exists in the wild.
+export const parser = "tsx"
 
 export default function (file: FileInfo, api: API, opts: Options) {
   j = api.jscodeshift
