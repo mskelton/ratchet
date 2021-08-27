@@ -21,7 +21,7 @@ defineTest(__dirname, "transform", null, "odd-required")
 
 // TypeScript is not likely to exist in input files, but we should support if
 // people already started to migrate to TS. This does exist in the wild.
-// defineTest(__dirname, "transform", null, "typescript")
+defineTest(__dirname, "transform", null, "typescript")
 
 // --preserve-prop-types
 defineTest(
