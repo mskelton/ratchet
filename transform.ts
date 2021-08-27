@@ -166,7 +166,7 @@ function getTSTypes(
     collected.push({
       component: getComponentName(path),
       types: path
-        .filter(({ value }) => value.type === "Property", null)
+        .filter(({ value }) => value.type === "ObjectProperty", null)
         .map(mapType, null),
     })
   })
@@ -283,6 +283,10 @@ function cleanup(
       .remove()
   }
 }
+
+// Use the TSX to allow parsing of TypeScript code that still contains prop
+// types. Though not typical, this exists in the wild.
+export const parser = "tsx"
 
 export default function (file: FileInfo, api: API, opts: Options) {
   j = api.jscodeshift
