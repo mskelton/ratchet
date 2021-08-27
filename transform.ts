@@ -166,7 +166,11 @@ function getTSTypes(
     collected.push({
       component: getComponentName(path),
       types: path
-        .filter(({ value }) => value.type === "ObjectProperty", null)
+        .filter(
+          ({ value }) =>
+            value.type === "ObjectProperty" || value.type === "ObjectMethod",
+          null
+        )
         .map(mapType, null),
     })
   })
