@@ -1,6 +1,5 @@
 <script>
   import jscodeshift from "jscodeshift"
-  import { onMount } from "svelte"
   import transform from "../../transform"
   import Editor from "./components/Editor.svelte"
   import Header from "./components/Header.svelte"
@@ -15,7 +14,7 @@
     try {
       output = transform(
         { source },
-        { jscodeshift },
+        { jscodeshift: jscodeshift.withParser("tsx") },
         { "preserve-prop-types": storage["preserve-prop-types"] }
       )
     } catch (e) {
