@@ -7,7 +7,7 @@
     "url": "git+https://github.com/mskelton/prop-types-to-ts.git"
   },
   "author": "Mark Skelton",
-  "license": "MIT",
+  "license": "ISC",
   "packageManager": "yarn@3.0.1",
   "scripts": {
     "format": "prettier --write .",
