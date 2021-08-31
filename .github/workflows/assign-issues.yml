@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign issue
-        uses: pozil/auto-assign-issue@v1
+        uses: pozil/auto-assign-issue@v1.0.4
         with:
           assignees: mskelton
