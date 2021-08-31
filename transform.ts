@@ -2,6 +2,8 @@ import type { NodePath } from "ast-types/lib/node-path"
 import type {
   API,
   Collection,
+  CommentBlock,
+  CommentLine,
   FileInfo,
   JSCodeshift,
   Options,
@@ -22,11 +24,13 @@ type TSType = {
   key: string
   type: TSAnyKeyword | TSFunctionType
   required: boolean
+  comments: (CommentLine | CommentBlock)[]
 }
 
-function createPropertySignature({ key, required, type }: TSType) {
+function createPropertySignature({ comments, key, required, type }: TSType) {
   if (type.type === "TSFunctionType") {
     return j.tsMethodSignature.from({
+      comments,
       key: j.identifier(key),
       optional: !required,
       parameters: type.parameters,
@@ -34,11 +38,12 @@ function createPropertySignature({ key, required, type }: TSType) {
     })
   }
 
-  return j.tsPropertySignature(
-    j.identifier(key),
-    j.tsTypeAnnotation(type),
-    !required
-  )
+  return j.tsPropertySignature.from({
+    comments,
+    key: j.identifier(key),
+    optional: !required,
+    typeAnnotation: j.tsTypeAnnotation(type),
+  })
 }
 
 function isCustomValidator(path: NodePath) {
@@ -138,6 +143,7 @@ const isRequired = (path: NodePath) =>
 function mapType(path: NodePath): TSType {
   const required = isRequired(path.get("value"))
   const key = path.get("key", "name").value
+  const comments = path.get("leadingComments").value
   const type = getTSType(
     required ? path.get("value", "object") : path.get("value")
   )
@@ -148,7 +154,12 @@ function mapType(path: NodePath): TSType {
     path.replace()
   }
 
-  return { key, required, type }
+  return {
+    comments: comments ?? [],
+    key,
+    required,
+    type,
+  }
 }
 
 type CollectedTypes = {

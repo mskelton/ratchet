@@ -8,10 +8,9 @@ interface MyComponentProps {
    */
   bar: string;
   /**
-   * Some number
-   * @default 1
+   * Some function
    */
-  foo?: number;
+  foo?(...args: unknown[]): unknown;
 }
 
 export function MyComponent(props: MyComponentProps) {

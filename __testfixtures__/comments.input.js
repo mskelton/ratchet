@@ -13,8 +13,7 @@ MyComponent.propTypes = {
    */
   bar: PropTypes.string.isRequired,
   /**
-   * Some number
-   * @default 1
+   * Some function
    */
-  foo: PropTypes.number,
+  foo: PropTypes.func,
 }
