@@ -10,6 +10,7 @@
 - Supports function and class components
 - Supports `static propTypes` declarations on class components
 - Supports files with multiple components
+- Copies JSDoc comments to the generated TypeScript types
 - Option to remove or preserve PropTypes after converting to TS
 
 ## Usage
