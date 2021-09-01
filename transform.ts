@@ -299,6 +299,53 @@ function cleanup(
   }
 }
 
+const isOnlyWhitespace = (str: string) => !/\S/.test(str)
+
+/**
+ * Guess the tab width of the file. This file is a modified version of recast's
+ * built-in tab width guessing with a modification to better handle files with
+ * block comments.
+ * @see https://github.com/benjamn/recast/blob/8cc1f42408c41b5616d82574f5552c2da3e11cf7/lib/lines.ts#L280-L314
+ */
+function guessTabWidth(source: string) {
+  const lines = source.split("\n")
+  const counts: number[] = []
+  let lastIndent = 0
+
+  for (const line of lines) {
+    // Whitespace-only lines don't tell us much about the likely tab width
+    if (isOnlyWhitespace(line)) {
+      continue
+    }
+
+    // Calculate the indentation of the line excluding lines starting with an
+    // asterisk. This is because these lines are often part of block comments
+    // which are indented an extra space which throws off our tab width guessing.
+    const indent = line.match(/^(\s*)/)
+      ? line.trim().startsWith("*")
+        ? lastIndent
+        : RegExp.$1.length
+      : 0
+
+    const diff = Math.abs(indent - lastIndent)
+    counts[diff] = ~~counts[diff] + 1
+    lastIndent = indent
+  }
+
+  let maxCount = -1
+  let result = 2
+
+  // Loop through the counts array to find the most common tab width in the file
+  for (let tabWidth = 1; tabWidth < counts.length; tabWidth++) {
+    if (counts[tabWidth] && counts[tabWidth] > maxCount) {
+      maxCount = counts[tabWidth]
+      result = tabWidth
+    }
+  }
+
+  return result
+}
+
 // Use the TSX to allow parsing of TypeScript code that still contains prop
 // types. Though not typical, this exists in the wild.
 export const parser = "tsx"
@@ -341,5 +388,5 @@ export default function (file: FileInfo, api: API, opts: Options) {
   // Remove empty propTypes expressions and imports
   cleanup(source, propTypes, staticPropTypes)
 
-  return source.toSource()
+  return source.toSource({ tabWidth: guessTabWidth(file.source) })
 }
