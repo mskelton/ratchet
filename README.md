@@ -1,6 +1,6 @@
 # PropTypes to TS
 
-[![Test](https://github.com/mskelton/prop-types-to-ts/workflows/Test/badge.svg?branch=master)](https://github.com/mskelton/prop-types-to-ts/actions?query=workflow%3ATest)
+[![Test](https://github.com/mskelton/prop-types-to-ts/workflows/Test/badge.svg?branch=main)](https://github.com/mskelton/prop-types-to-ts/actions?query=workflow%3ATest)
 [![GitHub deployments](https://img.shields.io/github/deployments/mskelton/prop-types-to-ts/production?label=Deploy)](https://prop-types.vercel.app)
 
 > Codemod to convert React PropTypes to TypeScript types.
@@ -17,10 +17,10 @@
 Run the following command with a file glob that matches the files you want to convert.
 
 ```sh
-npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/master/transform.ts GLOB
+npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/main/transform.ts GLOB
 
 # Example
-npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/master/transform.ts src/**/*.{js,jsx}
+npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/main/transform.ts src/**/*.{js,jsx}
 ```
 
 ## Try it Online!
