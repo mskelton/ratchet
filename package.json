@@ -8,7 +8,7 @@
   },
   "author": "Mark Skelton",
   "license": "ISC",
-  "packageManager": "yarn@3.0.1",
+  "packageManager": "yarn@3.0.2",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint .",
