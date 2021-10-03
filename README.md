@@ -3,7 +3,7 @@
 [![Test](https://github.com/mskelton/ratchet/workflows/Test/badge.svg?branch=main)](https://github.com/mskelton/ratchet/actions?query=workflow%3ATest)
 [![GitHub deployments](https://img.shields.io/github/deployments/mskelton/ratchet/production?label=Deploy)](https://prop-types.vercel.app)
 
-> Codemod to convert React PropTypes to TypeScript types.
+Codemod to convert React PropTypes to TypeScript types.
 
 ## Key Features
 
