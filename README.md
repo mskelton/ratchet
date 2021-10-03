@@ -1,7 +1,7 @@
-# PropTypes to TS
+# Ratchet
 
-[![Test](https://github.com/mskelton/prop-types-to-ts/workflows/Test/badge.svg?branch=main)](https://github.com/mskelton/prop-types-to-ts/actions?query=workflow%3ATest)
-[![GitHub deployments](https://img.shields.io/github/deployments/mskelton/prop-types-to-ts/production?label=Deploy)](https://prop-types.vercel.app)
+[![Test](https://github.com/mskelton/ratchet/workflows/Test/badge.svg?branch=main)](https://github.com/mskelton/ratchet/actions?query=workflow%3ATest)
+[![GitHub deployments](https://img.shields.io/github/deployments/mskelton/ratchet/production?label=Deploy)](https://prop-types.vercel.app)
 
 > Codemod to convert React PropTypes to TypeScript types.
 
@@ -18,17 +18,17 @@
 Run the following command with a file glob that matches the files you want to convert.
 
 ```sh
-npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/main/transform.ts GLOB
+npx jscodeshift -t https://mskelton.dev/ratchet.ts GLOB
 
 # Example
-npx jscodeshift -t https://raw.githubusercontent.com/mskelton/prop-types-to-ts/main/transform.ts src/**/*.{js,jsx}
+npx jscodeshift -t https://mskelton.dev/ratchet.ts src/**/*.{js,jsx}
 ```
 
 ## Try it Online!
 
-In addition to the CLI, you can use the tool online at [prop-types.vercel.app](https://prop-types.vercel.app)! Simply paste your input on the left and instantly see the output on the right!
+In addition to the CLI, you can use Ratchet online at [mskelton.dev/ratchet](https://mskelton.dev/ratchet)! Simply paste your input on the left and instantly see the output on the right!
 
-[![Screenshot](web/screenshot.png?v=1)](https://prop-types.vercel.app)
+[![Screenshot](web/screenshot.png?v=1)](https://mskelton.dev/ratchet)
 
 ## Example Input/Output
 

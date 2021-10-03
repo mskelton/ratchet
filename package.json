@@ -1,11 +1,8 @@
 {
-  "name": "prop-types-to-ts",
+  "name": "ratchet",
   "private": true,
   "description": "Convert React propTypes to TypeScript types.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mskelton/prop-types-to-ts.git"
-  },
+  "repository": "github:mskelton/ratchet",
   "author": "Mark Skelton",
   "license": "ISC",
   "packageManager": "yarn@3.0.2",
@@ -19,12 +16,6 @@
     "e2e",
     "web"
   ],
-  "eslintConfig": {
-    "extends": [
-      "@mskelton",
-      "@mskelton/eslint-config/typescript"
-    ]
-  },
   "dependencies": {
     "jscodeshift": "^0.13.0"
   },
