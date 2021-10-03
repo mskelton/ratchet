@@ -12,7 +12,7 @@
 </script>
 
 <div class="container">
-  <h1>PropTypes to TS</h1>
+  <h1>Ratchet</h1>
 
   <label>
     <span class="label">Preserve PropTypes:</span>

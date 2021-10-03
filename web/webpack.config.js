@@ -5,6 +5,7 @@ const { EnvironmentPlugin } = require("webpack")
 
 const mode = process.env.NODE_ENV || "development"
 const prod = mode === "production"
+const publicPath = "/ratchet"
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -18,6 +19,7 @@ module.exports = {
     port: 3000,
     static: {
       directory: path.join(__dirname, "public"),
+      publicPath,
     },
   },
   devtool: prod ? false : "source-map",
@@ -62,6 +64,7 @@ module.exports = {
   output: {
     filename: "[name].[contenthash].js",
     path: path.join(__dirname, "public"),
+    publicPath,
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "index.handlebars" }),

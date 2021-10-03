@@ -2,7 +2,7 @@
   "name": "e2e",
   "private": true,
   "version": "0.0.0",
-  "description": "E2E tests for PropTypes to TS.",
+  "description": "E2E tests for Ratchet.",
   "author": "Mark Skelton",
   "license": "ISC",
   "scripts": {

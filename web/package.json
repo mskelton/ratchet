@@ -2,7 +2,7 @@
   "name": "web",
   "private": true,
   "version": "0.0.0",
-  "description": "Web REPL for PropTypes to TS.",
+  "description": "Web REPL for Ratchet.",
   "author": "Mark Skelton",
   "license": "ISC",
   "scripts": {

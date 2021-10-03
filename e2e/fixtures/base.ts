@@ -1,8 +1,8 @@
 import { test as base } from "@playwright/test"
 
 export const test = base.extend({
-  page: async ({ baseURL, page }, use) => {
-    await page.goto(baseURL!)
+  page: async ({ page }, use) => {
+    await page.goto("/ratchet")
     await use(page)
   },
 })
