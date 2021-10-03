@@ -1,6 +1,3 @@
 {
-  "extends": ["plugin:playwright/playwright-test"],
-  "env": {
-    "shared-node-browser": true
-  }
+  "extends": "plugin:playwright/playwright-test"
 }

@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.14.0",
-    "eslint-plugin-playwright": "^0.4.0"
+    "eslint-plugin-playwright": "^0.5.1"
   }
 }
