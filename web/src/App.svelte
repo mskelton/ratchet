@@ -32,7 +32,6 @@
     source.current = event.detail.value
     doTransform(source.current)
   }
-
 </script>
 
 <div class="container">
@@ -59,5 +58,4 @@
     flex: 1;
     min-height: 0;
   }
-
 </style>
