@@ -12,7 +12,7 @@
     "eslint": ">=7"
   },
   "devDependencies": {
-    "@playwright/test": "^1.14.0",
-    "eslint-plugin-playwright": "^0.5.1"
+    "@playwright/test": "^1.15.2",
+    "eslint-plugin-playwright": "^0.5.2"
   }
 }
