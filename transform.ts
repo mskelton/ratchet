@@ -95,12 +95,17 @@ function getTSType(path: NodePath) {
           )
     }
 
-    case "oneOf":
-      return j.tsUnionType(
-        path
-          .get("arguments", 0, "elements")
-          .value.map(({ value }) => j.tsLiteralType(j.stringLiteral(value)))
-      )
+    case "oneOf": {
+      const arg = path.get("arguments", 0)
+
+      return arg.get("type").value !== "ArrayExpression"
+        ? j.tsArrayType(j.tsUnknownKeyword())
+        : j.tsUnionType(
+            arg
+              .get("elements")
+              .value.map(({ value }) => j.tsLiteralType(j.stringLiteral(value)))
+          )
+    }
 
     case "oneOfType":
       return j.tsUnionType(path.get("arguments", 0, "elements").map(getTSType))

@@ -12,6 +12,7 @@ interface MyComponentProps {
   optionalElement?: React.ReactElement;
   optionalElementType?: React.ElementType;
   optionalEnum?: "News" | "Photos";
+  optionalUnknownEnum?: unknown[];
   optionalUnion?: string | number;
   optionalArrayOf?: number[];
   optionalObjectOf?: Record<string, number>;

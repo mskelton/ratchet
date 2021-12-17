@@ -17,6 +17,7 @@ MyComponent.propTypes = {
   optionalElement: PropTypes.element,
   optionalElementType: PropTypes.elementType,
   optionalEnum: PropTypes.oneOf(["News", "Photos"]),
+  optionalUnknownEnum: PropTypes.oneOf(Object.keys(arr)),
   optionalUnion: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
   optionalObjectOf: PropTypes.objectOf(PropTypes.number),
@@ -24,7 +25,7 @@ MyComponent.propTypes = {
   optionalObjectWithShape: PropTypes.shape({
     optionalProperty: PropTypes.string,
     requiredProperty: PropTypes.number.isRequired,
-    functionProperty: PRopTypes.func,
+    functionProperty: PropTypes.func,
   }),
   optionalObjectWithStrictShape: PropTypes.exact({
     optionalProperty: PropTypes.string,
