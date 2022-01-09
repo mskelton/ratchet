@@ -1,5 +1,8 @@
 __testfixtures__/
 web/public/
 web/index.handlebars
-.yarn/
 coverage/
+
+# Yarn
+.yarn/
+.yarnrc.yml

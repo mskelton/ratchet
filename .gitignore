@@ -3,7 +3,7 @@ coverage/
 web/public
 e2e/test-results
 
-# Yarn 2
+# Yarn
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
