@@ -15,7 +15,8 @@ Codemod to convert React PropTypes to TypeScript types.
 
 ## Usage
 
-Run the following command with a file glob that matches the files you want to convert.
+Run the following command with a file glob that matches the files you want to
+convert.
 
 ```sh
 npx jscodeshift -t https://mskelton.dev/ratchet.ts GLOB
@@ -26,7 +27,9 @@ npx jscodeshift -t https://mskelton.dev/ratchet.ts src/**/*.{js,jsx}
 
 ## Try it Online!
 
-In addition to the CLI, you can use Ratchet online at [mskelton.dev/ratchet](https://mskelton.dev/ratchet)! Simply paste your input on the left and instantly see the output on the right!
+In addition to the CLI, you can use Ratchet online at
+[mskelton.dev/ratchet](https://mskelton.dev/ratchet)! Simply paste your input on
+the left and instantly see the output on the right!
 
 [![Screenshot](web/screenshot.png?v=1)](https://mskelton.dev/ratchet)
 
@@ -63,13 +66,15 @@ export function MyComponent(props: MyComponentProps) {
 
 ### `--preserve-prop-types`
 
-Preserves prop types after converting to TS. There are two available modes: `all` and `unconverted`.
+Preserves prop types after converting to TS. There are two available modes:
+`all` and `unconverted`.
 
 #### `--preserve-prop-types=all`
 
 _CLI alias: `--preserve-prop-types`_
 
-This option will preserve all PropTypes. This is useful for component libraries where you support both TypeScript declarations and PropTypes.
+This option will preserve all PropTypes. This is useful for component libraries
+where you support both TypeScript declarations and PropTypes.
 
 Input:
 
@@ -107,7 +112,10 @@ MyComponent.propTypes = {
 
 #### `--preserve-prop-types=unconverted`
 
-This option will preserve prop types which could not be fully converted. For example, spread expressions are not converted, and custom validators are converted to `unknown`. This option is useful to preserve these expressions so you can manually review and convert to their TypeScript equivalent.
+This option will preserve prop types which could not be fully converted. For
+example, spread expressions are not converted, and custom validators are
+converted to `unknown`. This option is useful to preserve these expressions so
+you can manually review and convert to their TypeScript equivalent.
 
 Input:
 

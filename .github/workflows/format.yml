@@ -9,10 +9,8 @@ jobs:
       - uses: mskelton/setup-yarn@v1
         with:
           ref: ${{ github.head_ref }}
-      - name: Format
-        run: |
-          yarn format
-          yarn lint --fix
+      - run: yarn format
+      - run: yarn lint --fix
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
