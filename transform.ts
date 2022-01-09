@@ -21,10 +21,10 @@ function reactType(type: string) {
 }
 
 type TSType = {
-  key: string
-  type: TSAnyKeyword | TSFunctionType
-  required: boolean
   comments: (CommentLine | CommentBlock)[]
+  key: string
+  required: boolean
+  type: TSAnyKeyword | TSFunctionType
 }
 
 function createPropertySignature({ comments, key, required, type }: TSType) {
