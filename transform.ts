@@ -5,7 +5,9 @@ import type {
   CommentBlock,
   CommentLine,
   FileInfo,
+  Identifier,
   JSCodeshift,
+  Literal,
   Options,
   TSAnyKeyword,
   TSFunctionType,
@@ -22,7 +24,7 @@ function reactType(type: string) {
 
 type TSType = {
   comments: (CommentLine | CommentBlock)[]
-  key: string
+  key: Identifier | Literal
   required: boolean
   type: TSAnyKeyword | TSFunctionType
 }
@@ -31,7 +33,7 @@ function createPropertySignature({ comments, key, required, type }: TSType) {
   if (type.type === "TSFunctionType") {
     return j.tsMethodSignature.from({
       comments,
-      key: j.identifier(key),
+      key,
       optional: !required,
       parameters: type.parameters,
       typeAnnotation: type.typeAnnotation,
@@ -40,7 +42,7 @@ function createPropertySignature({ comments, key, required, type }: TSType) {
 
   return j.tsPropertySignature.from({
     comments,
-    key: j.identifier(key),
+    key,
     optional: !required,
     typeAnnotation: j.tsTypeAnnotation(type),
   })
@@ -147,7 +149,7 @@ const isRequired = (path: NodePath) =>
 
 function mapType(path: NodePath): TSType {
   const required = isRequired(path.get("value"))
-  const key = path.get("key", "name").value
+  const key = path.get("key").value
   const comments = path.get("leadingComments").value
   const type = getTSType(
     required ? path.get("value", "object") : path.get("value")

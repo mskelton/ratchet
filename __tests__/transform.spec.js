@@ -14,6 +14,7 @@ defineTest(__dirname, "transform", null, "multiple-class-components-static")
 defineTest(__dirname, "transform", null, "multiple-components")
 defineTest(__dirname, "transform", null, "no-export")
 defineTest(__dirname, "transform", null, "no-prop-types")
+defineTest(__dirname, "transform", null, "literal-prop")
 
 // This test shouldn't really be needed since `arrayOf(shape({}).isRequired).isRequired`
 // is not really a valid prop type, but since it exists in the wild, we should
