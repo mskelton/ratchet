@@ -180,18 +180,20 @@ function getTSTypes(
 ) {
   const collected = [] as CollectedTypes
 
-  source.forEach((path) => {
-    collected.push({
-      component: getComponentName(path),
-      types: path
-        .filter(
-          ({ value }) =>
-            value.type === "ObjectProperty" || value.type === "ObjectMethod",
-          null
-        )
-        .map(mapType, null),
+  source
+    .filter((path) => path.value)
+    .forEach((path) => {
+      collected.push({
+        component: getComponentName(path),
+        types: path
+          .filter(
+            ({ value }) =>
+              value.type === "ObjectProperty" || value.type === "ObjectMethod",
+            null
+          )
+          .map(mapType, null),
+      })
     })
-  })
 
   return collected
 }
