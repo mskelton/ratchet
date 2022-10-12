@@ -103,9 +103,21 @@ function getTSType(path: NodePath) {
       return arg.get("type").value !== "ArrayExpression"
         ? j.tsArrayType(j.tsUnknownKeyword())
         : j.tsUnionType(
-            arg
-              .get("elements")
-              .value.map(({ value }) => j.tsLiteralType(j.stringLiteral(value)))
+            arg.get("elements").value.map(({ type, value }) => {
+              switch (type) {
+                case "StringLiteral":
+                  return j.tsLiteralType(j.stringLiteral(value))
+
+                case "NumericLiteral":
+                  return j.tsLiteralType(j.numericLiteral(value))
+
+                case "BooleanLiteral":
+                  return j.tsLiteralType(j.booleanLiteral(value))
+
+                default:
+                  return j.tsUnknownKeyword()
+              }
+            })
           )
     }
 

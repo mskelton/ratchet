@@ -17,6 +17,8 @@ MyComponent.propTypes = {
   optionalElement: PropTypes.element,
   optionalElementType: PropTypes.elementType,
   optionalEnum: PropTypes.oneOf(["News", "Photos"]),
+  optionalNumericEnum: PropTypes.oneOf([1, 2, 3]),
+  optionalMixedEnum: PropTypes.oneOf([1, "Unknown", false, () => {}]),
   optionalUnknownEnum: PropTypes.oneOf(Object.keys(arr)),
   optionalUnion: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
