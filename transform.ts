@@ -220,9 +220,8 @@ function getComponentName(path: NodePath) {
   const root =
     path.get("type").value === "ArrowFunctionExpression" ? path.parent : path
 
-  return root.get("id", "name").value
+  return root.get("id", "name").value ?? root.parent.get("id", "name").value
 }
-
 function createInterface(path: NodePath, componentTypes: CollectedTypes) {
   const componentName = getComponentName(path)
   const types = componentTypes.find((t) => t.component === componentName)
@@ -241,6 +240,25 @@ function createInterface(path: NodePath, componentTypes: CollectedTypes) {
 
   return typeName
 }
+/**
+ * If forwardRef is being used, declare the props.
+ * Otherwise, return false
+ */
+function addForwardRefTypes(path: NodePath, typeName: string): boolean {
+  // for `React.forwardRef()`
+  let isForwardRef = path.node.callee?.property?.name === "forwardRef"
+  if (isForwardRef) {
+    path.node.callee.property.name = `forwardRef<React.ReactHTMLElement, ${typeName}>`
+    return isForwardRef
+  }
+  // if calling `forwardRef()` directly
+  isForwardRef = path.node.callee?.name === "forwardRef"
+  if (isForwardRef) {
+    path.node.callee.name = `forwardRef<React.ReactHTMLElement, ${typeName}>`
+    return isForwardRef
+  }
+  return false
+}
 
 function addFunctionTSTypes(
   source: Collection,
@@ -250,6 +268,9 @@ function addFunctionTSTypes(
     const typeName = createInterface(path, componentTypes)
     if (!typeName) return
 
+    // add forwardRef types if present
+    if (addForwardRefTypes(path.parentPath, typeName)) return
+    // Function components & Class Components
     // Add the TS types to the props param
     path.get("params", 0).value.typeAnnotation = j.tsTypeReference(
       // For some reason, jscodeshift isn't adding the colon so we have to do

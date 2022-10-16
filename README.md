@@ -9,6 +9,8 @@ Codemod to convert React PropTypes to TypeScript types.
 
 - Supports function and class components
 - Supports `static propTypes` declarations on class components
+- Supports
+  [`forwardRef` technique](https://reactjs.org/docs/forwarding-refs.html)
 - Supports files with multiple components
 - Copies JSDoc comments to the generated TypeScript types
 - Option to remove or preserve PropTypes after converting to TS
@@ -33,9 +35,11 @@ the left and instantly see the output on the right!
 
 [![Screenshot](web/screenshot.png?v=1)](https://mskelton.dev/ratchet)
 
-## Example Input/Output
+## Example: Function Component
 
-```ts
+input:
+
+```jsx
 // Input
 import PropTypes from "prop-types"
 import React from "react"
@@ -48,8 +52,11 @@ MyComponent.propTypes = {
   bar: PropTypes.string.isRequired,
   foo: PropTypes.number,
 }
+```
 
-// Output
+output:
+
+```tsx
 import React from "react"
 
 interface MyComponentProps {
@@ -60,6 +67,46 @@ interface MyComponentProps {
 export function MyComponent(props: MyComponentProps) {
   return <span />
 }
+```
+
+## Example: `forwardRef`
+
+input:
+
+```jsx
+// Input
+import PropTypes from "prop-types"
+import React from "react"
+
+const MyComponent = React.forwardRef((props, ref) => {
+  return <span ref={ref} />
+})
+
+MyComponent.propTypes = {
+  bar: PropTypes.string.isRequired,
+  foo: PropTypes.number,
+}
+
+export default MyComponent
+```
+
+output:
+
+```tsx
+import React from "react"
+
+interface MyComponentProps {
+  bar: string
+  foo?: number
+}
+
+const MyComponent = React.forwardRef<React.ReactHTMLElement, MyComponentProps>(
+  (props, ref) => {
+    return <span ref={ref} />
+  }
+)
+
+export default MyComponent
 ```
 
 ## Options
@@ -78,7 +125,7 @@ where you support both TypeScript declarations and PropTypes.
 
 Input:
 
-```js
+```jsx
 import PropTypes from "prop-types"
 import React from "react"
 
@@ -93,7 +140,7 @@ MyComponent.propTypes = {
 
 Output:
 
-```ts
+```tsx
 import PropTypes from "prop-types"
 import React from "react"
 
@@ -119,7 +166,7 @@ you can manually review and convert to their TypeScript equivalent.
 
 Input:
 
-```js
+```jsx
 import PropTypes from "prop-types"
 import React from "react"
 
@@ -138,7 +185,7 @@ MyComponent.propTypes = {
 
 Output:
 
-```ts
+```tsx
 import PropTypes from "prop-types"
 import React from "react"
 
