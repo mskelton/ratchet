@@ -10798,10 +10798,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^3.46.4":
-  version: 3.46.4
-  resolution: "svelte@npm:3.46.4"
-  checksum: 929e6790cdd6d94c123b4b8a7b5a541164dbea6d4f4ed311f4e65cde60caa1c704e531bbf2e63519d1a96163cd3f812c6e5be5b2fd05f72d0177af5fd8ca8637
+"svelte@npm:^3.49.0":
+  version: 3.52.0
+  resolution: "svelte@npm:3.52.0"
+  checksum: a1fcbf63901055ee0224872aaf1e7736920ce8b9ced5b132c3d62506e11d125aa86ad1b889a08601ffa2b92fb96adc66e1b1c0c866d2f681788403d3e5f7b39e
   languageName: node
   linkType: hard
 
@@ -11375,7 +11375,7 @@ __metadata:
     mini-css-extract-plugin: ^2.6.0
     prettier-plugin-svelte: ^2.6.0
     style-loader: ^3.3.1
-    svelte: ^3.46.4
+    svelte: ^3.49.0
     svelte-loader: ^3.1.2
     webpack: ^5.70.0
     webpack-cli: ^4.9.2
