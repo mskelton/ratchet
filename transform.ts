@@ -191,6 +191,7 @@ function getTSTypes(
   getComponentName: (path: NodePath) => string
 ) {
   const collected = [] as CollectedTypes
+  const propertyTypes = ["Property", "ObjectProperty", "ObjectMethod"]
 
   source
     .filter((path) => path.value)
@@ -198,11 +199,7 @@ function getTSTypes(
       collected.push({
         component: getComponentName(path),
         types: path
-          .filter(
-            ({ value }) =>
-              value.type === "ObjectProperty" || value.type === "ObjectMethod",
-            null
-          )
+          .filter(({ value }) => propertyTypes.includes(value.type), null)
           .map(mapType, null),
       })
     })

@@ -9,7 +9,7 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint .",
-    "test": "jest",
+    "test": "node --experimental-vm-modules $(yarn bin jest)",
     "ts": "tsc"
   },
   "workspaces": [
