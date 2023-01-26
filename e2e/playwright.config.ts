@@ -1,5 +1,5 @@
 import { PlaywrightTestConfig } from "@playwright/test"
-import * as path from "path"
+import { fileURLToPath } from "node:url"
 
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
   },
   webServer: {
     command: "yarn dev",
-    cwd: path.resolve(__dirname, "../web"),
+    cwd: fileURLToPath(new URL("../web"), import.meta.url),
     port: 3000,
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
