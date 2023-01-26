@@ -1,5 +1,5 @@
-import { expect, test } from "../fixtures/base"
-import { clearInput, read } from "../utils"
+import { expect, test } from "../fixtures/base.js"
+import { clearInput, read } from "../utils.js"
 
 const outputFixture = read("preserve-prop-types.output")
 
