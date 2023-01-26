@@ -1,4 +1,4 @@
-import type { NodePath } from "ast-types/lib/node-path"
+import type { NodePath } from "ast-types/lib/node-path.js"
 import type {
   API,
   Collection,
