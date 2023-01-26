@@ -1,10 +1,10 @@
 <script>
   import jscodeshift from "jscodeshift"
-  import transform from "../../transform"
+  import transform from "../../transform.ts"
   import Editor from "./components/Editor.svelte"
   import Header from "./components/Header.svelte"
-  import { inputSnippet } from "./editor/snippets"
-  import { storage } from "./storage"
+  import { inputSnippet } from "./editor/snippets.js"
+  import { storage } from "./storage.js"
 
   const source = { current: inputSnippet }
   let output
@@ -44,6 +44,10 @@
 </div>
 
 <style>
+  :global(html) {
+    font-size: 16px;
+  }
+
   .container,
   .editors {
     display: flex;

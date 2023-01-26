@@ -8,11 +8,12 @@
   "scripts": {
     "test": "playwright test"
   },
+  "type": "module",
   "peerDependencies": {
     "eslint": ">=7"
   },
   "devDependencies": {
-    "@playwright/test": "^1.20.1",
-    "eslint-plugin-playwright": "^0.8.0"
+    "@playwright/test": "^1.30.0",
+    "eslint-plugin-playwright": "^0.12.0"
   }
 }

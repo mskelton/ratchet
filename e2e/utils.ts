@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test"
-import * as fs from "fs"
-import * as os from "os"
+import fs from "node:fs"
+import os from "node:os"
 
 export const getValue = (page: Page, editorId: "input" | "output") =>
   page.evaluate((editorId) => {

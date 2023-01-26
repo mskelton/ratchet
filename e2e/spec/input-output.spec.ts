@@ -1,5 +1,5 @@
-import { expect, test } from "../fixtures/base"
-import { clearInput, getValue, read } from "../utils"
+import { expect, test } from "../fixtures/base.js"
+import { clearInput, getValue, read } from "../utils.js"
 
 const outputFixture = read("class-component.output")
 

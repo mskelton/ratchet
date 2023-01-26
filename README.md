@@ -35,7 +35,7 @@ the left and instantly see the output on the right!
 
 ## Example Input/Output
 
-```ts
+```typescript
 // Input
 import PropTypes from "prop-types"
 import React from "react"

@@ -1,6 +1,6 @@
 <script>
   import { afterUpdate, createEventDispatcher } from "svelte"
-  import { storage } from "../storage"
+  import { storage } from "../storage.js"
 
   const dispatch = createEventDispatcher()
   let preservePropTypes = storage["preserve-prop-types"]

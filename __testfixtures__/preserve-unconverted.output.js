@@ -2,13 +2,13 @@ import PropTypes from "prop-types"
 import React from "react"
 
 interface MyComponentProps {
-  a?: string;
-  b?: unknown;
-  c?: unknown;
-  d?: unknown;
-  e?: unknown;
-  f?: unknown;
-  g?: unknown;
+  a?: string
+  b?: unknown
+  c?: unknown
+  d?: unknown
+  e?: unknown
+  f?: unknown
+  g?: unknown
 }
 
 export function MyComponent(props: MyComponentProps) {
