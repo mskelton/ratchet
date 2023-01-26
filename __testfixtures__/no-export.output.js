@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface MyComponentProps {
-  a?: number;
+  a?: number
 }
 
 function MyComponent(props: MyComponentProps) {

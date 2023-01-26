@@ -6,11 +6,11 @@ interface MyComponentProps {
    * wrapping comment.
    * @example "foo"
    */
-  bar: string;
+  bar: string
   /**
    * Some function
    */
-  foo?(...args: unknown[]): unknown;
+  foo?(...args: unknown[]): unknown
 }
 
 export function MyComponent(props: MyComponentProps) {
