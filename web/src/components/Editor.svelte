@@ -1,8 +1,8 @@
 <script>
   import { createEventDispatcher, afterUpdate, onMount } from "svelte"
-  import { CodeMirror } from "../editor/codemirror.js"
-  import { options } from "../editor/options"
-  import { debounce } from "../utils"
+  import CodeMirror from "../editor/codemirror.js"
+  import { options } from "../editor/options.js"
+  import { debounce } from "../utils.js"
 
   export let readOnly = false
   export let testId

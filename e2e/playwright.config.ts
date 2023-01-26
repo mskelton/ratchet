@@ -10,7 +10,7 @@ const config: PlaywrightTestConfig = {
     trace: "on-first-retry",
   },
   webServer: {
-    command: "yarn serve",
+    command: "yarn dev",
     cwd: path.resolve(__dirname, "../web"),
     port: 3000,
     reuseExistingServer: !process.env.CI,

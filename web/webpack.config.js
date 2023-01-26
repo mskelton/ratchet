@@ -1,24 +1,26 @@
-const path = require("path")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const { EnvironmentPlugin } = require("webpack")
+import HtmlWebpackPlugin from "html-webpack-plugin"
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
+import { fileURLToPath } from "url"
+import webpack from "webpack"
+
+const resolve = (path) => fileURLToPath(new URL(path, import.meta.url))
 
 const mode = process.env.NODE_ENV || "development"
 const prod = mode === "production"
 const publicPath = "/ratchet"
 
 /** @type {import('webpack').Configuration} */
-module.exports = {
+export default {
   cache: {
     buildDependencies: {
-      config: [__filename],
+      config: [resolve(".")],
     },
     type: "filesystem",
   },
   devServer: {
     port: 3000,
     static: {
-      directory: path.join(__dirname, "public"),
+      directory: resolve("./public/"),
       publicPath,
     },
   },
@@ -63,17 +65,17 @@ module.exports = {
   },
   output: {
     filename: "[name].[contenthash].js",
-    path: path.join(__dirname, "public"),
+    path: resolve("./public/"),
     publicPath,
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "index.handlebars" }),
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
-    new EnvironmentPlugin({ NODE_DEBUG: false }),
+    new webpack.EnvironmentPlugin({ NODE_DEBUG: false }),
   ],
   resolve: {
     alias: {
-      svelte: path.resolve("..", "node_modules", "svelte"),
+      svelte: resolve("../node_modules/svelte/"),
     },
     extensions: [".ts", ".mjs", ".js", ".svelte"],
     fallback: {
