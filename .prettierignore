@@ -1,6 +1,5 @@
 __testfixtures__/
 web/public/
-web/index.handlebars
 coverage/
 
 # Yarn

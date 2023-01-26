@@ -69,7 +69,7 @@ export default {
     publicPath,
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "index.handlebars" }),
+    new HtmlWebpackPlugin({ template: "index.html" }),
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
     new webpack.EnvironmentPlugin({ NODE_DEBUG: false }),
   ],
