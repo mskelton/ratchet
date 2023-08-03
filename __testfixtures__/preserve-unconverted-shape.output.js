@@ -1,11 +1,11 @@
 import React from "react"
 
 interface MyComponentProps {
-  a?: string;
-  b?: unknown;
+  a?: string
+  b?: unknown
   c?: {
     d?: boolean
-  };
+  }
 }
 
 export function MyComponent(props: MyComponentProps) {

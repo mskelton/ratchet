@@ -1,7 +1,7 @@
 import React from "react"
 
 interface MyComponentProps {
-  'data-testid'?: string;
+  'data-testid'?: string
 }
 
 export function MyComponent(props: MyComponentProps) {

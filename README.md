@@ -19,7 +19,7 @@ Codemod to convert React PropTypes to TypeScript types.
 Run the following command with a file glob that matches the files you want to
 convert.
 
-```sh
+```bash
 npx jscodeshift -t https://mskelton.dev/ratchet.ts GLOB
 
 # Example

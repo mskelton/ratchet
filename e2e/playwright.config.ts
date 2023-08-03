@@ -1,17 +1,18 @@
 import { PlaywrightTestConfig } from "@playwright/test"
-import * as path from "path"
+import { fileURLToPath } from "node:url"
 
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
+  fullyParallel: true,
   reporter: process.env.CI ? "dot" : "list",
-  retries: 2,
+  retries: process.env.CI ? 2 : 0,
   use: {
     screenshot: "only-on-failure",
     trace: "on-first-retry",
   },
   webServer: {
-    command: "yarn serve",
-    cwd: path.resolve(__dirname, "../web"),
+    command: "yarn dev",
+    cwd: fileURLToPath(new URL("../web/", import.meta.url)),
     port: 3000,
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
