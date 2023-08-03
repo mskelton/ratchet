@@ -1,8 +1,8 @@
 import React from "react"
 
 interface MyComponentProps {
-  bar: string;
-  foo?: number;
+  bar: string
+  foo?: number
 }
 
 const MyComponent = React.forwardRef<HTMLElement, MyComponentProps>((props, ref) => {
