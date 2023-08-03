@@ -9,8 +9,7 @@ Codemod to convert React PropTypes to TypeScript types.
 
 - Supports function and class components
 - Supports `static propTypes` declarations on class components
-- Supports
-  [`forwardRef` technique](https://reactjs.org/docs/forwarding-refs.html)
+- Supports [`forwardRef`s](https://reactjs.org/docs/forwarding-refs.html)
 - Supports files with multiple components
 - Copies JSDoc comments to the generated TypeScript types
 - Option to remove or preserve PropTypes after converting to TS
@@ -37,9 +36,9 @@ the left and instantly see the output on the right!
 
 ## Example: Function Component
 
-input:
+Input:
 
-```jsx
+```javascript
 // Input
 import PropTypes from "prop-types"
 import React from "react"
@@ -54,7 +53,7 @@ MyComponent.propTypes = {
 }
 ```
 
-output:
+Output:
 
 ```tsx
 import React from "react"
@@ -67,46 +66,6 @@ interface MyComponentProps {
 export function MyComponent(props: MyComponentProps) {
   return <span />
 }
-```
-
-## Example: `forwardRef`
-
-input:
-
-```jsx
-// Input
-import PropTypes from "prop-types"
-import React from "react"
-
-const MyComponent = React.forwardRef((props, ref) => {
-  return <span ref={ref} />
-})
-
-MyComponent.propTypes = {
-  bar: PropTypes.string.isRequired,
-  foo: PropTypes.number,
-}
-
-export default MyComponent
-```
-
-output:
-
-```tsx
-import React from "react"
-
-interface MyComponentProps {
-  bar: string
-  foo?: number
-}
-
-const MyComponent = React.forwardRef<React.ReactHTMLElement, MyComponentProps>(
-  (props, ref) => {
-    return <span ref={ref} />
-  }
-)
-
-export default MyComponent
 ```
 
 ## Options

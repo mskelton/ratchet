@@ -248,13 +248,13 @@ function addForwardRefTypes(path: NodePath, typeName: string): boolean {
   // for `React.forwardRef()`
   let isForwardRef = path.node.callee?.property?.name === "forwardRef"
   if (isForwardRef) {
-    path.node.callee.property.name = `forwardRef<React.ReactHTMLElement, ${typeName}>`
+    path.node.callee.property.name = `forwardRef<HTMLElement, ${typeName}>`
     return isForwardRef
   }
   // if calling `forwardRef()` directly
   isForwardRef = path.node.callee?.name === "forwardRef"
   if (isForwardRef) {
-    path.node.callee.name = `forwardRef<React.ReactHTMLElement, ${typeName}>`
+    path.node.callee.name = `forwardRef<HTMLElement, ${typeName}>`
     return isForwardRef
   }
   return false

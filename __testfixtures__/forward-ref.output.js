@@ -5,7 +5,7 @@ interface MyComponentProps {
   foo?: number;
 }
 
-const MyComponent = React.forwardRef<React.ReactHTMLElement, MyComponentProps>((props, ref) => {
+const MyComponent = React.forwardRef<HTMLElement, MyComponentProps>((props, ref) => {
   return <span ref={ref} />
 })
 
