@@ -243,16 +243,14 @@ function createInterface(path: NodePath, componentTypes: CollectedTypes) {
  */
 function addForwardRefTypes(path: NodePath, typeName: string): boolean {
   // for `React.forwardRef()`
-  let isForwardRef = path.node.callee?.property?.name === "forwardRef"
-  if (isForwardRef) {
+  if (path.node.callee?.property?.name === "forwardRef") {
     path.node.callee.property.name = `forwardRef<HTMLElement, ${typeName}>`
-    return isForwardRef
+    return true
   }
   // if calling `forwardRef()` directly
-  isForwardRef = path.node.callee?.name === "forwardRef"
-  if (isForwardRef) {
+  if (path.node.callee?.name === "forwardRef") {
     path.node.callee.name = `forwardRef<HTMLElement, ${typeName}>`
-    return isForwardRef
+    return true
   }
   return false
 }
