@@ -9,6 +9,7 @@ Codemod to convert React PropTypes to TypeScript types.
 
 - Supports function and class components
 - Supports `static propTypes` declarations on class components
+- Supports [`forwardRef`s](https://reactjs.org/docs/forwarding-refs.html)
 - Supports files with multiple components
 - Copies JSDoc comments to the generated TypeScript types
 - Option to remove or preserve PropTypes after converting to TS
@@ -33,9 +34,11 @@ the left and instantly see the output on the right!
 
 [![Screenshot](web/screenshot.png?v=1)](https://mskelton.dev/ratchet)
 
-## Example Input/Output
+## Example: Function Component
 
-```typescript
+Input:
+
+```javascript
 // Input
 import PropTypes from "prop-types"
 import React from "react"
@@ -48,8 +51,11 @@ MyComponent.propTypes = {
   bar: PropTypes.string.isRequired,
   foo: PropTypes.number,
 }
+```
 
-// Output
+Output:
+
+```tsx
 import React from "react"
 
 interface MyComponentProps {
@@ -78,7 +84,7 @@ where you support both TypeScript declarations and PropTypes.
 
 Input:
 
-```javascript
+```jsx
 import PropTypes from "prop-types"
 import React from "react"
 
@@ -119,7 +125,7 @@ you can manually review and convert to their TypeScript equivalent.
 
 Input:
 
-```javascript
+```jsx
 import PropTypes from "prop-types"
 import React from "react"
 
