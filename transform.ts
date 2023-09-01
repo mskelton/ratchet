@@ -15,6 +15,7 @@ import type {
 
 let j: JSCodeshift
 let options: {
+  preferTypeAliases: boolean
   preservePropTypes: "none" | "unconverted" | "all"
 }
 
@@ -237,6 +238,25 @@ function createInterface(path: NodePath, componentTypes: CollectedTypes) {
 
   return typeName
 }
+function createTypeAlias(path: NodePath, componentTypes: CollectedTypes) {
+  const componentName = getComponentName(path)
+  const types = componentTypes.find((t) => t.component === componentName)
+  const typeName = `${componentName}Props`
+
+  // If the component doesn't have propTypes, ignore it
+  if (!types) return
+
+  // Add the TS types before the function/class
+  getFunctionParent(path).insertBefore(
+    j.tsTypeAliasDeclaration(
+      j.identifier(typeName),
+      j.tsTypeLiteral(types.types.map(createPropertySignature))
+    )
+  )
+
+  return typeName
+}
+
 /**
  * If forwardRef is being used, declare the props.
  * Otherwise, return false
@@ -260,7 +280,9 @@ function addFunctionTSTypes(
   componentTypes: CollectedTypes
 ) {
   source.forEach((path) => {
-    const typeName = createInterface(path, componentTypes)
+    const typeName = options.preferTypeAliases
+      ? createTypeAlias(path, componentTypes)
+      : createInterface(path, componentTypes)
     if (!typeName) return
 
     // add forwardRef types if present
@@ -277,7 +299,9 @@ function addFunctionTSTypes(
 
 function addClassTSTypes(source: Collection, componentTypes: CollectedTypes) {
   source.find(j.ClassDeclaration).forEach((path) => {
-    const typeName = createInterface(path, componentTypes)
+    const typeName = options.preferTypeAliases
+      ? createTypeAlias(path, componentTypes)
+      : createInterface(path, componentTypes)
     if (!typeName) return
 
     // Add the TS types to the React.Component super class
@@ -393,6 +417,7 @@ export default function (file: FileInfo, api: API, opts: Options) {
 
   // Parse the CLI options
   options = {
+    preferTypeAliases: opts["prefer-type-aliases"] === true,
     preservePropTypes:
       opts["preserve-prop-types"] === true
         ? "all"
