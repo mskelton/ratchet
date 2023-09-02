@@ -4,8 +4,8 @@ import { defineTest } from "./test-utils.js"
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url))
 
-// --prefer-type-aliases=false && --prefer-type-aliases
-;[(null, { "prefer-type-aliases": true })].forEach((options) => {
+// --prefer-type-aliases=false (default) && --prefer-type-aliases
+;[null, { "prefer-type-aliases": true }].forEach((options) => {
   let prefix = ""
   if (options) {
     prefix = "prefer-type-aliases-"
