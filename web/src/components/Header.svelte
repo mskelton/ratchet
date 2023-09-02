@@ -4,6 +4,7 @@
 
   const dispatch = createEventDispatcher()
   let preservePropTypes = storage["preserve-prop-types"]
+  let preferTypeAliases = storage["prefer-type-aliases"] === "true"
 
   afterUpdate(() => {
     dispatch("change")
@@ -13,6 +14,17 @@
 <div class="container">
   <h1>Ratchet</h1>
 
+  <label>
+    Prefer Type Aliases
+    <input
+      bind:checked={preferTypeAliases}
+      data-testid="prefer-type-aliases"
+      on:change={() => {
+        storage["prefer-type-aliases"] = preferTypeAliases
+      }}
+      type="checkbox"
+    />
+  </label>
   <label>
     <span class="label">Preserve PropTypes:</span>
     <!-- svelte-ignore a11y-no-onchange -->

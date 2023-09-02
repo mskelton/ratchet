@@ -15,7 +15,10 @@
       output = transform(
         { source },
         { jscodeshift: jscodeshift.withParser("tsx") },
-        { "preserve-prop-types": storage["preserve-prop-types"] }
+        {
+          "preserve-prop-types": storage["preserve-prop-types"],
+          "prefer-type-aliases": storage["prefer-type-aliases"] === "true",
+        }
       )
     } catch (e) {
       console.warn("Transform error.", e)
