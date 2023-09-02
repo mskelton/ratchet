@@ -166,7 +166,7 @@ MyComponent.propTypes = {
 }
 ```
 
-### --prefer-type-aliases
+### `--prefer-type-aliases`
 
 Create type alias instead of interface.
 
