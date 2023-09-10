@@ -4,45 +4,33 @@ import { defineTest } from "./test-utils.js"
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url))
 
-// --prefer-type-aliases=false (default) && --prefer-type-aliases
-;[null, { "prefer-type-aliases": true }].forEach((options) => {
-  let prefix = ""
-  if (options) {
-    prefix = "prefer-type-aliases-"
-  }
-  defineTest(__dirname, transform, options, `${prefix}arrow-function`)
-  defineTest(__dirname, transform, options, `${prefix}class-component-static`)
-  defineTest(__dirname, transform, options, `${prefix}class-component`)
-  defineTest(__dirname, transform, options, `${prefix}complex-props`)
-  defineTest(__dirname, transform, options, `${prefix}comments`)
-  defineTest(__dirname, transform, options, `${prefix}custom-validator`)
-  defineTest(__dirname, transform, options, `${prefix}extended-props`)
-  defineTest(__dirname, transform, options, `${prefix}forward-ref`)
-  defineTest(__dirname, transform, options, `${prefix}forward-ref-and-func`)
-  defineTest(__dirname, transform, options, `${prefix}function-and-class`)
-  defineTest(__dirname, transform, options, `${prefix}function-component`)
-  defineTest(__dirname, transform, options, `${prefix}memo-export`)
-  defineTest(__dirname, transform, options, `${prefix}memo`)
-  defineTest(
-    __dirname,
-    transform,
-    options,
-    `${prefix}multiple-class-components-static`
-  )
-  defineTest(__dirname, transform, options, `${prefix}multiple-components`)
-  defineTest(__dirname, transform, options, `${prefix}no-export`)
-  defineTest(__dirname, transform, options, `${prefix}no-prop-types`)
-  defineTest(__dirname, transform, options, `${prefix}literal-prop`)
+defineTest(__dirname, transform, null, "arrow-function")
+defineTest(__dirname, transform, null, "class-component-static")
+defineTest(__dirname, transform, null, "class-component")
+defineTest(__dirname, transform, null, "complex-props")
+defineTest(__dirname, transform, null, "comments")
+defineTest(__dirname, transform, null, "custom-validator")
+defineTest(__dirname, transform, null, "extended-props")
+defineTest(__dirname, transform, null, "forward-ref")
+defineTest(__dirname, transform, null, "forward-ref-and-func")
+defineTest(__dirname, transform, null, "function-and-class")
+defineTest(__dirname, transform, null, "function-component")
+defineTest(__dirname, transform, null, "memo-export")
+defineTest(__dirname, transform, null, "memo")
+defineTest(__dirname, transform, null, "multiple-class-components-static")
+defineTest(__dirname, transform, null, "multiple-components")
+defineTest(__dirname, transform, null, "no-export")
+defineTest(__dirname, transform, null, "no-prop-types")
+defineTest(__dirname, transform, null, "literal-prop")
 
-  // This test shouldn't really be needed since `arrayOf(shape({}).isRequired).isRequired`
-  // is not really a valid prop type, but since it exists in the wild, we should
-  // support it.
-  defineTest(__dirname, transform, options, `${prefix}odd-required`)
+// This test shouldn't really be needed since `arrayOf(shape({}).isRequired).isRequired`
+// is not really a valid prop type, but since it exists in the wild, we should
+// support it.
+defineTest(__dirname, transform, null, "odd-required")
 
-  // TypeScript is not likely to exist in input files, but we should support if
-  // people already started to migrate to TS. This does exist in the wild.
-  defineTest(__dirname, transform, options, `${prefix}typescript`)
-})
+// TypeScript is not likely to exist in input files, but we should support if
+// people already started to migrate to TS. This does exist in the wild.
+defineTest(__dirname, transform, null, "typescript")
 
 // --preserve-prop-types
 defineTest(
@@ -102,4 +90,12 @@ defineTest(
   transform,
   { "preserve-prop-types": "unconverted" },
   "preserve-unconverted-shape"
+)
+
+// --declaration-style=type
+defineTest(
+  __dirname,
+  transform,
+  { "declaration-style": "type" },
+  "declaration-style-type"
 )
