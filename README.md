@@ -167,7 +167,7 @@ MyComponent.propTypes = {
 
 ## `--declaration-style`
 
-Allow to choose between interfaces & type aliases. Default is `inteface`.
+Allow to choose between interfaces & type aliases. Default is `interface`.
 
 ### `--declaration-style=type`
 
