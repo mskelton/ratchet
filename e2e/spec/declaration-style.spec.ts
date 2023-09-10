@@ -1,29 +1,29 @@
 import { expect, test } from "../fixtures/base.js"
 import { clearInput, read } from "../utils.js"
 
-const outputFixture = read("prefer-type-aliases-function-component.output")
+const outputFixture = read("declaration-style-type.output")
 
-test.describe("Prefer Type Aliases", () => {
-  test("should be false by default", async ({ page }) => {
+test.describe("Declaration Style", () => {
+  test("should be interface by default", async ({ page }) => {
     const value = await page.$eval(
-      "data-testid=prefer-type-aliases",
+      "data-testid=declaration-style",
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (el: any) => el.checked
+      (el: any) => el.options[el.selectedIndex].value
     )
 
-    expect(value).toBe(false)
+    expect(value).toBe("interface")
   })
 
   test("should update the output when changing the selected value", async ({
     page,
   }) => {
-    await page.setChecked("data-testid=prefer-type-aliases", true)
+    await page.selectOption("data-testid=declaration-style", "type")
     await page.waitForFunction(
       ([editorId, expected]) => window[editorId].getValue() === expected,
       ["output", outputFixture]
     )
 
-    await page.setChecked("data-testid=prefer-type-aliases", false)
+    await page.selectOption("data-testid=declaration-style", "interface")
     await page.waitForFunction(
       ([editorId, expected]) => window[editorId].getValue() === expected,
       ["output", read("function-component.output")]
@@ -32,10 +32,10 @@ test.describe("Prefer Type Aliases", () => {
 
   test("should persist between reloads", async ({ page }) => {
     await test.step("edit the input", async () => {
-      await page.getByTestId("prefer-type-aliases").check()
+      await page.selectOption("data-testid=declaration-style", "type")
       await clearInput(page)
 
-      const trimmedInput = read("prefer-type-aliases-function-component.input")
+      const trimmedInput = read("declaration-style-type.input")
         .replace("PropTypes.number", "PropTypes.bool")
         .split("\n")
         .map((line) => line.trim())
@@ -54,7 +54,7 @@ test.describe("Prefer Type Aliases", () => {
 
     await test.step("persists the selected value", async () => {
       await page.reload()
-      await page.getByTestId("prefer-type-aliases").check()
+      await page.selectOption("data-testid=declaration-style", "type")
     })
 
     await test.step("sets the initial value", async () => {

@@ -4,7 +4,7 @@
 
   const dispatch = createEventDispatcher()
   let preservePropTypes = storage["preserve-prop-types"]
-  let preferTypeAliases = storage["prefer-type-aliases"] === "true"
+  let declarationStyle = storage["declaration-style"]
 
   afterUpdate(() => {
     dispatch("change")
@@ -15,15 +15,17 @@
   <h1>Ratchet</h1>
 
   <label>
-    Prefer Type Aliases
-    <input
-      bind:checked={preferTypeAliases}
-      data-testid="prefer-type-aliases"
+    <span class="label">Declaration Style:</span>
+    <select
+      bind:value={declarationStyle}
+      data-testid="declaration-style"
       on:change={() => {
-        storage["prefer-type-aliases"] = preferTypeAliases
+        storage["declaration-style"] = declarationStyle
       }}
-      type="checkbox"
-    />
+    >
+    <option value="interface">Interface</option>
+    <option value="type">Type</option>
+    </select>
   </label>
   <label>
     <span class="label">Preserve PropTypes:</span>
@@ -51,11 +53,13 @@
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;
+    gap: 20px;
   }
 
   h1 {
     font-size: 22px;
     margin: 0;
+    margin-right: auto;
   }
 
   label {

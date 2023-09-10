@@ -17,7 +17,7 @@
         { jscodeshift: jscodeshift.withParser("tsx") },
         {
           "preserve-prop-types": storage["preserve-prop-types"],
-          "prefer-type-aliases": storage["prefer-type-aliases"] === "true",
+          "declaration-style": storage["declaration-style"],
         }
       )
     } catch (e) {

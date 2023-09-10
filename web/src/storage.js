@@ -1,5 +1,5 @@
 const defaults = {
-  "prefer-type-aliases": false,
+  "prefer-type-aliases": "interface",
   "preserve-prop-types": "none",
 }
 
