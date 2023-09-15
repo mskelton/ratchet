@@ -16,11 +16,18 @@ Codemod to convert React PropTypes to TypeScript types.
 
 ## Usage
 
-Easily run Ratchet on your project using the [Intuita VS Code extension](https://marketplace.visualstudio.com/items?itemName=Intuita.intuita-vscode-extension):
+Thanks to my friends at Intuita, you can easily run Ratchet on your project
+using the
+[Intuita VS Code extension](https://marketplace.visualstudio.com/items?itemName=Intuita.intuita-vscode-extension):
 
-<a href="http://tinyurl.com/intuita-ratchet" target="_blank"> <img src="https://raw.githubusercontent.com/intuita-inc/intuita-docs/master/static/img/intuita-badge.png" alt="Intuita Run Codemod" width="200"/> </a>
+<a href="http://tinyurl.com/intuita-ratchet" target="_blank">
+<img src="https://raw.githubusercontent.com/intuita-inc/intuita-docs/master/static/img/intuita-badge.png" alt="Intuita Run Codemod" width="200"/>
+</a>
 
-> To learn more about using the extension, [read the docs here](https://docs.intuita.io/docs/vs-code-extension/quickstart). If you encounter any issues, please [let us know.](https://www.intuita.io/community)
+> To learn more about using the extension,
+> [read the docs here](https://docs.intuita.io/docs/vs-code-extension/quickstart).
+> If you encounter any issues, please
+> [reach out](https://www.intuita.io/community) to my good friends at Intuita.
 
 Or run the following command with a file glob that matches the files you want to
 convert.
