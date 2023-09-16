@@ -7,7 +7,7 @@ const resolve = (path) => fileURLToPath(new URL(path, import.meta.url))
 
 const mode = process.env.NODE_ENV || "development"
 const prod = mode === "production"
-const publicPath = "/ratchet"
+const publicPath = mode === "development" ? "/" : "/ratchet"
 
 /** @type {import('webpack').Configuration} */
 export default {
