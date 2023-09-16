@@ -177,3 +177,43 @@ MyComponent.propTypes = {
   },
 }
 ```
+
+## `--declaration-style`
+
+Allow to choose between interfaces & type aliases. Default is `interface`.
+
+### `--declaration-style=type`
+
+Create type alias instead of interface.
+
+Input:
+
+```javascript
+// Input
+import PropTypes from "prop-types"
+import React from "react"
+
+export function MyComponent(props) {
+  return <span />
+}
+
+MyComponent.propTypes = {
+  bar: PropTypes.string.isRequired,
+  foo: PropTypes.number,
+}
+```
+
+Output:
+
+```tsx
+import React from "react"
+
+type MyComponentProps = {
+  bar: string
+  foo?: number
+}
+
+export function MyComponent(props: MyComponentProps) {
+  return <span />
+}
+```

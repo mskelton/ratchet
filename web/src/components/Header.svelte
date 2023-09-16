@@ -4,6 +4,7 @@
 
   const dispatch = createEventDispatcher()
   let preservePropTypes = storage["preserve-prop-types"]
+  let declarationStyle = storage["declaration-style"]
 
   afterUpdate(() => {
     dispatch("change")
@@ -13,6 +14,19 @@
 <div class="container">
   <h1>Ratchet</h1>
 
+  <label>
+    <span class="label">Declaration Style:</span>
+    <select
+      bind:value={declarationStyle}
+      data-testid="declaration-style"
+      on:change={() => {
+        storage["declaration-style"] = declarationStyle
+      }}
+    >
+    <option value="interface">Interface</option>
+    <option value="type">Type</option>
+    </select>
+  </label>
   <label>
     <span class="label">Preserve PropTypes:</span>
     <!-- svelte-ignore a11y-no-onchange -->
@@ -39,11 +53,13 @@
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;
+    gap: 20px;
   }
 
   h1 {
     font-size: 22px;
     margin: 0;
+    margin-right: auto;
   }
 
   label {

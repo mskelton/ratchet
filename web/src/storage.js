@@ -1,4 +1,5 @@
 const defaults = {
+  "declaration-style": "interface",
   "preserve-prop-types": "none",
 }
 

@@ -91,3 +91,11 @@ defineTest(
   { "preserve-prop-types": "unconverted" },
   "preserve-unconverted-shape"
 )
+
+// --declaration-style=type
+defineTest(
+  __dirname,
+  transform,
+  { "declaration-style": "type" },
+  "declaration-style-type"
+)
