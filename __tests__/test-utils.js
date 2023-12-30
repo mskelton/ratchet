@@ -28,11 +28,11 @@ export function runInlineTest(mod, options, input, expectedOutput) {
 
 async function runTest(dirName, mod, options, testFilePrefix) {
   const fixtureDir = path.join(dirName, "..", "__testfixtures__")
-  const inputPath = path.join(fixtureDir, `${testFilePrefix}.input.js`)
+  const inputPath = path.join(fixtureDir, `${testFilePrefix}.input.tsx`)
 
   const source = await fs.readFile(inputPath, "utf8")
   const expectedOutput = await fs.readFile(
-    path.join(fixtureDir, `${testFilePrefix}.output.js`),
+    path.join(fixtureDir, `${testFilePrefix}.output.tsx`),
     "utf8"
   )
 
