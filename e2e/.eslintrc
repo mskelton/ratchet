@@ -1,3 +1,7 @@
 {
-  "extends": "plugin:playwright/playwright-test"
+  "extends": "plugin:playwright/playwright-test",
+  "rules": {
+    "playwright/expect-expect": "off",
+    "playwright/no-eval": "off"
+  }
 }
