@@ -23,7 +23,7 @@ using the [Codemod VS Code extension](https://marketplace.visualstudio.com/items
 <img src="https://raw.githubusercontent.com/codemod-com/codemod/main/apps/docs/images/misc/run-in-codemod-badge.svg" alt="Run in Codemod.com" width="200"/>
 </a>
 
-> To learn more about using the Codemod platform, [read the docs here](https://docs.codemod.com/).
+> To learn more about using the Codemod platform, [read the docs here](https://go.codemod.com/vsce-docs).
 > If you encounter any issues, please [reach out](https://www.codemod.com/community) to my good friends at Codemod.
 
 Or run the following command with a file glob that matches the files you want to
