@@ -5288,7 +5288,7 @@ __metadata:
   dependencies:
     globals: ^13.23.0
   peerDependencies:
-    eslint: ">=7"
+    eslint: ">=8.40.0"
     eslint-plugin-jest: ">=25"
   peerDependenciesMeta:
     eslint-plugin-jest:
