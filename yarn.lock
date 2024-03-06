@@ -5282,9 +5282,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-playwright@portal:/Users/mark/dev/eslint-plugin-playwright::locator=ratchet%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "eslint-plugin-playwright@portal:/Users/mark/dev/eslint-plugin-playwright::locator=ratchet%40workspace%3A."
+"eslint-plugin-playwright@npm:^1.1.0":
+  version: 1.5.2
+  resolution: "eslint-plugin-playwright@npm:1.5.2"
   dependencies:
     globals: "npm:^13.23.0"
   peerDependencies:
@@ -5293,8 +5293,9 @@ __metadata:
   peerDependenciesMeta:
     eslint-plugin-jest:
       optional: true
+  checksum: 10/31e3c1307035488fffd3625d9f45fa0f19857823e1eab18f7960c087c8bcdbfcfa58bb3f7ce1a27ed1538f18acf2979e9da9f16b67f1a2db392d12fec109cab4
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "eslint-plugin-sort@npm:^2.4.0":
   version: 2.4.0
