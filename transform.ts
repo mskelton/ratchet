@@ -10,7 +10,6 @@ import type {
   Literal,
   Options,
   TSAnyKeyword,
-  TSFunctionType,
 } from "jscodeshift"
 
 let j: JSCodeshift
@@ -27,20 +26,10 @@ type TSType = {
   comments: (CommentLine | CommentBlock)[]
   key: Identifier | Literal
   required: boolean
-  type: TSAnyKeyword | TSFunctionType
+  type: TSAnyKeyword
 }
 
 function createPropertySignature({ comments, key, required, type }: TSType) {
-  if (type.type === "TSFunctionType") {
-    return j.tsMethodSignature.from({
-      comments,
-      key,
-      optional: !required,
-      parameters: type.parameters,
-      typeAnnotation: type.typeAnnotation,
-    })
-  }
-
   return j.tsPropertySignature.from({
     comments,
     key,

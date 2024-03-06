@@ -10,7 +10,7 @@ interface MyComponentProps {
   /**
    * Some function
    */
-  foo?(...args: unknown[]): unknown
+  foo?: (...args: unknown[]) => unknown
 }
 
 export function MyComponent(props: MyComponentProps) {

@@ -3,7 +3,7 @@ import React from "react"
 interface MyComponentProps {
   optionalArray?: unknown[]
   optionalBool?: boolean
-  optionalFunc?(...args: unknown[]): unknown
+  optionalFunc?: (...args: unknown[]) => unknown
   optionalNumber?: number
   optionalObject?: object
   optionalString?: string
@@ -22,7 +22,7 @@ interface MyComponentProps {
   optionalObjectWithShape?: {
     optionalProperty?: string
     requiredProperty: number
-    functionProperty?(...args: unknown[]): unknown
+    functionProperty?: (...args: unknown[]) => unknown
   }
   optionalObjectWithStrictShape?: {
     optionalProperty?: string
@@ -30,7 +30,7 @@ interface MyComponentProps {
   }
   requiredArray: unknown[]
   requiredBool: boolean
-  requiredFunc(...args: unknown[]): unknown
+  requiredFunc: (...args: unknown[]) => unknown
   requiredNumber: number
   requiredObject: object
   requiredString: string

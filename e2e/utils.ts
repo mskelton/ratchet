@@ -4,7 +4,7 @@ import os from "node:os"
 
 export const getValue = (page: Page, editorId: "input" | "output") =>
   page.evaluate((editorId) => {
-    const editor = window[editorId] as unknown as { getValue(): string }
+    const editor = window[editorId] as unknown as { getValue: () => string }
     return editor.getValue()
   }, editorId)
 
