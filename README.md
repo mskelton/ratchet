@@ -1,7 +1,7 @@
 # Ratchet
 
 [![Test](https://github.com/mskelton/ratchet/workflows/Test/badge.svg?branch=main)](https://github.com/mskelton/ratchet/actions?query=workflow%3ATest)
-[![GitHub deployments](https://img.shields.io/github/deployments/mskelton/ratchet/production?label=Deploy)](https://prop-types.vercel.app)
+[![GitHub deployments](https://img.shields.io/github/deployments/mskelton/ratchet/production?label=Deploy)](https://ratchet.mskelton.dev)
 
 Codemod to convert React PropTypes to TypeScript types.
 
@@ -30,19 +30,19 @@ Or run the following command with a file glob that matches the files you want to
 convert.
 
 ```bash
-npx jscodeshift -t https://mskelton.dev/ratchet.ts GLOB
+npx jscodeshift -t https://go.mskelton.dev/ratchet.ts GLOB
 
 # Example
-npx jscodeshift -t https://mskelton.dev/ratchet.ts src/**/*.{js,jsx}
+npx jscodeshift -t https://go.mskelton.dev/ratchet.ts src/**/*.{js,jsx}
 ```
 
 ## Try it Online!
 
 Additionally, you can use Ratchet online at
-[mskelton.dev/ratchet](https://mskelton.dev/ratchet)! Simply paste your input on
+[ratchet.mskelton.dev](https://ratchet.mskelton.dev)! Simply paste your input on
 the left and instantly see the output on the right!
 
-[![Screenshot](web/screenshot.png?v=1)](https://mskelton.dev/ratchet)
+[![Screenshot](web/screenshot.png?v=1)](https://ratchet.mskelton.dev)
 
 ## Example: Function Component
 

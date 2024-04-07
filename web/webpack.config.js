@@ -7,7 +7,6 @@ const resolve = (path) => fileURLToPath(new URL(path, import.meta.url))
 
 const mode = process.env.NODE_ENV || "development"
 const prod = mode === "production"
-const publicPath = mode === "development" ? "/" : "/ratchet"
 
 /** @type {import('webpack').Configuration} */
 export default {
@@ -21,7 +20,7 @@ export default {
     port: 3000,
     static: {
       directory: resolve("./public/"),
-      publicPath,
+      publicPath: "/",
     },
   },
   devtool: prod ? false : "source-map",
@@ -66,7 +65,7 @@ export default {
   output: {
     filename: "[name].[contenthash].js",
     path: resolve("./public/"),
-    publicPath,
+    publicPath: "/",
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "index.html" }),
